@@ -1,22 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class EventoSismico(models.Model):
-    fecha_hora_ocurrencia = models.DateTimeField()
-    fecha_hora_fin = models.DateTimeField(null=True, blank=True)
-    latitud_epicentro = models.FloatField()
-    longitud_epicentro = models.FloatField()
-    latitud_hipocentro = models.FloatField()
-    longitud_hipocentro = models.FloatField()
-    valor_magnitud = models.FloatField()
 
-    clasificacion = models.ForeignKey('ClasificacionSismo', on_delete=models.SET_NULL, null=True)
-    magnitud = models.ForeignKey('MagnitudRichter', on_delete=models.SET_NULL, null=True)
-    origen = models.ForeignKey('OrigenDeGeneracion', on_delete=models.SET_NULL, null=True)
-    alcance = models.ForeignKey('AlcanceSismo', on_delete=models.SET_NULL, null=True)
-
-    def estado_actual(self):
-        return self.cambios_estado.filter(fecha_hora_fin__isnull=True).first()
 
 class ClasificacionSismo(models.Model):
     nombre = models.CharField(max_length=100)
@@ -54,6 +39,24 @@ class Estado(models.Model):
     def __str__(self):
         return self.nombre_estado
 
+
+class EventoSismico(models.Model):
+    fecha_hora_ocurrencia = models.DateTimeField()
+    fecha_hora_fin = models.DateTimeField(null=True, blank=True)
+    latitud_epicentro = models.FloatField()
+    longitud_epicentro = models.FloatField()
+    latitud_hipocentro = models.FloatField()
+    longitud_hipocentro = models.FloatField()
+    valor_magnitud = models.FloatField()
+
+    clasificacion = models.ForeignKey(ClasificacionSismo, on_delete=models.SET_NULL, null=True)
+    magnitud = models.ForeignKey(MagnitudRichter, on_delete=models.SET_NULL, null=True)
+    origen = models.ForeignKey(OrigenDeGeneracion, on_delete=models.SET_NULL, null=True)
+    alcance = models.ForeignKey(AlcanceSismo, on_delete=models.SET_NULL, null=True)
+
+    def estado_actual(self):
+        return self.cambios_estado.filter(fecha_hora_fin__isnull=True).first()
+    
 class CambioEstado(models.Model):
     evento = models.ForeignKey(EventoSismico, on_delete=models.CASCADE, related_name='cambios_estado')
     estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
@@ -62,3 +65,4 @@ class CambioEstado(models.Model):
 
     def es_estado_actual(self):
         return self.fecha_hora_fin is None
+    
