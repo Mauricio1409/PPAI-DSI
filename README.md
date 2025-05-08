@@ -4,7 +4,7 @@
 url : https://www.python.org/downloads/
 
 ## Verificar que se instalo correctamente
-# En la terminal ejecutar 
+### En la terminal ejecutar 
 Para python : `python --version` o `python3--version`
 Para pip : `pip --version` o  `pip --version`
 
