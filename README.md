@@ -9,7 +9,7 @@ Para python : `python --version` o `python3--version`
 Para pip : `pip --version` o  `pip --version`
 
 ## Clonar repositorio
-git clone url
+`git clone https://github.com/Mauricio1409/PPAI-DSI.git`
 
 ## Instalar dependencias con pip
 `pip install -r requirements.txt`
