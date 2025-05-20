@@ -319,7 +319,7 @@
         "kind": 6,
         "importPath": "Backend.estados.models",
         "description": "Backend.estados.models",
-        "peekOfCode": "class Estado(models.Model):\n    AMBITO_CHOICES = [\n        ('evento', 'Evento Sísmico'),\n        ('sismografo', 'Sismógrafo'),\n    ]\n    nombre = models.CharField(max_length=100)\n    ambito = models.CharField(max_length=15, choices=AMBITO_CHOICES)\nclass CambioEstado(models.Model):\n    fecha_hora_inicio = models.DateTimeField()\n    fecha_hora_fin = models.DateTimeField(null=True, blank=True)",
+        "peekOfCode": "class Estado(models.Model):\n    AMBITO_CHOICES = [\n        ('evento', 'Evento Sísmico'),\n        ('sismografo', 'Sismógrafo'),\n    ]\n    _nombre = models.CharField(max_length=100, db_column='nombre')\n    _ambito = models.CharField(max_length=15, choices=AMBITO_CHOICES, db_column='ambito')\n    @property\n    def nombre(self):\n        return self._nombre",
         "detail": "Backend.estados.models",
         "documentation": {}
     },
@@ -328,7 +328,7 @@
         "kind": 6,
         "importPath": "Backend.estados.models",
         "description": "Backend.estados.models",
-        "peekOfCode": "class CambioEstado(models.Model):\n    fecha_hora_inicio = models.DateTimeField()\n    fecha_hora_fin = models.DateTimeField(null=True, blank=True)\n    estado = models.ForeignKey(Estado, on_delete=models.CASCADE)\n    evento_sismico = models.ForeignKey(EventoSismico, on_delete=models.CASCADE, null=True, blank=True, related_name=\"cambios_estado\")\n    sismografo = models.ForeignKey(Sismografo, on_delete=models.CASCADE, null=True, blank=True, related_name=\"cambios_estado\")\n    empleado = models.ForeignKey(Empleado, on_delete=models.SET_NULL, null=True, blank=True)",
+        "peekOfCode": "class CambioEstado(models.Model):\n    _fecha_hora_inicio = models.DateTimeField(db_column='fecha_hora_inicio')\n    _fecha_hora_fin = models.DateTimeField(null=True, blank=True, db_column='fecha_hora_fin')\n    _estado = models.ForeignKey(Estado, on_delete=models.CASCADE, db_column='estado_id')\n    _evento_sismico = models.ForeignKey(\n        EventoSismico, on_delete=models.CASCADE, null=True, blank=True,\n        related_name=\"cambios_estado\", db_column='evento_sismico_id'\n    )\n    _sismografo = models.ForeignKey(\n        Sismografo, on_delete=models.CASCADE, null=True, blank=True,",
         "detail": "Backend.estados.models",
         "documentation": {}
     },
@@ -346,7 +346,7 @@
         "kind": 6,
         "importPath": "Backend.EventoSismico.models",
         "description": "Backend.EventoSismico.models",
-        "peekOfCode": "class MagnitudRichter(models.Model):\n    numero = models.IntegerField()\n    descripcion_magnitud = models.TextField()\nclass AlcanceSismo(models.Model):\n    nombre = models.CharField(max_length=100)\n    descripcion = models.TextField()\nclass ClasificacionSismo(models.Model):\n    nombre = models.CharField(max_length=100)\n    km_profundidad_desde = models.FloatField()\n    km_profundidad_hasta = models.FloatField()",
+        "peekOfCode": "class MagnitudRichter(models.Model):\n    _numero = models.IntegerField()\n    _descripcion_magnitud = models.TextField()\n    @property\n    def numero(self):\n        return self._numero\n    @numero.setter\n    def numero(self, value):\n        self._numero = value\n    @property",
         "detail": "Backend.EventoSismico.models",
         "documentation": {}
     },
@@ -355,7 +355,7 @@
         "kind": 6,
         "importPath": "Backend.EventoSismico.models",
         "description": "Backend.EventoSismico.models",
-        "peekOfCode": "class AlcanceSismo(models.Model):\n    nombre = models.CharField(max_length=100)\n    descripcion = models.TextField()\nclass ClasificacionSismo(models.Model):\n    nombre = models.CharField(max_length=100)\n    km_profundidad_desde = models.FloatField()\n    km_profundidad_hasta = models.FloatField()\nclass OrigenDeGeneracion(models.Model):\n    nombre = models.CharField(max_length=100)\n    descripcion = models.TextField()",
+        "peekOfCode": "class AlcanceSismo(models.Model):\n    _nombre = models.CharField(max_length=100)\n    _descripcion = models.TextField()\n    @property\n    def nombre(self):\n        return self._nombre\n    @nombre.setter\n    def nombre(self, value):\n        self._nombre = value\n    @property",
         "detail": "Backend.EventoSismico.models",
         "documentation": {}
     },
@@ -364,7 +364,7 @@
         "kind": 6,
         "importPath": "Backend.EventoSismico.models",
         "description": "Backend.EventoSismico.models",
-        "peekOfCode": "class ClasificacionSismo(models.Model):\n    nombre = models.CharField(max_length=100)\n    km_profundidad_desde = models.FloatField()\n    km_profundidad_hasta = models.FloatField()\nclass OrigenDeGeneracion(models.Model):\n    nombre = models.CharField(max_length=100)\n    descripcion = models.TextField()\nclass EventoSismico(models.Model):\n    fecha_hora_ocurrencia = models.DateTimeField()\n    fecha_hora_fin = models.DateTimeField(null=True, blank=True)",
+        "peekOfCode": "class ClasificacionSismo(models.Model):\n    _nombre = models.CharField(max_length=100)\n    _km_profundidad_desde = models.FloatField()\n    _km_profundidad_hasta = models.FloatField()\n    @property\n    def nombre(self):\n        return self._nombre\n    @nombre.setter\n    def nombre(self, value):\n        self._nombre = value",
         "detail": "Backend.EventoSismico.models",
         "documentation": {}
     },
@@ -373,7 +373,7 @@
         "kind": 6,
         "importPath": "Backend.EventoSismico.models",
         "description": "Backend.EventoSismico.models",
-        "peekOfCode": "class OrigenDeGeneracion(models.Model):\n    nombre = models.CharField(max_length=100)\n    descripcion = models.TextField()\nclass EventoSismico(models.Model):\n    fecha_hora_ocurrencia = models.DateTimeField()\n    fecha_hora_fin = models.DateTimeField(null=True, blank=True)\n    latitud_epicentro = models.FloatField()\n    longitud_epicentro = models.FloatField()\n    latitud_hipocentro = models.FloatField()\n    longitud_hipocentro = models.FloatField()",
+        "peekOfCode": "class OrigenDeGeneracion(models.Model):\n    _nombre = models.CharField(max_length=100)\n    _descripcion = models.TextField()\n    @property\n    def nombre(self):\n        return self._nombre\n    @nombre.setter\n    def nombre(self, value):\n        self._nombre = value\n    @property",
         "detail": "Backend.EventoSismico.models",
         "documentation": {}
     },
@@ -382,7 +382,7 @@
         "kind": 6,
         "importPath": "Backend.EventoSismico.models",
         "description": "Backend.EventoSismico.models",
-        "peekOfCode": "class EventoSismico(models.Model):\n    fecha_hora_ocurrencia = models.DateTimeField()\n    fecha_hora_fin = models.DateTimeField(null=True, blank=True)\n    latitud_epicentro = models.FloatField()\n    longitud_epicentro = models.FloatField()\n    latitud_hipocentro = models.FloatField()\n    longitud_hipocentro = models.FloatField()\n    valor_magnitud = models.FloatField()\n    magnitud = models.ForeignKey(MagnitudRichter, on_delete=models.CASCADE)\n    alcance = models.ForeignKey(AlcanceSismo, on_delete=models.CASCADE)",
+        "peekOfCode": "class EventoSismico(models.Model):\n    _fecha_hora_ocurrencia = models.DateTimeField()\n    _fecha_hora_fin = models.DateTimeField(null=True, blank=True)\n    _latitud_epicentro = models.FloatField()\n    _longitud_epicentro = models.FloatField()\n    _latitud_hipocentro = models.FloatField()\n    _longitud_hipocentro = models.FloatField()\n    _valor_magnitud = models.FloatField()\n    _magnitud = models.ForeignKey(MagnitudRichter, on_delete=models.CASCADE)\n    _alcance = models.ForeignKey(AlcanceSismo, on_delete=models.CASCADE)",
         "detail": "Backend.EventoSismico.models",
         "documentation": {}
     },
@@ -580,7 +580,7 @@
         "kind": 6,
         "importPath": "Backend.SerieTemporal.models",
         "description": "Backend.SerieTemporal.models",
-        "peekOfCode": "class SerieTemporal(models.Model):\n    condicion_alarma = models.IntegerField()\n    fecha_hora_registro_muestras = models.DateTimeField()\n    fecha_hora_registro = models.DateTimeField()\n    frecuencia_muestreo = models.FloatField()\n    evento_sismico = models.ForeignKey(EventoSismico, on_delete=models.CASCADE, related_name=\"series_temporales\")\n    sismografo = models.ForeignKey(Sismografo, on_delete=models.CASCADE, related_name=\"series_temporales\")\nclass MuestraSismica(models.Model):\n    fecha_hora_muestra = models.DateTimeField()\n    serie_temporal = models.ForeignKey(SerieTemporal, on_delete=models.CASCADE, related_name=\"muestras\")",
+        "peekOfCode": "class SerieTemporal(models.Model):\n    _condicion_alarma = models.IntegerField(db_column='condicion_alarma')\n    _fecha_hora_registro_muestras = models.DateTimeField(db_column='fecha_hora_registro_muestras')\n    _fecha_hora_registro = models.DateTimeField(db_column='fecha_hora_registro')\n    _frecuencia_muestreo = models.FloatField(db_column='frecuencia_muestreo')\n    _evento_sismico = models.ForeignKey('EventoSismico.EventoSismico', on_delete=models.CASCADE, related_name=\"series_temporales\", db_column='evento_sismico')\n    _sismografo = models.ForeignKey('sismologia.Sismografo', on_delete=models.CASCADE, related_name=\"series_temporales\", db_column='sismografo')\n    @property\n    def evento_sismico(self):\n        return self._evento_sismico",
         "detail": "Backend.SerieTemporal.models",
         "documentation": {}
     },
@@ -589,7 +589,7 @@
         "kind": 6,
         "importPath": "Backend.SerieTemporal.models",
         "description": "Backend.SerieTemporal.models",
-        "peekOfCode": "class MuestraSismica(models.Model):\n    fecha_hora_muestra = models.DateTimeField()\n    serie_temporal = models.ForeignKey(SerieTemporal, on_delete=models.CASCADE, related_name=\"muestras\")\nclass DetalleMuestraSismica(models.Model):\n    valor = models.FloatField()\n    muestra = models.ForeignKey(MuestraSismica, on_delete=models.CASCADE, related_name=\"detalles\")",
+        "peekOfCode": "class MuestraSismica(models.Model):\n    _fecha_hora_muestra = models.DateTimeField(db_column='fecha_hora_muestra')\n    _serie_temporal = models.ForeignKey(SerieTemporal, on_delete=models.CASCADE, related_name=\"muestras\", db_column='serie_temporal')\n    @property\n    def fecha_hora_muestra(self):\n        return self._fecha_hora_muestra\n    @fecha_hora_muestra.setter\n    def fecha_hora_muestra(self, value):\n        self._fecha_hora_muestra = value\n    @property",
         "detail": "Backend.SerieTemporal.models",
         "documentation": {}
     },
@@ -598,7 +598,7 @@
         "kind": 6,
         "importPath": "Backend.SerieTemporal.models",
         "description": "Backend.SerieTemporal.models",
-        "peekOfCode": "class DetalleMuestraSismica(models.Model):\n    valor = models.FloatField()\n    muestra = models.ForeignKey(MuestraSismica, on_delete=models.CASCADE, related_name=\"detalles\")",
+        "peekOfCode": "class DetalleMuestraSismica(models.Model):\n    _valor = models.FloatField(db_column='valor')\n    _muestra = models.ForeignKey(MuestraSismica, on_delete=models.CASCADE, related_name=\"detalles\", db_column='muestra')\n    @property\n    def valor(self):\n        return self._valor\n    @valor.setter\n    def valor(self, value):\n        self._valor = value\n    @property",
         "detail": "Backend.SerieTemporal.models",
         "documentation": {}
     },
@@ -616,7 +616,7 @@
         "kind": 6,
         "importPath": "Backend.sismologia.models",
         "description": "Backend.sismologia.models",
-        "peekOfCode": "class EstacionSismologica(models.Model):\n    codigo_estacion = models.CharField(max_length=100)\n    documento_certificacion_adq = models.CharField(max_length=100)\n    fecha_solicitud_certificacion = models.DateTimeField()\n    nombre = models.CharField(max_length=100)\n    latitud = models.FloatField()\n    longitud = models.FloatField()\n    numero_certificacion_adquisicion = models.CharField(max_length=100)\nclass Sismografo(models.Model):\n    identificador_sismografo = models.CharField(max_length=100)",
+        "peekOfCode": "class EstacionSismologica(models.Model):\n    _codigo_estacion = models.CharField(max_length=100)\n    _documento_certificacion_adq = models.CharField(max_length=100)\n    _fecha_solicitud_certificacion = models.DateTimeField()\n    _nombre = models.CharField(max_length=100)\n    _latitud = models.FloatField()\n    _longitud = models.FloatField()\n    _numero_certificacion_adquisicion = models.CharField(max_length=100)\n    @property\n    def codigo_estacion(self):",
         "detail": "Backend.sismologia.models",
         "documentation": {}
     },
@@ -625,7 +625,7 @@
         "kind": 6,
         "importPath": "Backend.sismologia.models",
         "description": "Backend.sismologia.models",
-        "peekOfCode": "class Sismografo(models.Model):\n    identificador_sismografo = models.CharField(max_length=100)\n    numero_serie = models.CharField(max_length=100)\n    fecha_adquisicion = models.DateTimeField()\n    estacion = models.ForeignKey(EstacionSismologica, on_delete=models.CASCADE)\n    estado_actual = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True, related_name=\"estado_actual_sismografos\")",
+        "peekOfCode": "class Sismografo(models.Model):\n    _identificador_sismografo = models.CharField(max_length=100)\n    _numero_serie = models.CharField(max_length=100)\n    _fecha_adquisicion = models.DateTimeField()\n    _estacion = models.ForeignKey(EstacionSismologica, on_delete=models.CASCADE)\n    _estado_actual = models.ForeignKey(Estado, on_delete=models.SET_NULL, null=True, related_name=\"estado_actual_sismografos\")\n    @property\n    def identificador_sismografo(self):\n        return self._identificador_sismografo\n    @identificador_sismografo.setter",
         "detail": "Backend.sismologia.models",
         "documentation": {}
     },
@@ -643,7 +643,7 @@
         "kind": 6,
         "importPath": "Backend.usuarios.models",
         "description": "Backend.usuarios.models",
-        "peekOfCode": "class Usuario(models.Model):\n    nombre = models.CharField(max_length=100)\n    contraseña = models.CharField(max_length=100)\nclass Empleado(models.Model):\n    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)\n    apellido = models.CharField(max_length=50, unique=True)\n    mail = models.CharField(max_length=100)\n    nombre = models.CharField(max_length=100)\n    telefono = models.CharField(max_length=15)\nclass Session(models.Model):",
+        "peekOfCode": "class Usuario(models.Model):\n    _nombre = models.CharField(max_length=100)\n    _contraseña = models.CharField(max_length=100)\n    @property\n    def nombre(self):\n        return self._nombre\n    @nombre.setter\n    def nombre(self, value):\n        self._nombre = value\n    @property",
         "detail": "Backend.usuarios.models",
         "documentation": {}
     },
@@ -652,7 +652,7 @@
         "kind": 6,
         "importPath": "Backend.usuarios.models",
         "description": "Backend.usuarios.models",
-        "peekOfCode": "class Empleado(models.Model):\n    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)\n    apellido = models.CharField(max_length=50, unique=True)\n    mail = models.CharField(max_length=100)\n    nombre = models.CharField(max_length=100)\n    telefono = models.CharField(max_length=15)\nclass Session(models.Model):\n    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)\n    fecha_hora_inicio = models.DateTimeField()\n    fecha_hora_fin = models.DateTimeField()",
+        "peekOfCode": "class Empleado(models.Model):\n    _usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)\n    _apellido = models.CharField(max_length=50, unique=True)\n    _mail = models.CharField(max_length=100)\n    _nombre = models.CharField(max_length=100)\n    _telefono = models.CharField(max_length=15)\n    @property\n    def usuario(self):\n        return self._usuario\n    @usuario.setter",
         "detail": "Backend.usuarios.models",
         "documentation": {}
     },
@@ -661,7 +661,7 @@
         "kind": 6,
         "importPath": "Backend.usuarios.models",
         "description": "Backend.usuarios.models",
-        "peekOfCode": "class Session(models.Model):\n    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)\n    fecha_hora_inicio = models.DateTimeField()\n    fecha_hora_fin = models.DateTimeField()",
+        "peekOfCode": "class Session(models.Model):\n    _usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)\n    _fecha_hora_inicio = models.DateTimeField()\n    _fecha_hora_fin = models.DateTimeField()\n    @property\n    def usuario(self):\n        return self._usuario\n    @usuario.setter\n    def usuario(self, value):\n        self._usuario = value",
         "detail": "Backend.usuarios.models",
         "documentation": {}
     },
