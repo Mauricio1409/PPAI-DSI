@@ -2,11 +2,13 @@ from Entitys.Estado import Estado
 import datetime
 
 class CambioEstado:
-    def __init__(self, fechaHoraInicio: datetime, estado : Estado, fechaHoraFin: datetime = None):
+    def __init__(self, fechaHoraInicio: datetime, estado : Estado, analista, fechaHoraFin: datetime = None):
         self._fechaHoraInicio = fechaHoraInicio
         self._fechaHoraFin = fechaHoraFin
         self._estado = estado
+        self._analistaResponsalbe = analista
 
+#region Getters y Setters
     @property
     def fechaHoraInicio(self):
         return self._fechaHoraInicio
@@ -31,16 +33,16 @@ class CambioEstado:
     def new(cls, fechaHoraInicio: datetime):
         return cls(fechaHoraInicio)
 
-    def setechaHoraFin(self, value: datetime):
-        self._fechaHoraFin = value
+
+#endregion
+
 
     def setFechaHoraFin(self, value: datetime):
         self._fechaHoraFin = value
 
-    def sosActual(self):
-        # Implementa la lógica real según tu dominio
-        return self._fechaHoraFin is None
-
     def __repr__(self):
         return (f"CambioEstado(fechaHoraInicio={self._fechaHoraInicio}, "
                 f"fechaHoraFin={self._fechaHoraFin})")
+
+    def sosActual(self):
+        return self._fechaHoraFin is None

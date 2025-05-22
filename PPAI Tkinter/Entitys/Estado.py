@@ -4,7 +4,18 @@ class Estado:
         self._ambito = ambito
 
     def sosPendienteRevision(self):
-        if self.ambito == "EventoSismico" and self.nombre == "PendienteRevision":
+        if self.nombre == "PendienteRevision":
+            return True
+        return False
+
+
+    def esAmbitoEvento(self):
+        if self.ambito == "EventoSismico":
+            return True
+        return False
+
+    def sosBloqueado(self):
+        if self.nombre == "Bloqueado":
             return True
         return False
 

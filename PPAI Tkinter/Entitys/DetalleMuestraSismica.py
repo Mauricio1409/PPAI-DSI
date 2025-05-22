@@ -11,3 +11,8 @@ class DetalleMuestraSismica:
 
     def __repr__(self):
         return f"DetalleMuestraSismica(valor={self._valor})"
+
+    def obtenerDatos(self):
+        return {
+            "valor": self._valor
+        }

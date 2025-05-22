@@ -7,7 +7,8 @@ from Entitys.SerieTemporal import SerieTemporal
 from datetime import datetime
 
 class EventoSismico:
-    def __init__(self, fechaHoraOcurrencia: datetime, magnitud: float, latitud: float, longitud: float, cambioEstado : list[CambioEstado], estado : Estado, clasificacionSismo : ClasificacionSismo, alcanceSismo : AlcanceSismo, origenGenercion : OrigenDeGeneracion, serieTemporal : SerieTemporal):
+    def __init__(self, fechaHoraOcurrencia: datetime, magnitud: float, latitud: float, longitud: float, cambioEstado : list[CambioEstado], estado : Estado, clasificacionSismo : ClasificacionSismo, alcanceSismo : AlcanceSismo, origenGenercion : OrigenDeGeneracion, serieTemporal : list[SerieTemporal]):
+        self._cambioEstadoActual = None
         self._fechaHoraFin = None
         self._fechaHoraOcurrencia = fechaHoraOcurrencia
         self._latitudEpicentro = latitud
@@ -15,14 +16,14 @@ class EventoSismico:
         self._longitudEpicentro = longitud
         self._longitudHipocentro = longitud
         self._ValorMagnitud = magnitud
-        self._cambioEstado = [cambioEstado]
+        self._cambioEstado = cambioEstado
         self._estado = estado
         self._alcanceSismo = alcanceSismo
         self._origenGeneracion = origenGenercion
         self._clasificacionSismo = clasificacionSismo
-        self._seriesTemporales = [serieTemporal]
+        self._seriesTemporales = serieTemporal
 
-
+    #region Getters y Setters
     @property
     def ValorMagnitud(self):
         return self._ValorMagnitud
@@ -99,11 +100,43 @@ class EventoSismico:
     @property
     def seriesTemporales(self):
         return self._seriesTemporales
+    #endregion
 
     def esPendienteRevision(self):
         return self._estado.sosPendienteRevision()
     
     def getUbicacion(self):
-        return ((self._latitudEpicentro, self._longitudEpicentro),(self._latitudHipocentro, self._longitudHipocentro)) ##CHEQUEAR ESTO CON EL DIAGRAMA
+        return ((self._latitudEpicentro, self._longitudEpicentro),(self._latitudHipocentro, self._longitudHipocentro)) # TODO CHEQUEAR ESTO CON EL DIAGRAMA
 
-    
+    def revisar(self, estado, Analista , fechaHoraActual):
+        self._estado = estado
+        self.buscarCambioEstadoActual()
+        self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
+        self.cambiarCambioEstado(estado, Analista, fechaHoraActual)
+
+    def cambiarCambioEstado(self, estado, analista, fechaHoraActual):
+        nuevoCambioEstado = CambioEstado(fechaHoraActual, estado, analista)
+        self._cambioEstado.append(nuevoCambioEstado)
+        self._cambioEstadoActual = nuevoCambioEstado
+
+
+    #TODO MODIFICAR ESTO EN EL DIAGRAMA DE SECUENCIA (nombre método)
+    def buscarCambioEstadoActual(self):
+        for cambio in self._cambioEstado:
+            if cambio.sosActual():
+                self._cambioEstadoActual = cambio
+        return None
+
+
+    def obtenerDatos(self):
+        alcance = self._alcanceSismo.getNombre()
+        clasificacion = self._clasificacionSismo.getNombre()
+        origen =self._origenGeneracion.obtenerOrigen()
+
+        return {
+            f"alcanceSismo": alcance,
+            f"clasificacionSismo": clasificacion,
+            f"origenGeneracion": origen,
+            f"seriesTemporales": [serie.obtenerDatos() for serie in self._seriesTemporales]
+        }
+
