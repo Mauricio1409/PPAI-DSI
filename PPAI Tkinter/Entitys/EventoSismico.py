@@ -7,7 +7,7 @@ from Entitys.SerieTemporal import SerieTemporal
 from datetime import datetime
 
 class EventoSismico:
-    def __init__(self, fechaHoraOcurrencia: datetime, magnitud: float, latitud: float, longitud: float, cambioEstado : CambioEstado, estado : Estado, clasificacionSismo : ClasificacionSismo, alcanceSismo : AlcanceSismo, origenGenercion : OrigenDeGeneracion, serieTemporal : SerieTemporal):
+    def __init__(self, fechaHoraOcurrencia: datetime, magnitud: float, latitud: float, longitud: float, cambioEstado : list[CambioEstado], estado : Estado, clasificacionSismo : ClasificacionSismo, alcanceSismo : AlcanceSismo, origenGenercion : OrigenDeGeneracion, serieTemporal : SerieTemporal):
         self._fechaHoraFin = None
         self._fechaHoraOcurrencia = fechaHoraOcurrencia
         self._latitudEpicentro = latitud

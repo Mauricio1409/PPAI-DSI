@@ -1,9 +1,17 @@
 import ttkbootstrap as ttk
-from tkinter import simpledialog, messagebox
-from Entitys.EventoSismico import EventoSismico
+#from tkinter import simpledialog, messagebox
 from ManejadorNuevoEventoSismico import ManejadorNuevoEventoSismico
 
+
 class VentanaPantNuevoEventoSismico(ttk.Window):
+
+
+    def seleccionaEventoSismico(self, event):
+        seleccion = self.cuadro.selection()
+        if seleccion:
+            item_id = seleccion[0]
+            index = self.cuadro.index(item_id)
+            self.punteroManejador.eventoSismicoSeleccionado(index)
 
     def habilitar_ventana(self):
         #self.button_reg_rev_manual.pack()
@@ -55,17 +63,18 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
 
 
         self.cuadro.delete(*self.cuadro.get_children())  # Limpiar el cuadro antes de agregar nuevos elementos
-        print("Llego a la ventana")
-        print(len(arrayFechaHoras))
-        print(arrayUbicaciones[1])
+
         for i in range(len(arrayFechaHoras)):
-            print("llego acá")
             # Agregar los elementos a la tabla
             self.cuadro.insert("", "end", text=arrayFechaHoras[i], values=(arrayUbicaciones[i][0][0], arrayUbicaciones[i][0][1],arrayUbicaciones[i][1][0],arrayUbicaciones[i][1][1], arrayMagnitudes[i]))
 
         self.cuadro.pack(fill="both", expand=True)
         self.frame_cuadro.pack(fill="both", expand=True)
         self.frame_superior_cuadro.place(relx=0.5, rely=0.4, relwidth=0.9, relheight=0.6, anchor="center")
+
+        # Event Listeners
+        self.cuadro.bind("<Return>", self.seleccionaEventoSismico)
+        self.cuadro.bind("<Double-1>", self.seleccionaEventoSismico)
 
     def __init__(self):
         super().__init__()

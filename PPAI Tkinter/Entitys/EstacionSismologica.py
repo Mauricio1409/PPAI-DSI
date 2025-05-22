@@ -1,12 +1,14 @@
+import datetime
+
 class EstacionSismologica:
     def __init__(
         self,
         codigoEstacion: int,
         documentoCertificacionAdq: int,
-        fechaSolicitudCertificacion: int,
-        latitud: int,
-        longitud: int,
-        nombre: int,
+        fechaSolicitudCertificacion: datetime,
+        latitud: float,
+        longitud: float,
+        nombre: str,
         numeroCertificacionAdquisicion: int
     ):
         self._codigoEstacion = codigoEstacion

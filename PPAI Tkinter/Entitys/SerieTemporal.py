@@ -1,7 +1,8 @@
 from Entitys.MuestraSismica import MuestraSismica
+import datetime
 
 class SerieTemporal:
-    def __init__(self, condicionAlarma: int, fechaHoraInicioRegistroMuestras: int, fechaHoraRegistro: int, frecuenciaMuestreo: int, muestraSismica : MuestraSismica):
+    def __init__(self, condicionAlarma: int, fechaHoraInicioRegistroMuestras: datetime, fechaHoraRegistro: datetime, frecuenciaMuestreo: float, muestraSismica : MuestraSismica):
         self._condicionAlarma = condicionAlarma
         self._fechaHoraInicioRegistroMuestras = fechaHoraInicioRegistroMuestras
         self._fechaHoraRegistro = fechaHoraRegistro

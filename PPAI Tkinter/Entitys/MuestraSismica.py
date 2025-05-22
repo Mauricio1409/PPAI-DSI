@@ -1,7 +1,8 @@
 from Entitys.DetalleMuestraSismica import DetalleMuestraSismica
+import datetime
 
 class MuestraSismica:
-    def __init__(self, fechaHoraMuestra: int, detalleMuestra : DetalleMuestraSismica):
+    def __init__(self, fechaHoraMuestra: datetime, detalleMuestra : DetalleMuestraSismica):
         self._fechaHoraMuestra = fechaHoraMuestra
         self._detalles = [detalleMuestra]
 

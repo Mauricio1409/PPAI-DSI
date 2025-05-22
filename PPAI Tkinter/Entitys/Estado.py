@@ -1,5 +1,5 @@
 class Estado:
-    def __init__(self, nombre: str, ambito : int):
+    def __init__(self, nombre: str, ambito : str):
         self._nombre = nombre
         self._ambito = ambito
 

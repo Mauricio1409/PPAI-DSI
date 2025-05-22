@@ -1,7 +1,8 @@
 from Entitys.Estado import Estado
+import datetime
 
 class CambioEstado:
-    def __init__(self, fechaHoraInicio: int, estado : Estado, fechaHoraFin: int = None):
+    def __init__(self, fechaHoraInicio: datetime, estado : Estado, fechaHoraFin: datetime = None):
         self._fechaHoraInicio = fechaHoraInicio
         self._fechaHoraFin = fechaHoraFin
         self._estado = estado
@@ -11,7 +12,7 @@ class CambioEstado:
         return self._fechaHoraInicio
 
     @fechaHoraInicio.setter
-    def fechaHoraInicio(self, value: int):
+    def fechaHoraInicio(self, value: datetime):
         self._fechaHoraInicio = value
 
     @property
@@ -19,7 +20,7 @@ class CambioEstado:
         return self._fechaHoraFin
 
     @fechaHoraFin.setter
-    def fechaHoraFin(self, value: int):
+    def fechaHoraFin(self, value: datetime):
         self._fechaHoraFin = value
 
     def esPendienteRevision(self):
@@ -27,13 +28,13 @@ class CambioEstado:
         return self._fechaHoraFin is None
 
     @classmethod
-    def new(cls, fechaHoraInicio: int):
+    def new(cls, fechaHoraInicio: datetime):
         return cls(fechaHoraInicio)
 
-    def setechaHoraFin(self, value: int):
+    def setechaHoraFin(self, value: datetime):
         self._fechaHoraFin = value
 
-    def setFechaHoraFin(self, value: int):
+    def setFechaHoraFin(self, value: datetime):
         self._fechaHoraFin = value
 
     def sosActual(self):
