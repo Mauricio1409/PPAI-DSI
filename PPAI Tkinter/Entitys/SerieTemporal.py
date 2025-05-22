@@ -1,9 +1,10 @@
 from Entitys.MuestraSismica import MuestraSismica
+from Entitys.EstacionSismologica import EstacionSismologica
 import datetime
 
 
 class SerieTemporal:
-    def __init__(self, condicionAlarma: int, fechaHoraInicioRegistroMuestras: datetime, fechaHoraRegistro: datetime, frecuenciaMuestreo: float, muestraSismica : list[MuestraSismica], estacionSismologica = None):
+    def __init__(self, condicionAlarma: int, fechaHoraInicioRegistroMuestras: datetime, fechaHoraRegistro: datetime, frecuenciaMuestreo: float, muestraSismica : list[MuestraSismica], estacionSismologica: EstacionSismologica = None):
         self._condicionAlarma = condicionAlarma
         self._fechaHoraInicioRegistroMuestras = fechaHoraInicioRegistroMuestras
         self._fechaHoraRegistro = fechaHoraRegistro
@@ -17,7 +18,7 @@ class SerieTemporal:
     def obtenerDatos(self):
         #return [muestra.obtenerDatos() for muestra in self._muestras]
         return {
-            "estacionSismologica": self._estacionSimologica,
+            "estacionSismologica": self._estacionSimologica.getDatos(),
             "condicionAlarma": self._condicionAlarma,
             "fechaHoraInicioRegistroMuestras": self._fechaHoraInicioRegistroMuestras,
             "fechaHoraRegistro": self._fechaHoraRegistro,

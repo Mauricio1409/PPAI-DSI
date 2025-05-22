@@ -22,14 +22,27 @@ class ManejadorNuevoEventoSismico:
 
     def eventoSismicoSeleccionado(self, index):
         print(f"Se selecciono el evento sismico en el indice {index}, es el objeto {self.eventosPendienteRevision[index]}")
-        self.actualizarEventoABloqueado(self.eventosPendienteRevision[index])
-        self.buscarDatosevento(self.eventosPendienteRevision[index])
+        self.eventoSismicoSeleccionadoActual = self.eventosPendienteRevision[index]
+        self.actualizarEventoABloqueado(self.eventoSismicoSeleccionadoActual)
+        self.buscarDatosevento(self.eventoSismicoSeleccionadoActual)
+        self.clasificarPorEstacion()
+        for clavedato, dato in self.datosEventoSismico.items(): #todo esto lo hice simplemente para ver que funcionase y recuperase los datos que se necesitan
+            print(f"{clavedato}: {dato}")
+        self.punteroPantalla.mostrarOpcionMapa()
 
-    #todo clasificar Datos por estacion sismológica (NOT EZ)
     def buscarDatosevento(self, evento: EventoSismico):
         self.datosEventoSismico = evento.obtenerDatos()
-        for clavedato, dato in self.datosEventoSismico.items(): #todo esto lo hice simplemente para ver que funcionase y recuperara los datos que se necesitan
-            print(f"{clavedato}: {dato}")
+        print(self.datosEventoSismico)
+
+
+#TODO CHEQUEAR ESTO
+    def clasificarPorEstacion(self):
+        for i in range(len(self.datosEventoSismico["seriesTemporales"])):
+            for j in range(i + 1, len(self.datosEventoSismico["seriesTemporales"])):
+                if self.datosEventoSismico["seriesTemporales"][i]["estacionSismologica"]["codigoEstacion"] > self.datosEventoSismico["seriesTemporales"][j]["estacionSismologica"]["codigoEstacion"]:
+                    # Intercambiar los elementos
+                    self.datosEventoSismico["seriesTemporales"][i], self.datosEventoSismico["seriesTemporales"][j] = self.datosEventoSismico["seriesTemporales"][j], self.datosEventoSismico["seriesTemporales"][i]
+                # Aquí puedes agregar lógica adicional para procesar las muestras
 
 
 
@@ -58,9 +71,14 @@ class ManejadorNuevoEventoSismico:
                 self.arrayUbicacion.append(evento.getUbicacion())
                 self.arrayMagnitud.append(evento.ValorMagnitud) ##CHEQUEAR ESTO CON EL DIAGRAMA
 
+    def noVisualizarSeleccionado(self):
+        self.punteroPantalla.habilitarEdicionDatos(self.datosEventoSismico["alcanceSismo"], self.datosEventoSismico["origenGeneracion"], self.eventoSismicoSeleccionadoActual.ValorMagnitud )
+
+
 
     def __init__(self,punteroPantalla):
 
+        self.eventoSismicoSeleccionadoActual = None
         self.punteroPantalla = punteroPantalla
         self.eventosSismicos = eventosSismicos
         self.sesion = sesion1

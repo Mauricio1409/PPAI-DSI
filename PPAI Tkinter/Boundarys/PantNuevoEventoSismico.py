@@ -1,5 +1,7 @@
 import ttkbootstrap as ttk
-#from tkinter import simpledialog, messagebox
+from tkinter import messagebox
+
+
 from ManejadorNuevoEventoSismico import ManejadorNuevoEventoSismico
 
 
@@ -13,8 +15,61 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
             index = self.cuadro.index(item_id)
             self.punteroManejador.eventoSismicoSeleccionado(index)
 
+    #TODO agregar funcionalidad a esto
     def habilitar_ventana(self):
         #self.button_reg_rev_manual.pack()
+        pass
+
+    def mostrarOpcionMapa(self):
+        respuesta = messagebox.askquestion("Visualizar Mapa", "¿Desea visualizar el mapa?")
+
+        if respuesta == "yes":
+            # acá debería hacer cosas que no están descriptas en el CU
+            print("Eligió sí")
+        elif respuesta == "no":
+            print("Seleccionó no")
+            self.punteroManejador.noVisualizarSeleccionado()
+
+    def habilitarEdicionDatos(self, alcance, origen, magnitud):
+        self.cuadro.pack_forget()
+        self.frame_cuadro.pack_forget()
+        self.frame_superior_cuadro.place_forget()
+        self.scrollbar.pack_forget()
+        self.lblEdicion.pack(pady=10)
+        self.habilitarEdicionMagnitud(magnitud)
+        self.habilitarEdicionOrigen(origen)
+        self.habilitarEdicionAlcance(alcance)
+        self.btnEditar.grid(row=4, column=0, padx=10, pady=10)
+        self.btnCancelar.grid(row=4, column=1, padx=10, pady=10)
+        self.inputFrame.place(relx=0.5, rely=0.5, anchor='center')
+
+    def habilitarEdicionMagnitud(self, magnitud):
+        self.strMagnitud.set(magnitud)
+
+        self.lblMagnitud.grid(row=0, column=0, padx=10, pady=10)
+        self.inputMagnitud.grid(row=0, column=1, padx=10, pady=10)
+
+    def habilitarEdicionAlcance(self, alcance):
+        self.strAlcance.set(alcance)
+
+
+        self.lblAlcance.grid(row=1, column=0, padx=10, pady=10)
+        self.inputAlcance.grid(row=1, column=1, padx=10, pady=10)
+
+    def habilitarEdicionOrigen(self, origen):
+
+        self.strOrigenDesc.set(origen["descripcion"])
+        self.strOrigenName.set(origen["nombre"])
+
+
+
+        self.lblOrigenDesc.grid(row=2, column=0,padx=10, pady=10)
+        self.lblOrigenNom.grid(row=3, column=0,padx=10, pady=10)
+        self.inputOrigenDesc.grid(row=2, column=1, padx=10, pady=10)
+        self.inputOrigenName.grid(row=3, column=1, padx=10, pady=10)
+
+    #TODO opciones
+    def habilitarSelectorOpciones(self):
         pass
         
 
@@ -79,9 +134,27 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
     def __init__(self):
         super().__init__()
         self.punteroManejador = None
+
+
+        self.inputFrame = ttk.Frame(master=self)
+        self.strMagnitud = ttk.StringVar()
+        self.strAlcance = ttk.StringVar()
+        self.strOrigenDesc = ttk.StringVar()
+        self.strOrigenName = ttk.StringVar()
+        self.btnEditar = ttk.Button(master=self.inputFrame, text="Editar", style='my.TButton', command= lambda: print("editar")) #TODO añadir funciones
+        self.btnCancelar = ttk.Button(master=self.inputFrame, text="Cancelar", style='my.TButton', command= lambda: print("cancelar")) #TODO añadir funciones
+        self.lblEdicion = ttk.Label(master=self, text=f"Edición de Datos del evento sismico Seleccionado", font=("Arial", 20))
+        self.lblOrigenDesc = ttk.Label(master=self.inputFrame, text=f"Descripción Origen: ", font=("Arial", 12))
+        self.lblOrigenNom = ttk.Label(master=self.inputFrame, text=f"Nombre Origen: ", font=("Arial", 12))
+        self.lblAlcance = ttk.Label(master=self.inputFrame, text=f"Alcance: ", font=("Arial", 12))
+        self.lblMagnitud = ttk.Label(master=self.inputFrame, text=f"Magnitud:", font=("Arial", 12))
+        self.inputMagnitud = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strMagnitud)
+        self.inputAlcance = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strAlcance)
+        self.inputOrigenDesc = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strOrigenDesc)
+        self.inputOrigenName = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strOrigenName)
         self.style.theme_use("journal")
         self.title("Nuevo Evento Sísmico")
-        self.geometry("800x600")
+        self.geometry("1600x900")
 
         #para estetica (añadir icono a la app)
 

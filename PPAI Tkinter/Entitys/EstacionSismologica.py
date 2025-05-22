@@ -19,6 +19,7 @@ class EstacionSismologica:
         self._nombre = nombre
         self._numeroCertificacionAdquisicion = numeroCertificacionAdquisicion
 
+#region Getters y Setters
     @property
     def codigoEstacion(self):
         return self._codigoEstacion
@@ -74,6 +75,8 @@ class EstacionSismologica:
     @numeroCertificacionAdquisicion.setter
     def numeroCertificacionAdquisicion(self, value: int):
         self._numeroCertificacionAdquisicion = value
+#endregion
+
 
     def getDatos(self):
         return {
@@ -86,8 +89,6 @@ class EstacionSismologica:
             "numeroCertificacionAdquisicion": self._numeroCertificacionAdquisicion
         }
 
-    def obtenerDatos(self):
-        return self.getDatos()
 
     def __repr__(self):
         return (
