@@ -2,7 +2,10 @@
   <dictionary name="project">
     <words>
       <w>descriptas</w>
+      <w>edicion</w>
       <w>estacion</w>
+      <w>manejador</w>
+      <w>opcion</w>
     </words>
   </dictionary>
 </component>

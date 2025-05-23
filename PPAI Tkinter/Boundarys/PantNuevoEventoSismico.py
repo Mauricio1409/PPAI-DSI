@@ -70,7 +70,8 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
 
     #TODO opciones
     def habilitarSelectorOpciones(self):
-        pass
+        self.selectorOpciones.pack()
+        self.btnConfirmarOpcion.place(relx=0.5, rely=0.8, anchor='center')
         
 
     def opcion_registrar_revision_manual(self):
@@ -131,6 +132,21 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.cuadro.bind("<Return>", self.seleccionaEventoSismico)
         self.cuadro.bind("<Double-1>", self.seleccionaEventoSismico)
 
+
+    def seleccionaNoModificarDatos(self): #TODO TENGO DUDAS SERIAS SOBRE ESTO, CHEQUEAR DIAGRAMA
+        pass
+
+    def seleccionaRechazarEvento(self):
+        opcion = self.selectorOpciones.get()
+        if opcion == "Confirmar Evento":
+            # TODO Lógica para confirmar evento
+            print("evento confirmado")
+        elif opcion == "Rechazar Evento":
+            self.punteroManejador.rechazarEventoSeleccionado()
+        elif opcion == "Solicitar Revisión a Experto":
+            # TODO Lógica para solicitar revisión
+            print("Revision Solicitada")
+
     def __init__(self):
         super().__init__()
         self.punteroManejador = None
@@ -141,8 +157,10 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.strAlcance = ttk.StringVar()
         self.strOrigenDesc = ttk.StringVar()
         self.strOrigenName = ttk.StringVar()
-        self.btnEditar = ttk.Button(master=self.inputFrame, text="Editar", style='my.TButton', command= lambda: print("editar")) #TODO añadir funciones
-        self.btnCancelar = ttk.Button(master=self.inputFrame, text="Cancelar", style='my.TButton', command= lambda: print("cancelar")) #TODO añadir funciones
+        self.selectorOpciones = ttk.Combobox(master=self, state="readonly", font=("Arial", 12), values=["Confirmar Evento", "Rechazar Evento", "Solicitar Revisión a Experto"])
+        self.btnConfirmarOpcion = ttk.Button(master=self, text="Confirmar Opción", style='my.TButton', command= self.seleccionaRechazarEvento)
+        self.btnEditar = ttk.Button(master=self.inputFrame, text="Modificar Datos", style='my.TButton', command= lambda: print("editar")) #TODO añadir funciones
+        self.btnCancelar = ttk.Button(master=self.inputFrame, text="No Modificar", style='my.TButton', command= lambda: print("cancelar")) #TODO añadir funciones
         self.lblEdicion = ttk.Label(master=self, text=f"Edición de Datos del evento sismico Seleccionado", font=("Arial", 20))
         self.lblOrigenDesc = ttk.Label(master=self.inputFrame, text=f"Descripción Origen: ", font=("Arial", 12))
         self.lblOrigenNom = ttk.Label(master=self.inputFrame, text=f"Nombre Origen: ", font=("Arial", 12))

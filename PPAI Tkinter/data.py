@@ -59,8 +59,9 @@ estado_detectado = Estado("Detectado", "EventoSismico")
 estado_confirmado = Estado("Confirmado" , "EventoSismico")
 estado_finalizado = Estado("Finalizado", "EventoSismico")
 estado_bloqueado = Estado("Bloqueado", "EventoSismico")
+estado_rechazado = Estado("Rechazado", "EventoSismico")
 
-estados = [estado_finalizado, estado_detectado, estado_finalizado, estado_bloqueado]
+estados = [estado_finalizado, estado_detectado, estado_finalizado, estado_bloqueado, estado_rechazado]
 
 # Fechas de ejemplo
 ahora = datetime.now()

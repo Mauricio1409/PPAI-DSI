@@ -115,9 +115,18 @@ class EventoSismico:
         self.cambiarCambioEstado(estado, Analista, fechaHoraActual)
 
     def cambiarCambioEstado(self, estado, analista, fechaHoraActual):
-        nuevoCambioEstado = CambioEstado(fechaHoraActual, estado, analista)
-        self._cambioEstado.append(nuevoCambioEstado)
-        self._cambioEstadoActual = nuevoCambioEstado
+        nuevo_cambio_estado = CambioEstado(fechaHoraActual, estado, analista)
+        self._cambioEstado.append(nuevo_cambio_estado)
+        print("cambios de estados realizados hasta acá: ", self._cambioEstado)
+
+        print("cambio de estado actual ANTES DEL CAMBIO: ", self._cambioEstadoActual)
+        self._cambioEstadoActual = nuevo_cambio_estado
+        print("cambio de estado actual DESPUÉS DEL CAMBIO: ", self._cambioEstadoActual)
+
+    def actualizarEstadoRechazado(self, estado, analista, fechaHoraActual):
+        self._estado = estado
+        self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
+        self.cambiarCambioEstado(estado, analista, fechaHoraActual)
 
 
     #TODO MODIFICAR ESTO EN EL DIAGRAMA DE SECUENCIA (nombre método)

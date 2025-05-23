@@ -9,6 +9,12 @@ class Estado:
         return False
 
 
+    def sosRechazado(self):
+        if self.nombre == "Rechazado":
+            return True
+        return False
+
+
     def esAmbitoEvento(self):
         if self.ambito == "EventoSismico":
             return True

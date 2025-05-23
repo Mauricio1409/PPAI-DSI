@@ -45,7 +45,6 @@ class ManejadorNuevoEventoSismico:
                 # Aquí puedes agregar lógica adicional para procesar las muestras
 
 
-
     def registrarNuevaRevision(self):
         self.buscar_eventos_auto_detectados()
         self.ordenarPorFechaHora()
@@ -62,6 +61,7 @@ class ManejadorNuevoEventoSismico:
                     self.arrayMagnitud[i], self.arrayMagnitud[j] = self.arrayMagnitud[j], self.arrayMagnitud[i]
                     self.eventosPendienteRevision[i], self.eventosPendienteRevision[j] = self.eventosPendienteRevision[j], self.eventosPendienteRevision[i]
 
+
     def buscar_eventos_auto_detectados(self):
         for evento in self.eventosSismicos:
             
@@ -71,14 +71,44 @@ class ManejadorNuevoEventoSismico:
                 self.arrayUbicacion.append(evento.getUbicacion())
                 self.arrayMagnitud.append(evento.ValorMagnitud) ##CHEQUEAR ESTO CON EL DIAGRAMA
 
+
     def noVisualizarSeleccionado(self):
         self.punteroPantalla.habilitarEdicionDatos(self.datosEventoSismico["alcanceSismo"], self.datosEventoSismico["origenGeneracion"], self.eventoSismicoSeleccionadoActual.ValorMagnitud )
+        self.punteroPantalla.habilitarSelectorOpciones()
 
 
+    def rechazarEventoSeleccionado(self):
+        if self.validarExistenciaMagnitudAlcanceOrigen():
+            pass
+        else:
+            print("No se puede rechazar el evento sismico, falta información")
+
+        for estado in estados:
+            if estado.esAmbitoEvento():
+                if estado.sosRechazado():
+                    self.estadoRechazado = estado
+        self.getFechaHora()
+        self.eventoSismicoSeleccionadoActual.actualizarEstadoRechazado(self.estadoRechazado, self.analistaLogueado, self.fechaHoraActual)
+        self.finCasoDeUso()
+
+
+    def finCasoDeUso(self): #TODO no se que debería hacer con esto, si es que debería hacer algo, cerrar la venta quizás(?
+        print("Fin del caso de uso")
+        print(self)
+
+    def validarExistenciaMagnitudAlcanceOrigen(self):
+        valor_magnitud=self.eventoSismicoSeleccionadoActual.ValorMagnitud
+        valor_alcance=self.eventoSismicoSeleccionadoActual.alcanceSismo
+        valor_origen=self.eventoSismicoSeleccionadoActual.origenGeneracion
+        if valor_magnitud is not None and valor_alcance is not None and valor_origen is not None:
+            return True
+        else:
+            return False
 
     def __init__(self,punteroPantalla):
 
-        self.eventoSismicoSeleccionadoActual = None
+
+
         self.punteroPantalla = punteroPantalla
         self.eventosSismicos = eventosSismicos
         self.sesion = sesion1
@@ -89,6 +119,8 @@ class ManejadorNuevoEventoSismico:
         self.arrayUbicacion = []
         self.arrayFechaHora = []
 
+        self.eventoSismicoSeleccionadoActual = None
+        self.estadoRechazado = None
         self.eventoBloqueado = None
         self.fechaHoraActual = None
         self.analistaLogueado = None
