@@ -1,6 +1,6 @@
 import ttkbootstrap as ttk
 from tkinter import messagebox
-
+from recursos.VentanaGif import VentanaGif  # Importá la ventana
 
 from ManejadorNuevoEventoSismico import ManejadorNuevoEventoSismico
 
@@ -24,8 +24,9 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         respuesta = messagebox.askquestion("Visualizar Mapa", "¿Desea visualizar el mapa?")
 
         if respuesta == "yes":
-            # acá debería hacer cosas que no están descriptas en el CU
-            print("Eligió sí")
+            gif_path = "recursos/sismo.gif"
+            ventana = VentanaGif(gif_path)
+            ventana.grab_set()  # bloquea la ventana principal si querés
         elif respuesta == "no":
             print("Seleccionó no")
             self.punteroManejador.noVisualizarSeleccionado()
