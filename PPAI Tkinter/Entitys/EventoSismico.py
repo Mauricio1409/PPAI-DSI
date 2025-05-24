@@ -16,7 +16,7 @@ class EventoSismico:
         self._longitudEpicentro = longitud
         self._longitudHipocentro = longitud
         self._ValorMagnitud = magnitud
-        self._cambioEstado = cambioEstado
+        self._cambioEstado = cambioEstado #TODO CAMBIAR ESTO A LISTA [cambioEstado]
         self._estado = estado
         self._alcanceSismo = alcanceSismo
         self._origenGeneracion = origenGenercion
@@ -106,7 +106,14 @@ class EventoSismico:
         return self._estado.sosPendienteRevision()
     
     def getUbicacion(self):
-        return ((self._latitudEpicentro, self._longitudEpicentro),(self._latitudHipocentro, self._longitudHipocentro)) # TODO CHEQUEAR ESTO CON EL DIAGRAMA
+        return (self.getCoordenadasEpicentro(), self.getCoordenadasHipocentro())# TODO CHEQUEAR ESTO CON EL DIAGRAMA
+
+    
+    def getCoordenadasEpicentro(self):
+        return (self.latitudEpicentro, self.longitudEpicentro)
+    
+    def getCoordenadasHipocentro(self):
+        return (self.latitudHipocentro, self.longitudHipocentro)
 
     def revisar(self, estado, Analista , fechaHoraActual):
         self._estado = estado
@@ -138,14 +145,16 @@ class EventoSismico:
 
 
     def obtenerDatos(self):
-        alcance = self._alcanceSismo.getNombre()
-        clasificacion = self._clasificacionSismo.getNombre()
-        origen =self._origenGeneracion.obtenerOrigen()
+        alcance = self.alcanceSismo.nombre
+        clasificacion = self.clasificacionSismo.nombre
+        origen =self.origenGeneracion.obtenerDatos()
 
         return {
             f"alcanceSismo": alcance,
             f"clasificacionSismo": clasificacion,
             f"origenGeneracion": origen,
-            f"seriesTemporales": [serie.obtenerDatos() for serie in self._seriesTemporales]
+            
         }
 
+    def obtenerDatosSerieTemporal(self):
+        return [serie.obtenerDatos() for serie in self._seriesTemporales]

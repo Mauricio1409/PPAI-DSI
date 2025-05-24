@@ -9,11 +9,11 @@ from Entitys.MuestraSismica import MuestraSismica
 from Entitys.OrigenDeGeneracion import OrigenDeGeneracion
 from Entitys.SerieTemporal import SerieTemporal
 from Entitys.EstacionSismologica import EstacionSismologica
-from Entitys.Empleado import Empleado
 from Entitys.EventoSismico import EventoSismico
 from Entitys.AnalistaSismos import AnalistaSismos
 from Entitys.Usuario import Usuario
 from Entitys.Sesion import Sesion
+from Entitys.Sismografo import Sismografo
 
 # -----------------------------
 # Datos para AnalistaSismos
@@ -122,6 +122,19 @@ estaciones_sismologicas = [
         numeroCertificacionAdquisicion=98765
     )
 ]
+
+# ------------------------------
+# sismografos
+# -------------------------------
+
+sismografos = [
+    Sismografo(2020, 1, 1001, estaciones_sismologicas[1]),
+    Sismografo(2019, 2, 1002, estaciones_sismologicas[0]),
+    Sismografo(2021, 3, 1003, estaciones_sismologicas[1]),
+    Sismografo(2018, 4, 1004, estaciones_sismologicas[1]),
+    Sismografo(2022, 5, 1005, estaciones_sismologicas[0])
+]
+
 # -----------------------------
 # Datos SerieTemporal
 # -----------------------------
@@ -133,7 +146,7 @@ series_temporales = [
         fechaHoraRegistro=fecha_registro,
         frecuenciaMuestreo=100,
         muestraSismica=muestras_sismicas,
-        estacionSismologica=estaciones_sismologicas[0]
+        sismografo=sismografos[0]
     ),
     SerieTemporal(
         condicionAlarma=1,
@@ -141,12 +154,14 @@ series_temporales = [
         fechaHoraRegistro=fecha_registro,
         frecuenciaMuestreo=200,
         muestraSismica=muestras_sismicas,
-        estacionSismologica=estaciones_sismologicas[1]
+        sismografo=sismografos[1]
     )
 ]
 
 
 origen_generacion = OrigenDeGeneracion("Generación Natural", "Origen natural de los sismos")
+
+
 
 # -----------------------------
 # Eventos sismicos
@@ -160,11 +175,3 @@ eventosSismicos = [
             EventoSismico(datetime(2023, 10, 5, 20, 0, 0), 5.7, -38.0, -62.0, cambios_estado, Estado("PendienteRevision","EventoSismico"), clasificaciones_sismo[0], alcances_sismo[3], origen_generacion, series_temporales),
         ]
 
-
-# -----------------------------
-# Empleados (sin atributos definidos)
-# -----------------------------
-empleados = [
-    Empleado(),
-    Empleado()
-]

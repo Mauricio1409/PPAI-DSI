@@ -15,8 +15,8 @@ class Estado:
         return False
 
 
-    def esAmbitoEvento(self):
-        if self.ambito == "EventoSismico":
+    def esAmbito(self, ambito : str):
+        if self.ambito == ambito:
             return True
         return False
 

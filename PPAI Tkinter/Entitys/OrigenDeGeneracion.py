@@ -19,7 +19,7 @@ class OrigenDeGeneracion:
     def nombre(self, value: str):
         self._nombre = value
 
-    def obtenerOrigen(self):
+    def obtenerDatos(self):
         return {
             "descripcion": self._descripcion,
             "nombre": self._nombre

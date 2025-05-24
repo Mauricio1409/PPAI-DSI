@@ -29,6 +29,14 @@ class Sismografo:
     @numeroSerie.setter
     def numeroSerie(self, value: int):
         self._numeroSerie = value
+        
+    @property
+    def estacionSismologica(self):
+        return self._estacionSismologica
+    
+    @estacionSismologica.setter
+    def estacionSismologica(self, valor):
+        self._estacionSismologica = valor
 
     def esTuSerie(self, serie: int):
         return self._numeroSerie == serie

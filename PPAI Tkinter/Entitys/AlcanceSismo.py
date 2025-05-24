@@ -19,8 +19,6 @@ class AlcanceSismo:
     def nombre(self, value: str):
         self._nombre = value
 
-    def getNombre(self):
-        return self._nombre
 
     def obtenerAlcance(self):
         return {

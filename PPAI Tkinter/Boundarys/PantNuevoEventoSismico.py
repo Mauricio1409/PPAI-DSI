@@ -10,7 +10,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
 
     def seleccionaEventoSismico(self, event):
         seleccion = self.cuadro.selection()
-        if seleccion:
+        if seleccion is not None:
             item_id = seleccion[0]
             index = self.cuadro.index(item_id)
             self.punteroManejador.eventoSismicoSeleccionado(index)
@@ -28,7 +28,6 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
             ventana = VentanaGif(gif_path)
             ventana.grab_set()  # bloquea la ventana principal si querés
         elif respuesta == "no":
-            print("Seleccionó no")
             self.punteroManejador.noVisualizarSeleccionado()
 
     def habilitarEdicionDatos(self, alcance, origen, magnitud):
@@ -36,6 +35,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.frame_cuadro.pack_forget()
         self.frame_superior_cuadro.place_forget()
         self.scrollbar.pack_forget()
+        
         self.lblEdicion.pack(pady=10)
         self.habilitarEdicionMagnitud(magnitud)
         self.habilitarEdicionOrigen(origen)
@@ -80,7 +80,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.punteroManejador = ManejadorNuevoEventoSismico(punteroPantalla=self)
         self.punteroManejador.registrarNuevaRevision()
 
-    def presentarEventosNoRevisados(self, arrayFechaHoras, arrayUbicaciones, arrayMagnitudes):
+    def presentarEventosNoRevisados(self, arrayDatos):
         # Crear la tabla
 
         #region CUADRO
@@ -121,9 +121,18 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
 
         self.cuadro.delete(*self.cuadro.get_children())  # Limpiar el cuadro antes de agregar nuevos elementos
 
-        for i in range(len(arrayFechaHoras)):
+        #for i in range(len(arrayFechaHoras)):
             # Agregar los elementos a la tabla
-            self.cuadro.insert("", "end", text=arrayFechaHoras[i], values=(arrayUbicaciones[i][0][0], arrayUbicaciones[i][0][1],arrayUbicaciones[i][1][0],arrayUbicaciones[i][1][1], arrayMagnitudes[i]))
+        #    self.cuadro.insert("", "end", text=arrayFechaHoras[i], values=(arrayUbicaciones[i][0][0], arrayUbicaciones[i][0][1],arrayUbicaciones[i][1][0],arrayUbicaciones[i][1][1], arrayMagnitudes[i]))
+
+        for datosEvento in arrayDatos:
+            self.cuadro.insert("", "end", 
+                               text=datosEvento['fechaHoraOcurrencia'], 
+                               values=(datosEvento['ubicacion'][0][0], 
+                                       datosEvento['ubicacion'][0][1],
+                                       datosEvento['ubicacion'][1][0],
+                                       datosEvento['ubicacion'][1][1],
+                                       datosEvento['valorMagnitud']))
 
         self.cuadro.pack(fill="both", expand=True)
         self.frame_cuadro.pack(fill="both", expand=True)
@@ -137,16 +146,20 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
     def seleccionaNoModificarDatos(self): #TODO TENGO DUDAS SERIAS SOBRE ESTO, CHEQUEAR DIAGRAMA
         pass
 
-    def seleccionaRechazarEvento(self):
-        opcion = self.selectorOpciones.get()
-        if opcion == "Confirmar Evento":
-            # TODO Lógica para confirmar evento
-            print("evento confirmado")
-        elif opcion == "Rechazar Evento":
-            self.punteroManejador.rechazarEventoSeleccionado()
-        elif opcion == "Solicitar Revisión a Experto":
-            # TODO Lógica para solicitar revisión
-            print("Revision Solicitada")
+    def tomarOptGrilla(self):
+        self.punteroManejador.tomarOptGrilla(self.selectorOpciones.get())
+
+
+    def habilitarBotonVolver(self):
+        self.btnVolver.place(relx=0.8, rely=0.8, anchor='center')
+
+    def volverApantallaPrincipal(self):
+        self.lblEdicion.pack_forget()
+        self.inputFrame.place_forget()
+        self.selectorOpciones.pack_forget()
+        self.btnConfirmarOpcion.place_forget()
+        self.btnVolver.place_forget()
+        self.punteroManejador.registrarNuevaRevision()
 
     def __init__(self):
         super().__init__()
@@ -159,9 +172,10 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.strOrigenDesc = ttk.StringVar()
         self.strOrigenName = ttk.StringVar()
         self.selectorOpciones = ttk.Combobox(master=self, state="readonly", font=("Arial", 12), values=["Confirmar Evento", "Rechazar Evento", "Solicitar Revisión a Experto"])
-        self.btnConfirmarOpcion = ttk.Button(master=self, text="Confirmar Opción", style='my.TButton', command= self.seleccionaRechazarEvento)
+        self.btnConfirmarOpcion = ttk.Button(master=self, text="Confirmar Opción", style='my.TButton', command= self.tomarOptGrilla)
         self.btnEditar = ttk.Button(master=self.inputFrame, text="Modificar Datos", style='my.TButton', command= lambda: print("editar")) #TODO añadir funciones
         self.btnCancelar = ttk.Button(master=self.inputFrame, text="No Modificar", style='my.TButton', command= lambda: print("cancelar")) #TODO añadir funciones
+        self.btnVolver = ttk.Button(master=self, text="Volver", style='my.TButton', command=self.volverApantallaPrincipal) #TODO añadir funciones
         self.lblEdicion = ttk.Label(master=self, text=f"Edición de Datos del evento sismico Seleccionado", font=("Arial", 20))
         self.lblOrigenDesc = ttk.Label(master=self.inputFrame, text=f"Descripción Origen: ", font=("Arial", 12))
         self.lblOrigenNom = ttk.Label(master=self.inputFrame, text=f"Nombre Origen: ", font=("Arial", 12))
