@@ -185,7 +185,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.inputAlcance = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strAlcance)
         self.inputOrigenDesc = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strOrigenDesc)
         self.inputOrigenName = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strOrigenName)
-        self.style.theme_use("journal")
+        self.style.theme_use("darkly")
         self.title("Nuevo Evento Sísmico")
         self.geometry("1600x900")
 
