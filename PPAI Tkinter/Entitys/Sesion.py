@@ -24,7 +24,7 @@ class Sesion:
         return self._fechaHoraInicio
 
     @fechaHoraInicio.setter
-    def fechaHoraInicio(self, value: int):
+    def fechaHoraInicio(self, value: datetime):
         self._fechaHoraInicio = value
 
     @property
@@ -32,11 +32,8 @@ class Sesion:
         return self._fechaHoraFin
 
     @fechaHoraFin.setter
-    def fechaHoraFin(self, value: int):
+    def fechaHoraFin(self, value: datetime):
         self._fechaHoraFin = value
-
-    def obtenerUsuario(self):
-        return self._usuario
 
     def __repr__(self):
         return (f"Sesion(sesion_id={self._sesion_id}, usuario={self._usuario}, "

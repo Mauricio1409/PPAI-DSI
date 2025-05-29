@@ -32,6 +32,7 @@ class Estado:
     @nombre.setter
     def nombre(self, nuevoNombre: str):
         self._nombre = nuevoNombre
+
     @property
     def ambito(self):
         return self._ambito
