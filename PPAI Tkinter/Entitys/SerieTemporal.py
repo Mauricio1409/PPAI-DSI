@@ -63,7 +63,7 @@ class SerieTemporal:
     def agregarMuestra(self, muestra: MuestraSismica):
         self._muestras.append(muestra)
 
-    def obtenerDatos(self):
+    def obtenerDatosSerieTemporal(self):
         #return [muestra.obtenerDatos() for muestra in self._muestras]
         return {
             "estacionSismologica": self.sismografo.estacionSismologica,
