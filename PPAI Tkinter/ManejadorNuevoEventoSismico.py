@@ -21,7 +21,9 @@ class ManejadorNuevoEventoSismico:
         self.fechaHoraActual= datetime.now()
 
     def eventoSismicoSeleccionado(self, index):
+        # noinspection PyTypeChecker
         print(f"Se selecciono el evento sismico en el indice {index}, es el objeto {self.arrayDatos[index]['evento']}")
+        # noinspection PyTypeChecker
         self.eventoSismicoSeleccionadoActual = self.arrayDatos[index]['evento']
         self.actualizarEventoABloqueado(self.eventoSismicoSeleccionadoActual)
         self.buscarDatosEvento(self.eventoSismicoSeleccionadoActual)
@@ -58,20 +60,10 @@ class ManejadorNuevoEventoSismico:
     def ordenarPorFechaHora(self):
         
         self.arrayDatos.sort(key= lambda datosEvento : datosEvento['fechaHoraOcurrencia'], reverse=True)
-        
-        # for i in range(len(self.arrayFechaHora)):
-        #     for j in range(i + 1, len(self.arrayFechaHora)):
-        #         if self.arrayFechaHora[i] < self.arrayFechaHora[j]:
-        #             # Intercambiar los elementos
-        #             self.arrayFechaHora[i], self.arrayFechaHora[j] = self.arrayFechaHora[j], self.arrayFechaHora[i]
-        #             self.arrayUbicacion[i], self.arrayUbicacion[j] = self.arrayUbicacion[j], self.arrayUbicacion[i]
-        #             self.arrayMagnitud[i], self.arrayMagnitud[j] = self.arrayMagnitud[j], self.arrayMagnitud[i]
-        #             self.eventosPendienteRevision[i], self.eventosPendienteRevision[j] = self.eventosPendienteRevision[j], self.eventosPendienteRevision[i]
 
-
-    
 
     def buscar_eventos_auto_detectados(self):
+        self.arrayDatos = []  # Reiniciar el array de datos
         for evento in self.eventosSismicos:
             datosEvento = {}
             if evento.esPendienteRevision():
@@ -118,7 +110,6 @@ class ManejadorNuevoEventoSismico:
             print("Revision Solicitada")
         
 
-
     def finCasoDeUso(self): #TODO no se que debería hacer con esto, si es que debería hacer algo, cerrar la venta quizás(?
         print("Fin del caso de uso")
         self.punteroPantalla.habilitarBotonVolver()
@@ -137,6 +128,7 @@ class ManejadorNuevoEventoSismico:
 
 
 
+
         self.punteroPantalla = punteroPantalla
         self.eventosSismicos = eventosSismicos
         self.sesion = sesion1
@@ -144,10 +136,9 @@ class ManejadorNuevoEventoSismico:
 
         self.eventosPendienteRevision = []
         self.arrayDatos = []
-        # self.arrayMagnitud = []
-        # self.arrayUbicacion = []
-        # self.arrayFechaHora = []
 
+        # ATRIBUTOS QUE SE INICIAN VACÍOS (SE RELLENAN DURANTE LA EJECUCIÓN DEL CASO DE USO)
+        self.datosSerieTemporal = None
         self.eventoSismicoSeleccionadoActual = None
         self.estadoRechazado = None
         self.eventoBloqueado = None

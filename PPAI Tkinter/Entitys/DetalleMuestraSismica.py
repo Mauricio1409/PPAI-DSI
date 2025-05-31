@@ -1,6 +1,9 @@
+from Entitys.TipoDeDato import TipoDeDato
+
 class DetalleMuestraSismica:
-    def __init__(self, valor: int):
+    def __init__(self, valor: int, tipoDato: TipoDeDato):
         self._valor = valor
+        self._tipoDato = tipoDato
 
     @property
     def valor(self):

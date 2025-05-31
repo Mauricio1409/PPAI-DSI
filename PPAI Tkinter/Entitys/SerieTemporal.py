@@ -65,6 +65,7 @@ class SerieTemporal:
 
     def obtenerDatos(self):
         #return [muestra.obtenerDatos() for muestra in self._muestras]
+        '''
         return {
             "estacionSismologica": self.sismografo.estacionSismologica,
             "condicionAlarma": self.condicionAlarma,
@@ -73,6 +74,15 @@ class SerieTemporal:
             "frecuenciaMuestreo": self.frecuenciaMuestreo,
             "muestras": [muestra.obtenerDatos() for muestra in self.muestras]
         }
+        '''
+
+        # TODO que estamos haciendo aca??????, el enunciado solo pide que busquemos 3 datos, no todos los datos de la serie temporal
+
+        return {
+            "estacionSismologica": self.sismografo.estacionSismologica.codigoEstacion,
+            "muestras": [muestra.obtenerDatos() for muestra in self.muestras],
+        }
+
 
     def sosSerie(self):
         #TODO que es esto?

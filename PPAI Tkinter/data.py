@@ -14,6 +14,7 @@ from Entitys.AnalistaSismos import AnalistaSismos
 from Entitys.Usuario import Usuario
 from Entitys.Sesion import Sesion
 from Entitys.Sismografo import Sismografo
+from Entitys.TipoDeDato import TipoDeDato
 
 # -----------------------------
 # Datos para AnalistaSismos
@@ -73,12 +74,18 @@ cambios_estado = [
 ]
 
 # -----------------------------
+# Tipos de datos muestra sismica
+# -----------------------------
+
+tipoMuestra1 = TipoDeDato("Velocidad Onda", "metros sobre segundo", 22.4)
+
+# -----------------------------
 # Detalles de muestras sísmicas
 # -----------------------------
 detalles_muestra = [
-    DetalleMuestraSismica(150),
-    DetalleMuestraSismica(200),
-    DetalleMuestraSismica(175)
+    DetalleMuestraSismica(150, tipoMuestra1),
+    DetalleMuestraSismica(200, tipoMuestra1),
+    DetalleMuestraSismica(175, tipoMuestra1)
 ]
 
 # -----------------------------
