@@ -18,6 +18,8 @@ class ManejadorNuevoEventoSismico:
         # self.arrayUbicacion = []
         # self.arrayFechaHora = []
 
+        self.datosSerieTemporal = None
+        self.estadoBloqueado = None
         self.eventoSismicoSeleccionadoActual = None
         self.estadoRechazado = None
         self.eventoBloqueado = None
@@ -87,7 +89,12 @@ class ManejadorNuevoEventoSismico:
     def buscarDatosEvento(self, evento: EventoSismico):
         self.datosEventoSismico = evento.obtenerDatos()
         self.datosSerieTemporal = evento.obtenerDatosSerieTemporal()
+        print("----------------------------------")
+        print("DATOS EVENTO SISMICO")
         print(self.datosEventoSismico)
+        print("----------------------------------")
+        print("DATOS SERIE TEMPORAL")
+        print(self.datosSerieTemporal)
 
     def clasificarPorEstacion(self):
         
@@ -138,7 +145,8 @@ class ManejadorNuevoEventoSismico:
         elif opcion == "Solicitar Revisión a Experto":
             # TODO Lógica para solicitar revisión
             print("Revision Solicitada")
-        
+
+    #TODO CORREGIR ESTO
     def validarExistenciaMagnitudAlcanceOrigen(self):
         valor_magnitud=self.eventoSismicoSeleccionadoActual.ValorMagnitud
         valor_alcance=self.eventoSismicoSeleccionadoActual.alcanceSismo

@@ -88,8 +88,8 @@ fecha_muestra1 = datetime.now() - timedelta(hours=2)
 fecha_muestra2 = datetime.now() - timedelta(hours=1)
 
 muestras_sismicas = [
-    MuestraSismica(fecha_muestra1, detalles_muestra[0]),
-    MuestraSismica(fecha_muestra2, detalles_muestra[1])
+    MuestraSismica(fecha_muestra1, detalles_muestra),
+    MuestraSismica(fecha_muestra2, detalles_muestra)
 ]
 
 # -----------------------------

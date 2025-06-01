@@ -1,5 +1,5 @@
 class DetalleMuestraSismica:
-    def __init__(self, valor: int):
+    def __init__(self, valor: float):
         self._valor = valor
 
 # region Getters y Setters
@@ -11,10 +11,6 @@ class DetalleMuestraSismica:
          self._valor = nuevoValor
 # endregion
 
-    def obtenerDatos(self):
-        return {
-            "valor": self._valor
-        }
     
     def __repr__(self):
         return f"DetalleMuestraSismica(valor={self._valor})"
