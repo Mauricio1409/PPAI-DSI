@@ -4,6 +4,7 @@ class ClasificacionSismo:
         self._kmProfundidadHasta = kmProfundidadHasta
         self._nombre = nombre
 
+# region Getters y Setters
     @property
     def kmProfundidadDesde(self):
         return self._kmProfundidadDesde
@@ -27,6 +28,7 @@ class ClasificacionSismo:
     @nombre.setter
     def nombre(self, value: str):
         self._nombre = value
+# endregion
 
     def getNombre(self):
         return self._nombre

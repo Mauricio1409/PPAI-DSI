@@ -1,6 +1,5 @@
 from datetime import datetime
 from Entitys.EventoSismico import EventoSismico
-## from Entitys.Estado import Estado
 
 from data import eventosSismicos, estados, sesion1
 
@@ -100,6 +99,9 @@ class ManejadorNuevoEventoSismico:
                     # Intercambiar los elementos
         #            self.datosEventoSismico["seriesTemporales"][i], self.datosEventoSismico["seriesTemporales"][j] = self.datosEventoSismico["seriesTemporales"][j], self.datosEventoSismico["seriesTemporales"][i]
                 # Aquí puedes agregar lógica adicional para procesar las muestras
+
+    def generarSismograma(self, estacionSismologica): # TODO: Implementar lógica para generar sismograma
+        pass
 
     def noVisualizarSeleccionado(self):
         self.punteroPantalla.habilitarEdicionDatos(self.eventoSismicoSeleccionadoActual.alcanceSismo, 

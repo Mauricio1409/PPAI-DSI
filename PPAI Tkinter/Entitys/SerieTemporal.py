@@ -12,6 +12,7 @@ class SerieTemporal:
         self._muestras = muestraSismica
         self._sismografo = sismografo #TODO esto esta hardcodeado, debería buscar cual es su estación sismológica en la BDD
 
+# region Getters y Setters
     @property
     def condicionAlarma(self):
         return self._condicionAlarma
@@ -59,11 +60,9 @@ class SerieTemporal:
     @sismografo.setter
     def sismografo(self, valor):
         self._sismografo = valor
+# endregion
 
-    def agregarMuestra(self, muestra: MuestraSismica):
-        self._muestras.append(muestra)
-
-    def obtenerDatosSerieTemporal(self):
+    def obtenerDatos(self):
         #return [muestra.obtenerDatos() for muestra in self._muestras]
         return {
             "estacionSismologica": self.sismografo.estacionSismologica,
@@ -74,13 +73,13 @@ class SerieTemporal:
             "muestras": [muestra.obtenerDatos() for muestra in self.muestras]
         }
 
-    def sosSerie(self):
-        #TODO que es esto?
-        return True
-
     def __repr__(self):
         return (f"SerieTemporal(condicionAlarma={self._condicionAlarma}, "
                 f"fechaHoraInicioRegistroMuestras={self._fechaHoraInicioRegistroMuestras}, "
                 f"fechaHoraRegistro={self._fechaHoraRegistro}, "
                 f"frecuenciaMuestreo={self._frecuenciaMuestreo}, "
                 f"muestras={self._muestras})")
+    
+    #TODO: metodos de implementación fuera del diagrama
+    def agregarMuestra(self, muestra: MuestraSismica):
+        self._muestras.append(muestra)

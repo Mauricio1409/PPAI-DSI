@@ -6,6 +6,7 @@ class Sismografo:
         self._numeroSerie = numeroSerie
         self._estacionSismologica = estacionSismologica
 
+# region Getters y Setters
     @property
     def fechaAdquisicion(self):
         return self._fechaAdquisicion
@@ -37,6 +38,7 @@ class Sismografo:
     @estacionSismologica.setter
     def estacionSismologica(self, valor):
         self._estacionSismologica = valor
+# endregion
 
     def esTuSerie(self, serie: int):
         return self._numeroSerie == serie

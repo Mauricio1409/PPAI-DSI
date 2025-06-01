@@ -196,8 +196,6 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
     def tomarOptGrilla(self):
         self.punteroManejador.tomarOptGrilla(self.selectorOpciones.get())
 
-
-
 #################################################################################################################
     def habilitarBotonVolver(self):
         self.btnVolver.place(relx=0.8, rely=0.8, anchor='center')

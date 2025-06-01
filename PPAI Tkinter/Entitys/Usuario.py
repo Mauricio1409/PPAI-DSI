@@ -6,6 +6,7 @@ class Usuario:
         self._contrasena = contrasena
         self._logueado = logueado
 
+#region Getters y Setters
     @property
     def nombre(self):
         return self._nombre
@@ -21,6 +22,7 @@ class Usuario:
     @contrasena.setter
     def contrasena(self, value: str):
         self._contrasena = value
+#endregion
 
     def getLogueado(self):
         return self._logueado
