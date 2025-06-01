@@ -3,6 +3,7 @@ class AlcanceSismo:
         self._descripcion = descripcion
         self._nombre = nombre
 
+#region Getters y Setters
     @property
     def descripcion(self):
         return self._descripcion
@@ -18,7 +19,10 @@ class AlcanceSismo:
     @nombre.setter
     def nombre(self, value: str):
         self._nombre = value
+# endregion
 
+    def getNombre(self):
+        return self._nombre
 
     def obtenerAlcance(self):
         return {

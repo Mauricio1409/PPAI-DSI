@@ -7,10 +7,8 @@ class Sesion:
         self._usuario = usuario
         self._fechaHoraInicio = fechaHoraInicio
         self._fechaHoraFin = fechaHoraFin
-
-    def obtenerUsuario(self):
-        return self._usuario.getLogueado()
-
+    
+#region Getters y Setters
     @property
     def sesion_id(self):
         return self._sesion_id
@@ -24,7 +22,7 @@ class Sesion:
         return self._fechaHoraInicio
 
     @fechaHoraInicio.setter
-    def fechaHoraInicio(self, value: int):
+    def fechaHoraInicio(self, value: datetime):
         self._fechaHoraInicio = value
 
     @property
@@ -32,12 +30,14 @@ class Sesion:
         return self._fechaHoraFin
 
     @fechaHoraFin.setter
-    def fechaHoraFin(self, value: int):
+    def fechaHoraFin(self, value: datetime):
         self._fechaHoraFin = value
+# endregion
 
     def obtenerUsuario(self):
-        return self._usuario
+        return self._usuario.getLogueado()
 
     def __repr__(self):
         return (f"Sesion(sesion_id={self._sesion_id}, usuario={self._usuario}, "
                 f"fechaHoraInicio={self._fechaHoraInicio}, fechaHoraFin={self._fechaHoraFin})")
+    

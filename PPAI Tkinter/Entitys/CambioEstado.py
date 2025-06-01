@@ -36,6 +36,8 @@ class CambioEstado:
 
 #endregion
 
+    def sosActual(self):
+        return self._fechaHoraFin is None
 
     def setFechaHoraFin(self, value: datetime):
         self._fechaHoraFin = value
@@ -44,6 +46,3 @@ class CambioEstado:
         return (f"CambioEstado(fechaHoraInicio={self._fechaHoraInicio}, "
                 f"EstadoActual={self._estado.nombre}," 
                 f"fechaHoraFin={self._fechaHoraFin})")
-
-    def sosActual(self):
-        return self._fechaHoraFin is None

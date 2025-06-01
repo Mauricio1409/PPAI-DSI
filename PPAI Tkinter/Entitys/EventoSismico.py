@@ -105,21 +105,34 @@ class EventoSismico:
     def esPendienteRevision(self):
         return self._estado.sosPendienteRevision()
     
+    def getFechaHoraOcurrencia(self): # jr
+        return self._fechaHoraOcurrencia
+
     def getUbicacion(self):
         return (self.getCoordenadasEpicentro(), self.getCoordenadasHipocentro())# TODO CHEQUEAR ESTO CON EL DIAGRAMA
 
-    
     def getCoordenadasEpicentro(self):
         return (self.latitudEpicentro, self.longitudEpicentro)
     
     def getCoordenadasHipocentro(self):
         return (self.latitudHipocentro, self.longitudHipocentro)
 
+    def getMagnitud(self): # jr
+        return self.ValorMagnitud
+
+# EventoSismico seleccionado 
+
     def revisar(self, estado, Analista , fechaHoraActual):
         self._estado = estado
         self.buscarCambioEstadoActual()
         self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
         self.cambiarCambioEstado(estado, Analista, fechaHoraActual)
+
+    def buscarCambioEstadoActual(self):
+        for cambio in self._cambioEstado:
+            if cambio.sosActual():
+                self._cambioEstadoActual = cambio
+        return None
 
     def cambiarCambioEstado(self, estado, analista, fechaHoraActual):
         nuevo_cambio_estado = CambioEstado(fechaHoraActual, estado, analista)
@@ -130,20 +143,6 @@ class EventoSismico:
         self._cambioEstadoActual = nuevo_cambio_estado
         print("cambio de estado actual DESPUÉS DEL CAMBIO: ", self._cambioEstadoActual)
 
-    def actualizarEstadoRechazado(self, estado, analista, fechaHoraActual):
-        self._estado = estado
-        self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
-        self.cambiarCambioEstado(estado, analista, fechaHoraActual)
-
-
-    #TODO MODIFICAR ESTO EN EL DIAGRAMA DE SECUENCIA (nombre método)
-    def buscarCambioEstadoActual(self):
-        for cambio in self._cambioEstado:
-            if cambio.sosActual():
-                self._cambioEstadoActual = cambio
-        return None
-
-
     def obtenerDatos(self):
         alcance = self.alcanceSismo.nombre
         clasificacion = self.clasificacionSismo.nombre
@@ -152,9 +151,15 @@ class EventoSismico:
         return {
             f"alcanceSismo": alcance,
             f"clasificacionSismo": clasificacion,
-            f"origenGeneracion": origen,
-            
+            f"origenGeneracion": origen,  
         }
 
     def obtenerDatosSerieTemporal(self):
         return [serie.obtenerDatos() for serie in self._seriesTemporales]
+    
+    def actualizarEstadoRechazado(self, estado, analista, fechaHoraActual):
+        self._estado = estado
+        self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
+        self.cambiarCambioEstado(estado, analista, fechaHoraActual)
+
+
