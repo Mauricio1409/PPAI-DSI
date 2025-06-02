@@ -7,6 +7,7 @@ from data import eventosSismicos, estados, sesion1
 class ManejadorNuevoEventoSismico:
 
     def __init__(self,punteroPantalla):
+
         self.punteroPantalla = punteroPantalla
         self.eventosSismicos = eventosSismicos
         self.sesion = sesion1
@@ -18,6 +19,7 @@ class ManejadorNuevoEventoSismico:
         # self.arrayUbicacion = []
         # self.arrayFechaHora = []
 
+        self.estadoConfirmado = None
         self.CasoUsoSismograma = None
         self.datosModificados = False
         self.ValorMagnitudMod = None
@@ -116,8 +118,8 @@ class ManejadorNuevoEventoSismico:
 
     def generarSismograma(self, datosSerieTemporal): # TODO: Implementar lógica para generar sismograma
         self.CasoUsoSismograma = ManejadorGenerarSismograma(datosSerieTemporal)
-        rutaSismograma = self.CasoUsoSismograma.generarSismograma()
-        return rutaSismograma
+        ruta_sismograma = self.CasoUsoSismograma.generarSismograma()
+        return ruta_sismograma
 
     def noVisualizarSeleccionado(self):
 
@@ -142,7 +144,14 @@ class ManejadorNuevoEventoSismico:
 
             if opcion == "Confirmar Evento":
             # TODO Lógica para confirmar evento
+                for estado in estados:
+                    if estado.esAmbito("EventoSismico"):
+                        if estado.sosConfirmado():
+                            self.estadoConfirmado = estado
+                self.getFechaHora()
+                self.eventoSismicoSeleccionadoActual.actualizarEstadoConfirmado(self.estadoConfirmado, self.analistaLogueado, self.fechaHoraActual)
                 print("evento confirmado")
+                self.finCasoDeUso()
 
             elif opcion == "Rechazar Evento":
 
@@ -172,4 +181,23 @@ class ManejadorNuevoEventoSismico:
         self.punteroPantalla.volverApantallaPrincipal()
         print(self)
 
+
+    def casoDeUsoCancelado(self):
+        print("Caso de uso cancelado")
+        estado_pendiente_revision = self.buscarEstadoPendienteRevision()
+
+        self.buscarUsuarioLogueado()
+
+        self.getFechaHora()
+
+        self.eventoSismicoSeleccionadoActual.actualizarEstadoPendiente(estado_pendiente_revision, self.analistaLogueado, self.fechaHoraActual)
+        print(self)
+
+
+    def buscarEstadoPendienteRevision(self):
+        for estado in self.arrayEstados:
+            if estado.esAmbito('EventoSismico'):
+                if estado.sosPendienteRevision():
+                    return estado
+        return None
 

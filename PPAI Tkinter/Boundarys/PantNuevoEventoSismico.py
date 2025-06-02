@@ -1,6 +1,5 @@
 import ttkbootstrap as ttk
 from tkinter import messagebox
-from recursos.VentanaGif import VentanaGif  # Importá la ventana
 from PIL import Image, ImageTk, ImageSequence
 
 from ManejadorNuevoEventoSismico import ManejadorNuevoEventoSismico
@@ -9,7 +8,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
     def __init__(self):
         super().__init__()
 
-
+        self.variableEjemplo = None
         self.imagen = None
         self.modificoDatos = None
         self.punteroManejador = None
@@ -26,8 +25,8 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.lblTitulo = ttk.Label(master=self, text="Visualización del evento seleccionado", font=("Arial", 30, "bold"))
         self.lblSeleccionarOpcion = ttk.Label(master=self, text="Seleccione una acción para el evento sismico seleccionado:", font=("Arial", 14, "bold"))
         self.selectorOpciones = ttk.Combobox(master=self, state="readonly", font=("Arial", 12), textvariable=self.opcionElegida, values=["Confirmar Evento", "Rechazar Evento", "Solicitar Revisión a Experto"])
-        self.btnConfirmarOpcion = ttk.Button(master=self, text="Confirmar Opción", style='my.TButton', command= self.tomarOptGrilla)
-        self.btnEditar = ttk.Button(master=self.inputFrame, text="Modificar Datos", style='my.TButton', command= lambda: self.seleccionarModificarDatos(True))
+        self.btnConfirmarOpcion = ttk.Button(master=self, text="Confirmar Opción", style='success.TButton', command= self.tomarOptGrilla)
+        self.btnEditar = ttk.Button(master=self.inputFrame, text="Modificar Datos", style='warning.TButton', command= lambda: self.seleccionarModificarDatos(True))
         self.btnVolver = ttk.Button(master=self, text="Volver", style='my.TButton', command=self.continuarAVisualizarEventos)
         self.lblClasificacion = ttk.Label(master=self.inputFrame, text="Clasificación del Evento Sísmico: ", font=("Arial", 12))
         self.lblEdicion = ttk.Label(master=self.bodyFrame, text=f"Edición de datos del evento sismico Seleccionado", font=("Arial", 20, "bold"))
@@ -43,6 +42,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.inputAlcance = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strAlcance, state="readonly")
         self.inputOrigenName = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strOrigenName, state="readonly")
         self.lblClasificacionActual = ttk.Label(master=self.inputFrame, textvariable=self.strClasificacion, font=("Arial", 12, "bold"))
+        self.btnCancelar = ttk.Button(master=self, text="Cancelar Caso de uso", style='danger.TButton', command=self.cancelarEjecucionCasoDeUso)
         self.style.theme_use("darkly")
         self.title("Nuevo Evento Sísmico")
         self.geometry("1600x900")
@@ -75,7 +75,13 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         # Packing inicial
 
         self.buttons_frame.pack()
-        
+
+    def cancelarEjecucionCasoDeUso(self):
+        respuesta = messagebox.askyesno("Cancelar Caso de Uso", "¿Está seguro de que desea cancelar la ejecución del caso de uso?")
+        if respuesta:
+            self.punteroManejador.casoDeUsoCancelado()
+            self.volverApantallaPrincipal()
+
     def opcionRegistrarRevisionManual(self):
         self.habilitarVentana()
         self.punteroManejador = ManejadorNuevoEventoSismico(punteroPantalla=self)
@@ -83,6 +89,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
 
     def habilitarVentana(self):
         self.lblTituloCuadro.pack()
+        self.btnCancelar.place(relx=0.9, rely=0.05, anchor='center')
 
     def presentarEventosNoRevisados(self, arrayDatos):
         # Crear la tabla
@@ -270,9 +277,14 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.selectorOpciones.place_forget()
         self.btnConfirmarOpcion.place_forget()
         self.btnVolver.place_forget()
-        self.punteroManejador.registrarNuevaRevision()
         self.lblTitulo.pack_forget()
         self.lblSeleccionarOpcion.place_forget()
         self.bodyFrame.place_forget()
+        self.lblGifMapaIMG.place_forget()
+        self.lblGifMapaTitulo.pack_forget()
+        self.cuadro.pack_forget()
+        self.lblTituloCuadro.pack_forget()
+        self.habilitarVentana()
+        self.punteroManejador.registrarNuevaRevision()
 
     

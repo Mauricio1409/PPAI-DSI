@@ -44,3 +44,8 @@ class Estado:
             return True
         return False
 
+    def sosConfirmado(self):
+        if self.nombre == "Confirmado":
+            return True
+        return False
+

@@ -44,5 +44,5 @@ class CambioEstado:
 
     def __repr__(self):
         return (f"CambioEstado(fechaHoraInicio={self._fechaHoraInicio}, "
-                f"EstadoActual={self._estado.nombre}," 
+                f"EstadoActual={self._estado.nombre},"
                 f"fechaHoraFin={self._fechaHoraFin})")

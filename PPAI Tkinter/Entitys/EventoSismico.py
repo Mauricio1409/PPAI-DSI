@@ -164,4 +164,16 @@ class EventoSismico:
         self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
         self.cambiarCambioEstado(estado, analista, fechaHoraActual)
 
+    def actualizarEstadoConfirmado(self, estado, analista, fechaHoraActual):
+        self._estado = estado
+        self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
+        self.cambiarCambioEstado(estado, analista, fechaHoraActual)
+
+
+    def actualizarEstadoPendiente(self, estado, analista, fechaHoraActual):
+        self._estado = estado
+        self.buscarCambioEstadoActual()
+        self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
+        self.cambiarCambioEstado(estado, analista, fechaHoraActual)
+
 
