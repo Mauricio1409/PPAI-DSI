@@ -25,22 +25,16 @@ class CambioEstado:
     def fechaHoraFin(self, value: datetime):
         self._fechaHoraFin = value
 
+#endregion
+
+
     def esPendienteRevision(self):
-        # Implementa la lógica real según tu dominio
         return self._fechaHoraFin is None
 
-    @classmethod
-    def new(cls, fechaHoraInicio: datetime):
-        return cls(fechaHoraInicio)
-
-
-#endregion
 
     def sosActual(self):
         return self._fechaHoraFin is None
 
-    def setFechaHoraFin(self, value: datetime):
-        self._fechaHoraFin = value
 
     def __repr__(self):
         return (f"CambioEstado(fechaHoraInicio={self._fechaHoraInicio}, "

@@ -247,7 +247,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.lblClasificacion.grid(row=0, column=0, padx=10, pady=10)
         self.lblClasificacionActual.grid(row=0, column=1, padx=10, pady=10)
 
-        print(rutaSismograma)
+
         self.imagen = ttk.PhotoImage(file=rutaSismograma)
 
 
@@ -261,15 +261,13 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
 
 
     def tomarOptGrilla(self):
-        opcionElegida = self.selectorOpciones.get()
-        if opcionElegida == "Elija una opción":
+        opcion_elegida = self.selectorOpciones.get()
+        if opcion_elegida == "Elija una opción":
             messagebox.showwarning("Advertencia", "Por favor, seleccione una acción válida.")
             return
-        self.punteroManejador.tomarOptGrilla(opcionElegida, self.strAlcance.get(), self.strOrigenName.get(), self.strMagnitud.get(), self.modificoDatos)
+        self.punteroManejador.tomarOptGrilla(opcion_elegida, self.strAlcance.get(), self.strOrigenName.get(), self.strMagnitud.get(), self.modificoDatos)
 
 #################################################################################################################
-    def habilitarBotonVolver(self):
-        self.btnVolver.place(relx=0.8, rely=0.8, anchor='center')
 
     def volverApantallaPrincipal(self):
         self.lblEdicion.pack_forget()

@@ -125,7 +125,7 @@ class EventoSismico:
     def revisar(self, estado, Analista , fechaHoraActual):
         self._estado = estado
         self.buscarCambioEstadoActual()
-        self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
+        self._cambioEstadoActual.fechaHoraFin = fechaHoraActual
         self.cambiarCambioEstado(estado, Analista, fechaHoraActual)
 
     def buscarCambioEstadoActual(self):
@@ -133,6 +133,7 @@ class EventoSismico:
             if cambio.sosActual():
                 self._cambioEstadoActual = cambio
         return None
+
 
     def cambiarCambioEstado(self, estado, analista, fechaHoraActual):
         nuevo_cambio_estado = CambioEstado(fechaHoraActual, estado, analista)
@@ -142,6 +143,7 @@ class EventoSismico:
         print("cambio de estado actual ANTES DEL CAMBIO: ", self._cambioEstadoActual)
         self._cambioEstadoActual = nuevo_cambio_estado
         print("cambio de estado actual DESPUÉS DEL CAMBIO: ", self._cambioEstadoActual)
+
 
     def obtenerDatos(self):
         alcance = self.alcanceSismo.nombre
@@ -156,24 +158,27 @@ class EventoSismico:
             "valorMagnitud" : magnitud
         }
 
+
     def obtenerDatosSerieTemporal(self):
         return [serie.obtenerDatos() for serie in self._seriesTemporales]
-    
+
+
     def actualizarEstadoRechazado(self, estado, analista, fechaHoraActual):
         self._estado = estado
-        self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
+        self._cambioEstadoActual.fechaHoraFin = fechaHoraActual
         self.cambiarCambioEstado(estado, analista, fechaHoraActual)
+
 
     def actualizarEstadoConfirmado(self, estado, analista, fechaHoraActual):
         self._estado = estado
-        self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
+        self._cambioEstadoActual.fechaHoraFin = fechaHoraActual
         self.cambiarCambioEstado(estado, analista, fechaHoraActual)
 
 
     def actualizarEstadoPendiente(self, estado, analista, fechaHoraActual):
         self._estado = estado
         self.buscarCambioEstadoActual()
-        self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
+        self._cambioEstadoActual.fechaHoraFin = fechaHoraActual
         self.cambiarCambioEstado(estado, analista, fechaHoraActual)
 
 

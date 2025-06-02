@@ -42,18 +42,18 @@ class ManejadorNuevoEventoSismico:
     def buscarEventosAutoDetectados(self):
         self.arrayDatos = []
         for evento in self.eventosSismicos:
-            datosEvento = {}
+            datos_evento = {}
             if evento.esPendienteRevision():
                 # self.eventosPendienteRevision.append(evento)
                 # self.arrayFechaHora.append(evento.fechaHoraOcurrencia)
                 # self.arrayUbicacion.append(evento.getUbicacion())
                 # self.arrayMagnitud.append(evento.ValorMagnitud) ##CHEQUEAR ESTO CON EL DIAGRAMA
-                datosEvento['evento'] = evento
-                datosEvento['fechaHoraOcurrencia'] = evento.fechaHoraOcurrencia
-                datosEvento['ubicacion'] = evento.getUbicacion()
-                datosEvento['valorMagnitud'] = evento.ValorMagnitud
+                datos_evento['evento'] = evento
+                datos_evento['fechaHoraOcurrencia'] = evento.fechaHoraOcurrencia
+                datos_evento['ubicacion'] = evento.getUbicacion()
+                datos_evento['valorMagnitud'] = evento.ValorMagnitud
 
-                self.arrayDatos.append(datosEvento)
+                self.arrayDatos.append(datos_evento)
 
     def ordenarPorFechaHora(self):
 
@@ -76,8 +76,8 @@ class ManejadorNuevoEventoSismico:
         self.clasificarPorEstacion()
         for clavedato, dato in self.datosEventoSismico.items(): #todo esto lo hice simplemente para ver que funcionase y recuperase los datos que se necesitan
             print(f"{clavedato}: {dato}")
-        rutaSismo =  self.generarSismograma(self.datosSerieTemporal)
-        self.punteroPantalla.mostrarDetallesEvento(self.datosEventoSismico["clasificacionSismo"], rutaSismo)
+        ruta_sismo =  self.generarSismograma(self.datosSerieTemporal)
+        self.punteroPantalla.mostrarDetallesEvento(self.datosEventoSismico["clasificacionSismo"], ruta_sismo)
         self.punteroPantalla.mostrarOpcionMapa()
 
     def actualizarEventoABloqueado(self, eventoSismico: EventoSismico):
@@ -143,7 +143,6 @@ class ManejadorNuevoEventoSismico:
                 print("Datos modificados correctamente")
 
             if opcion == "Confirmar Evento":
-            # TODO Lógica para confirmar evento
                 for estado in estados:
                     if estado.esAmbito("EventoSismico"):
                         if estado.sosConfirmado():
@@ -155,11 +154,12 @@ class ManejadorNuevoEventoSismico:
 
             elif opcion == "Rechazar Evento":
 
+                self.getFechaHora()
                 for estado in estados:
                     if estado.esAmbito("EventoSismico"):
                         if estado.sosRechazado():
                             self.estadoRechazado = estado
-                self.getFechaHora()
+
                 self.eventoSismicoSeleccionadoActual.actualizarEstadoRechazado(self.estadoRechazado, self.analistaLogueado, self.fechaHoraActual)
                 self.finCasoDeUso()
 
@@ -169,7 +169,7 @@ class ManejadorNuevoEventoSismico:
         else:
             print("No se tienen los datos necesarios del evento sismico.")
 
-    #TODO CORREGIR ESTO
+
     def validarExistenciaMagnitudAlcanceOrigen(self, valorMagnitudMod, alcanceMod, origenGeneracionMod):
         if valorMagnitudMod is not None and alcanceMod is not None and origenGeneracionMod is not None:
             return True
