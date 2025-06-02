@@ -265,7 +265,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         if opcionElegida == "Elija una opción":
             messagebox.showwarning("Advertencia", "Por favor, seleccione una acción válida.")
             return
-        self.punteroManejador.tomarOptGrilla(opcionElegida, self.strAlcance.get(), self.strMagnitud.get(), self.strOrigenName.get(), self.modificoDatos)
+        self.punteroManejador.tomarOptGrilla(opcionElegida, self.strAlcance.get(), self.strOrigenName.get(), self.strMagnitud.get(), self.modificoDatos)
 
 #################################################################################################################
     def habilitarBotonVolver(self):
