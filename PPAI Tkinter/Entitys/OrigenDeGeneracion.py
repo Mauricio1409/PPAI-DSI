@@ -21,9 +21,6 @@ class OrigenDeGeneracion:
         self._nombre = value
 # endregion
 
-    def getNombre(self):
-        return self._nombre
-
     def obtenerDatos(self):
         return {
             "descripcion": self._descripcion,

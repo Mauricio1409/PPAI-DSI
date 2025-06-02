@@ -1,14 +1,12 @@
 from datetime import datetime
 from Entitys.EventoSismico import EventoSismico
+from ManejadorGenerarSismograma import ManejadorGenerarSismograma
 
 from data import eventosSismicos, estados, sesion1
 
 class ManejadorNuevoEventoSismico:
 
     def __init__(self,punteroPantalla):
-
-
-
         self.punteroPantalla = punteroPantalla
         self.eventosSismicos = eventosSismicos
         self.sesion = sesion1
@@ -20,6 +18,7 @@ class ManejadorNuevoEventoSismico:
         # self.arrayUbicacion = []
         # self.arrayFechaHora = []
 
+        self.CasoUsoSismograma = None
         self.datosModificados = False
         self.ValorMagnitudMod = None
         self.origenGeneracionMod = None
@@ -75,6 +74,8 @@ class ManejadorNuevoEventoSismico:
         self.clasificarPorEstacion()
         for clavedato, dato in self.datosEventoSismico.items(): #todo esto lo hice simplemente para ver que funcionase y recuperase los datos que se necesitan
             print(f"{clavedato}: {dato}")
+        rutaSismo =  self.generarSismograma(self.datosSerieTemporal)
+        self.punteroPantalla.mostrarDetallesEvento(self.datosEventoSismico["clasificacionSismo"], rutaSismo)
         self.punteroPantalla.mostrarOpcionMapa()
 
     def actualizarEventoABloqueado(self, eventoSismico: EventoSismico):
@@ -113,8 +114,10 @@ class ManejadorNuevoEventoSismico:
         #            self.datosEventoSismico["seriesTemporales"][i], self.datosEventoSismico["seriesTemporales"][j] = self.datosEventoSismico["seriesTemporales"][j], self.datosEventoSismico["seriesTemporales"][i]
                 # Aquí puedes agregar lógica adicional para procesar las muestras
 
-    def generarSismograma(self, estacionSismologica): # TODO: Implementar lógica para generar sismograma
-        pass
+    def generarSismograma(self, datosSerieTemporal): # TODO: Implementar lógica para generar sismograma
+        self.CasoUsoSismograma = ManejadorGenerarSismograma(datosSerieTemporal)
+        rutaSismograma = self.CasoUsoSismograma.generarSismograma()
+        return rutaSismograma
 
     def noVisualizarSeleccionado(self):
 
@@ -126,12 +129,6 @@ class ManejadorNuevoEventoSismico:
 
         self.punteroPantalla.habilitarSelectorOpciones()
 
-    def tomarModificarDatos(self, modificado, alcanceSismo, origenGeneracion, valorMagnitud):
-        self.datosModificados = modificado
-        self.alcanceMod = alcanceSismo
-        self.origenGeneracionMod = origenGeneracion
-        self.ValorMagnitudMod = valorMagnitud
-        print(f"Alcance Sismo Mod: {self.alcanceMod}, Origen Generación Mod: {self.origenGeneracionMod}, Magnitud: {self.ValorMagnitudMod}")
 
     def tomarOptGrilla(self, opcion, alcanceSismo, origenGeneracion, valorMagnitud, modifico):
 

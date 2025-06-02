@@ -77,7 +77,3 @@ class SerieTemporal:
                 f"muestras={self._muestras})")
     '''
 
-
-    #TODO: metodos de implementación fuera del diagrama
-    def agregarMuestra(self, muestra: MuestraSismica):
-        self._muestras.append(muestra)

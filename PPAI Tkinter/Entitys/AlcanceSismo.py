@@ -21,9 +21,6 @@ class AlcanceSismo:
         self._nombre = value
 # endregion
 
-    def getNombre(self):
-        return self._nombre
-
     def obtenerAlcance(self):
         return {
             "descripcion": self._descripcion,

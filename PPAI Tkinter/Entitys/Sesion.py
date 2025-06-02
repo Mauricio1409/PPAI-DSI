@@ -35,7 +35,7 @@ class Sesion:
 # endregion
 
     def obtenerUsuario(self):
-        return self._usuario.getLogueado()
+        return self._usuario.logueado
 
     def __repr__(self):
         return (f"Sesion(sesion_id={self._sesion_id}, usuario={self._usuario}, "

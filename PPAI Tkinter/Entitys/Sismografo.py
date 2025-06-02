@@ -40,9 +40,6 @@ class Sismografo:
         self._estacionSismologica = valor
 # endregion
 
-    def esTuSerie(self, serie: int):
-        return self._numeroSerie == serie
-
     def __repr__(self):
         return (f"Sismografo(fechaAdquisicion={self._fechaAdquisicion}, "
                 f"identificadorSismografo={self._identificadorSismografo}, "
