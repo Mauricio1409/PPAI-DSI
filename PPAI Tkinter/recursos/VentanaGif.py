@@ -9,7 +9,6 @@ class VentanaGif(tk.Toplevel):
         self.geometry("600x600")
         self.label = tk.Label(self)
         self.label.pack()
-
         self.frames = []
         self.load_gif(gif_path)
         self.animate(0)

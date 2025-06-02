@@ -1,6 +1,7 @@
 import ttkbootstrap as ttk
 from tkinter import messagebox
 from recursos.VentanaGif import VentanaGif  # Importá la ventana
+from PIL import Image, ImageTk, ImageSequence
 
 from ManejadorNuevoEventoSismico import ManejadorNuevoEventoSismico
 
@@ -27,11 +28,14 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.selectorOpciones = ttk.Combobox(master=self, state="readonly", font=("Arial", 12), textvariable=self.opcionElegida, values=["Confirmar Evento", "Rechazar Evento", "Solicitar Revisión a Experto"])
         self.btnConfirmarOpcion = ttk.Button(master=self, text="Confirmar Opción", style='my.TButton', command= self.tomarOptGrilla)
         self.btnEditar = ttk.Button(master=self.inputFrame, text="Modificar Datos", style='my.TButton', command= lambda: self.seleccionarModificarDatos(True))
-        self.btnVolver = ttk.Button(master=self, text="Volver", style='my.TButton', command=self.volverApantallaPrincipal)
+        self.btnVolver = ttk.Button(master=self, text="Volver", style='my.TButton', command=self.continuarAVisualizarEventos)
         self.lblClasificacion = ttk.Label(master=self.inputFrame, text="Clasificación del Evento Sísmico: ", font=("Arial", 12))
         self.lblEdicion = ttk.Label(master=self.bodyFrame, text=f"Edición de datos del evento sismico Seleccionado", font=("Arial", 20, "bold"))
         self.lblTituloSismograma = ttk.Label(master=self.bodyFrame, text="Sismograma del Evento Sísmico",font=("Arial", 20, "bold"))
         self.lblOrigenName = ttk.Label(master=self.inputFrame, text=f"Nombre Origen: ", font=("Arial", 12))
+        self.lblGifMapaTitulo = ttk.Label(master=self, text="Visualización del Mapa del Evento Sísmico", font=("Arial", 30, "bold"))
+        self.lblGifMapaIMG = ttk.Label(master=self)  # Este label se usará para mostrar el gif del mapa
+        self.frames = []  # Lista para almacenar los frames del gif
         self.lblAlcance = ttk.Label(master=self.inputFrame, text=f"Alcance: ", font=("Arial", 12))
         self.lblMagnitud = ttk.Label(master=self.inputFrame, text=f"Magnitud:", font=("Arial", 12))
         self.lblTituloSismograma = ttk.Label(master=self.bodyFrame, text="Sismograma del Evento Sísmico", font=("Arial", 20, "bold"))
@@ -149,13 +153,38 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
             index = self.cuadro.index(item_id)
             self.punteroManejador.eventoSismicoSeleccionado(index)
 
+    def animateGif(self, index):
+        self.lblGifMapaIMG.configure(image=self.frames[index])
+        self.after(100, lambda: self.animateGif((index + 1) % len(self.frames)))
+
+
+    def continuarAVisualizarEventos(self):
+        self.lblGifMapaIMG.place_forget()
+        self.lblGifMapaTitulo.pack_forget()
+        self.btnVolver.place_forget()
+        self.seleccionarNoVisualizar()
+
     def mostrarOpcionMapa(self):
         respuesta = messagebox.askquestion("Visualizar Mapa", "¿Desea visualizar el mapa?")
 
         if respuesta == "yes":
             gif_path = "recursos/sismo.gif"
-            ventana = VentanaGif(gif_path)
-            ventana.grab_set()  # bloquea la ventana principal si querés
+            #ventana = VentanaGif(gif_path)
+            #ventana.grab_set()  # bloquea la ventana principal si querés
+            gif = Image.open(gif_path)
+            self.frames = [ImageTk.PhotoImage(frame.copy().convert("RGBA")) for frame in ImageSequence.Iterator(gif)]
+
+            self.lblTituloCuadro.pack_forget()
+            self.cuadro.pack_forget()
+            self.frame_cuadro.pack_forget()
+            self.frame_superior_cuadro.place_forget()
+            self.scrollbar.pack_forget()
+
+            self.lblGifMapaTitulo.pack(pady=30)
+            self.lblGifMapaIMG.place(relx=0.5, rely=0.5, anchor='center')
+            self.btnVolver.place(relx=0.8, rely=0.8, anchor='center')
+
+            self.animateGif(0)
         elif respuesta == "no":
             self.seleccionarNoVisualizar()
 
@@ -170,7 +199,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.frame_superior_cuadro.place_forget()
         self.scrollbar.pack_forget()
 
-        self.lblTitulo.pack()
+        self.lblTitulo.pack(pady=20)
         self.lblEdicion.grid(row=0, column=0, padx=10, pady=10)
         self.btnEditar.grid(row=4, column=1, padx=10, pady=10)
         #self.bodyFrame.pack(fill="x", expand=True, padx=150)
