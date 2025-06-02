@@ -25,7 +25,7 @@ class MuestraSismica:
     def obtenerDatos(self):
         #return [detalle.obtenerDatos() for detalle in self._detalles]
         return {
-            "valorMuestra": [detalle.valor for detalle in self._detalles]
+            "detalleMuestra": [detalle.obtenerDatos() for detalle in self._detalles],
         }
 
     def __repr__(self):

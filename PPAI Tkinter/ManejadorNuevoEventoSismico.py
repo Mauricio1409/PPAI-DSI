@@ -7,6 +7,8 @@ class ManejadorNuevoEventoSismico:
 
     def __init__(self,punteroPantalla):
 
+
+
         self.punteroPantalla = punteroPantalla
         self.eventosSismicos = eventosSismicos
         self.sesion = sesion1
@@ -18,6 +20,10 @@ class ManejadorNuevoEventoSismico:
         # self.arrayUbicacion = []
         # self.arrayFechaHora = []
 
+        self.datosModificados = False
+        self.ValorMagnitudMod = None
+        self.origenGeneracionMod = None
+        self.alcanceMod = None
         self.datosSerieTemporal = None
         self.estadoBloqueado = None
         self.eventoSismicoSeleccionadoActual = None
@@ -111,47 +117,55 @@ class ManejadorNuevoEventoSismico:
         pass
 
     def noVisualizarSeleccionado(self):
-        self.punteroPantalla.habilitarEdicionDatos(self.eventoSismicoSeleccionadoActual.alcanceSismo, 
-                                                   self.eventoSismicoSeleccionadoActual.origenGeneracion.obtenerDatos(), 
-                                                   self.eventoSismicoSeleccionadoActual.ValorMagnitud )
+
+        self.punteroPantalla.habilitarEdicionDatos()
+
+        self.punteroPantalla.habilitarEdicionMagnitud(self.datosEventoSismico['valorMagnitud'])
+        self.punteroPantalla.habilitarEdicionOrigen(self.datosEventoSismico['origenGeneracion'])
+        self.punteroPantalla.habilitarEdicionAlcance(self.datosEventoSismico['alcanceSismo'])
+
         self.punteroPantalla.habilitarSelectorOpciones()
 
-    def tomarModificarDatos(self, alcanceSismo, origenGeneracion, valorMagnitud):
-        self.eventoSismicoSeleccionadoActual.alcanceSismo = alcanceSismo
-        self.eventoSismicoSeleccionadoActual.origenGeneracion = origenGeneracion
-        self.eventoSismicoSeleccionadoActual.ValorMagnitud = valorMagnitud
-        print(f"Alcance Sismo: {self.eventoSismicoSeleccionadoActual.alcanceSismo}, Origen Generación: {self.eventoSismicoSeleccionadoActual.origenGeneracion}, Magnitud: {self.eventoSismicoSeleccionadoActual.ValorMagnitud}")
-        self.punteroPantalla.habilitarBotonConfirmar()     
+    def tomarModificarDatos(self, modificado, alcanceSismo, origenGeneracion, valorMagnitud):
+        self.datosModificados = modificado
+        self.alcanceMod = alcanceSismo
+        self.origenGeneracionMod = origenGeneracion
+        self.ValorMagnitudMod = valorMagnitud
+        print(f"Alcance Sismo Mod: {self.alcanceMod}, Origen Generación Mod: {self.origenGeneracionMod}, Magnitud: {self.ValorMagnitudMod}")
 
-    def tomarOptGrilla(self, opcion):
-        if opcion == "Confirmar Evento":
-        # TODO Lógica para confirmar evento
-            print("evento confirmado")
+    def tomarOptGrilla(self, opcion, alcanceSismo, origenGeneracion, valorMagnitud, modifico):
 
-        elif opcion == "Rechazar Evento":
-            if self.validarExistenciaMagnitudAlcanceOrigen():
-                pass
-            else:
-                print("No se puede rechazar el evento sismico, falta información")
+        if self.validarExistenciaMagnitudAlcanceOrigen(valorMagnitud, alcanceSismo, origenGeneracion):
 
-            for estado in estados:
-                if estado.esAmbito("EventoSismico"):
-                    if estado.sosRechazado():
-                        self.estadoRechazado = estado
-            self.getFechaHora()
-            self.eventoSismicoSeleccionadoActual.actualizarEstadoRechazado(self.estadoRechazado, self.analistaLogueado, self.fechaHoraActual)
-            self.finCasoDeUso()
+            if modifico:
+                self.eventoSismicoSeleccionadoActual.ValorMagnitud = valorMagnitud
+                self.eventoSismicoSeleccionadoActual.alcanceSismo.nombre = alcanceSismo
+                self.eventoSismicoSeleccionadoActual.origenGeneracion.nombre = origenGeneracion
+                print("Datos modificados correctamente")
 
-        elif opcion == "Solicitar Revisión a Experto":
-            # TODO Lógica para solicitar revisión
-            print("Revision Solicitada")
+            if opcion == "Confirmar Evento":
+            # TODO Lógica para confirmar evento
+                print("evento confirmado")
+
+            elif opcion == "Rechazar Evento":
+
+                for estado in estados:
+                    if estado.esAmbito("EventoSismico"):
+                        if estado.sosRechazado():
+                            self.estadoRechazado = estado
+                self.getFechaHora()
+                self.eventoSismicoSeleccionadoActual.actualizarEstadoRechazado(self.estadoRechazado, self.analistaLogueado, self.fechaHoraActual)
+                self.finCasoDeUso()
+
+            elif opcion == "Solicitar Revisión a Experto":
+                # TODO Lógica para solicitar revisión
+                print("Revision Solicitada")
+        else:
+            print("No se tienen los datos necesarios del evento sismico.")
 
     #TODO CORREGIR ESTO
-    def validarExistenciaMagnitudAlcanceOrigen(self):
-        valor_magnitud=self.eventoSismicoSeleccionadoActual.ValorMagnitud
-        valor_alcance=self.eventoSismicoSeleccionadoActual.alcanceSismo
-        valor_origen=self.eventoSismicoSeleccionadoActual.origenGeneracion
-        if valor_magnitud is not None and valor_alcance is not None and valor_origen is not None:
+    def validarExistenciaMagnitudAlcanceOrigen(self, valorMagnitudMod, alcanceMod, origenGeneracionMod):
+        if valorMagnitudMod is not None and alcanceMod is not None and origenGeneracionMod is not None:
             return True
         else:
             return False

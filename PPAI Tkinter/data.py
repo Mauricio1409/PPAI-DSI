@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 from Entitys.AlcanceSismo import AlcanceSismo
-from Entitys.AlcanceSismo import AlcanceSismo
 from Entitys.ClasificacionSismo import ClasificacionSismo
 from Entitys.CambioEstado import CambioEstado
 from Entitys.Estado import Estado
@@ -14,6 +13,7 @@ from Entitys.AnalistaSismos import AnalistaSismos
 from Entitys.Usuario import Usuario
 from Entitys.Sesion import Sesion
 from Entitys.Sismografo import Sismografo
+from Entitys.tipoDato import TipoDato
 
 # -----------------------------
 # Datos para AnalistaSismos
@@ -73,12 +73,19 @@ cambios_estado = [
 ]
 
 # -----------------------------
+# Tipos De Datos
+# -----------------------------
+tipo1 = TipoDato("Velocidad de onda", "m/s", 10)
+tipo2 = TipoDato("Frecuencia de onda", "Hz", 90)
+tipo3 = TipoDato("Longitud", "m", 180)
+
+# -----------------------------
 # Detalles de muestras sísmicas
 # -----------------------------
 detalles_muestra = [
-    DetalleMuestraSismica(150),
-    DetalleMuestraSismica(200),
-    DetalleMuestraSismica(175)
+    DetalleMuestraSismica(150, tipo1),
+    DetalleMuestraSismica(200, tipo2),
+    DetalleMuestraSismica(175, tipo3)
 ]
 
 # -----------------------------

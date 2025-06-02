@@ -146,12 +146,14 @@ class EventoSismico:
     def obtenerDatos(self):
         alcance = self.alcanceSismo.nombre
         clasificacion = self.clasificacionSismo.nombre
-        origen =self.origenGeneracion.obtenerDatos()
+        origen = self.origenGeneracion.nombre
+        magnitud = self.ValorMagnitud
 
         return {
-            f"alcanceSismo": alcance,
-            f"clasificacionSismo": clasificacion,
-            f"origenGeneracion": origen,  
+            "alcanceSismo": alcance,
+            "clasificacionSismo": clasificacion,
+            "origenGeneracion": origen,
+            "valorMagnitud" : magnitud
         }
 
     def obtenerDatosSerieTemporal(self):
