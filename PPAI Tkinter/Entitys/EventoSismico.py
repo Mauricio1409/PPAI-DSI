@@ -100,10 +100,16 @@ class EventoSismico:
     @property
     def seriesTemporales(self):
         return self._seriesTemporales
+    
+    @property
+    def cambioEstado(self):
+        return self._cambioEstado
+    
+    @cambioEstado.setter
+    def cambioEstado(self, nuevoCambioEstado : list[CambioEstado]):
+        self._cambioEstado = nuevoCambioEstado
     #endregion
 
-    def esPendienteRevision(self):
-        return self._estado.sosPendienteRevision()
     
     def getUbicacion(self):
         return (self.getCoordenadasEpicentro(), self.getCoordenadasHipocentro())# TODO CHEQUEAR ESTO CON EL DIAGRAMA
@@ -114,6 +120,7 @@ class EventoSismico:
     
     def getCoordenadasHipocentro(self):
         return (self.latitudHipocentro, self.longitudHipocentro)
+    
 
     def revisar(self, estado, Analista , fechaHoraActual):
         self._estado = estado
@@ -130,10 +137,8 @@ class EventoSismico:
         self._cambioEstadoActual = nuevo_cambio_estado
         print("cambio de estado actual DESPUÉS DEL CAMBIO: ", self._cambioEstadoActual)
 
-    def actualizarEstadoRechazado(self, estado, analista, fechaHoraActual):
-        self._estado = estado
-        self._cambioEstadoActual.setFechaHoraFin(fechaHoraActual)
-        self.cambiarCambioEstado(estado, analista, fechaHoraActual)
+    def actualizarEstadoRechazado(self, analista, fechaHoraActual):
+        self._estado.rechazar(analista, fechaHoraActual, self)
 
 
     #TODO MODIFICAR ESTO EN EL DIAGRAMA DE SECUENCIA (nombre método)
