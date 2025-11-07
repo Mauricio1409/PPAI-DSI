@@ -26,7 +26,7 @@ class Estado(ABC):
     def __str__(self):
         return f"Estado: {self.nombre}"
 
-    
+
     def adquirirDatos(self):
         """
         Método para adquirir datos del evento sísmico.
@@ -34,15 +34,17 @@ class Estado(ABC):
         """
         print(f"Operación 'adquirirDatos' no permitida en estado: {self.nombre}")
         return False
-    
-    def revisar(self):
+
+
+    def revisar(self, analista, fechaHoraActual, eventoSismico):
         """
         Método para revisar el evento sísmico.
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'revisar' no permitida en estado: {self.nombre}")
         return False
-    
+
+
     def confirmarRevision(self):
         """
         Método para confirmar la revisión del evento sísmico.
@@ -50,7 +52,8 @@ class Estado(ABC):
         """
         print(f"Operación 'confirmarRevision' no permitida en estado: {self.nombre}")
         return False
-    
+
+
     def registrarAutomatico(self):
         """
         Método para registrar automáticamente el evento sísmico.
@@ -58,7 +61,8 @@ class Estado(ABC):
         """
         print(f"Operación 'registrarAutomatico' no permitida en estado: {self.nombre}")
         return False
-    
+
+
     def anular(self):
         """
         Método para anular el evento sísmico.
@@ -66,7 +70,8 @@ class Estado(ABC):
         """
         print(f"Operación 'anular' no permitida en estado: {self.nombre}")
         return False
-    
+
+
     def controlarTiempo(self):
         """
         Método para controlar el tiempo del evento sísmico.
@@ -74,15 +79,17 @@ class Estado(ABC):
         """
         print(f"Operación 'controlarTiempo' no permitida en estado: {self.nombre}")
         return False
-    
-    def confirmar(self):
+
+
+    def confirmar(self, analista, fechaHoraActual, eventoSismico):
         """
         Método para confirmar el evento sísmico.
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'confirmar' no permitida en estado: {self.nombre}")
         return False
-    
+
+
     def derivar(self):
         """
         Método para derivar el evento sísmico.
@@ -90,7 +97,8 @@ class Estado(ABC):
         """
         print(f"Operación 'derivar' no permitida en estado: {self.nombre}")
         return False
-    
+
+
     def rechazar(self, analista, fechaHoraActual, eventoSismico):
         """
         Método para rechazar el evento sísmico.
@@ -98,7 +106,8 @@ class Estado(ABC):
         """
         print(f"Operación 'rechazar' no permitida en estado: {self.nombre}")
         return False
-    
+
+
     def registrarPendientesCierre(self):
         """
         Método para registrar el evento como pendiente de cierre.
@@ -106,11 +115,15 @@ class Estado(ABC):
         """
         print(f"Operación 'registrarPendientesCierre' no permitida en estado: {self.nombre}")
         return False
-    
+
+
     def cerrar(self):
         """
         Método para cerrar el evento sísmico.
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'cerrar' no permitida en estado: {self.nombre}")
+
+    def actualizarEstadoPendiente(self, analista, fechaHoraActual, eventoSismico):
+        print(f"Operacion no soportada en estado: {self.nombre}")
 

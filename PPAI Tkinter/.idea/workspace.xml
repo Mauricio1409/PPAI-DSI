@@ -5,42 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4544443a-2ebf-423d-810a-cc4ad7f3bbe2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Enterprise Arquitect/PPAI 1.ldb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ManejadorNuevoEventoSismico.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/PPAI Tkinter.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Entitys/tipoDato.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ManejadorGenerarSismograma.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/recursos/sismograma.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/recursos/sismograma.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Enterprise Arquitect/PPAI 1.eapx" beforeDir="false" afterPath="$PROJECT_DIR$/../Enterprise Arquitect/PPAI 1.eapx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Boundarys/PantNuevoEventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Boundarys/PantNuevoEventoSismico.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/AlcanceSismo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/AlcanceSismo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/AutoConfirmado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/AutoConfirmado.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/AutoDetectado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/AutoDetectado.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/Bloqueado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Bloqueado.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entitys/CambioEstado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/CambioEstado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/ClasificacionSismo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/ClasificacionSismo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/Derivado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/Derivado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/DetalleMuestraSismica.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/DetalleMuestraSismica.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/EstacionSismologica.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/EstacionSismologica.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/Estado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/Estado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/EventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/EventoSismico.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/MuestraSismica.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/MuestraSismica.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/OrigenDeGeneracion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/OrigenDeGeneracion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/Cerrado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Cerrado.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/Confirmado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Confirmado.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/Derivado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Derivado.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/Estado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Estado.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/EventoSinRevision.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/EventoSinRevision.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/EventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/EventoSismico.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/PendienteDeCierre.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/PendienteDeCierre.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/PendienteDeRevision.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/PendienteDeRevision.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/Rechazado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Rechazado.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entitys/SerieTemporal.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/SerieTemporal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/Sesion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/Sesion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/Sismografo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/Sismografo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/TipoDeDato.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/Usuario.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/Usuario.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ManejadorNuevoEventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/ManejadorNuevoEventoSismico.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recursos/VentanaGif.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +52,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -90,7 +72,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Merging mergeo",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "/home/agustin/MEGA/AB No de la Facultad/Proyectos/Facultad/DSI/PPAI-DSI/PPAI Tkinter",
     "node.js.detected.package.eslint": "true",
@@ -104,6 +86,12 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Entitys" />
+      <recent name="$PROJECT_DIR$/Entitys/STATE" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="PPAI Tkinter" />
@@ -149,10 +137,14 @@
       <workItem from="1762268203626" duration="447000" />
       <workItem from="1762268679829" duration="789000" />
       <workItem from="1762520200702" duration="1401000" />
+      <workItem from="1762521917301" duration="7839000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PPAI_Tkinter$main.coverage" NAME="main Coverage Results" MODIFIED="1762528965145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

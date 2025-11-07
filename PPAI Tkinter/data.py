@@ -1,14 +1,19 @@
 from datetime import datetime, timedelta
 from Entitys.AlcanceSismo import AlcanceSismo
 from Entitys.ClasificacionSismo import ClasificacionSismo
+from Entitys.STATE.AutoDetectado import AutoDetectado
+from Entitys.STATE.Bloqueado import Bloqueado
 from Entitys.CambioEstado import CambioEstado
-from Entitys.Estado import Estado
+from Entitys.STATE.Cerrado import Cerrado
+from Entitys.STATE.Confirmado import Confirmado
 from Entitys.DetalleMuestraSismica import DetalleMuestraSismica
 from Entitys.MuestraSismica import MuestraSismica
 from Entitys.OrigenDeGeneracion import OrigenDeGeneracion
+from Entitys.STATE.PendienteDeRevision import PendienteDeRevision
+from Entitys.STATE.Rechazado import Recahazado
 from Entitys.SerieTemporal import SerieTemporal
 from Entitys.EstacionSismologica import EstacionSismologica
-from Entitys.EventoSismico import EventoSismico
+from Entitys.STATE.EventoSismico import EventoSismico
 from Entitys.AnalistaSismos import AnalistaSismos
 from Entitys.Usuario import Usuario
 from Entitys.Sesion import Sesion
@@ -56,22 +61,22 @@ clasificaciones_sismo = [
 # Datos para CambioEstado
 # -----------------------------
 # Estados disponibles
-estado_detectado = Estado("Detectado", "EventoSismico")
-estado_confirmado = Estado("Confirmado" , "EventoSismico")
-estado_finalizado = Estado("Finalizado", "EventoSismico")
-estado_bloqueado = Estado("Bloqueado", "EventoSismico")
-estado_rechazado = Estado("Rechazado", "EventoSismico")
-estado_pendiente = Estado("PendienteRevision", "EventoSismico")
+estado_auto_detectado = AutoDetectado()
+estado_confirmado = Confirmado()
+estado_cerrado = Cerrado()
+estado_bloqueado = Bloqueado()
+estado_rechazado = Recahazado()
+estado_pendiente = PendienteDeRevision()
 
-estados = [estado_finalizado, estado_detectado, estado_finalizado, estado_bloqueado, estado_rechazado, estado_pendiente, estado_confirmado]
+estados = [estado_cerrado, estado_auto_detectado, estado_cerrado, estado_bloqueado, estado_rechazado, estado_pendiente, estado_confirmado]
 
 # Fechas de ejemplo
 ahora = datetime.now()
 
 cambios_estado = [
-    CambioEstado(ahora - timedelta(days=3), estado_detectado, analista1, ahora - timedelta(days=2),),
+    CambioEstado(ahora - timedelta(days=3), estado_auto_detectado, analista1, ahora - timedelta(days=2), ),
     CambioEstado(ahora - timedelta(days=2), estado_confirmado, analista1, ahora - timedelta(days=1)),
-    CambioEstado(ahora - timedelta(days=1), estado_finalizado, analista1)
+    CambioEstado(ahora - timedelta(days=1), estado_cerrado, analista1)
 ]
 
 # -----------------------------
@@ -178,11 +183,11 @@ origen_generacion = OrigenDeGeneracion("Generación Natural", "Origen natural de
 # Eventos sísmicos
 # -----------------------------
 eventosSismicos = [
-            EventoSismico(datetime(2023, 5, 21, 12, 0, 0), 3.0, -34.0, -58.0, cambios_estado, Estado("PendienteRevision","EventoSismico"), clasificaciones_sismo[1], alcances_sismo[1], origen_generacion, series_temporales),
-            EventoSismico(datetime(2023, 10, 2, 14, 30, 0), 3.5, -35.0, -59.0, cambios_estado, Estado("PendienteRevision","EventoSismico"), clasificaciones_sismo[2], alcances_sismo[2], origen_generacion, series_temporales),
-            EventoSismico(datetime(2025, 10, 1, 10, 0, 0), 2.5, -34.5, -58.5, cambios_estado, Estado("PendienteRevision","EventoSismico"), clasificaciones_sismo[1], alcances_sismo[3], origen_generacion, series_temporales),
-            EventoSismico(datetime(2023, 10, 3, 16, 0, 0), 1.0, -36.0, -60.0, cambios_estado, Estado("PendienteRevision","EventoSismico"), clasificaciones_sismo[2], alcances_sismo[0], origen_generacion, series_temporales),
-            EventoSismico(datetime(2023, 10, 4, 18, 0, 0), 3.1, -37.0, -61.0, cambios_estado, Estado("PendienteRevision","EventoSismico"), clasificaciones_sismo[1], alcances_sismo[1], origen_generacion, series_temporales),
-            EventoSismico(datetime(2023, 10, 5, 20, 0, 0), 2.7, -38.0, -62.0, cambios_estado, Estado("PendienteRevision","EventoSismico"), clasificaciones_sismo[0], alcances_sismo[3], origen_generacion, series_temporales),
+            EventoSismico(datetime(2023, 5, 21, 12, 0, 0), 3.0, -34.0, -58.0, cambios_estado, PendienteDeRevision(), clasificaciones_sismo[1], alcances_sismo[1], origen_generacion, series_temporales),
+            EventoSismico(datetime(2023, 10, 2, 14, 30, 0), 3.5, -35.0, -59.0, cambios_estado, PendienteDeRevision(), clasificaciones_sismo[2], alcances_sismo[2], origen_generacion, series_temporales),
+            EventoSismico(datetime(2025, 10, 1, 10, 0, 0), 2.5, -34.5, -58.5, cambios_estado, PendienteDeRevision(), clasificaciones_sismo[1], alcances_sismo[3], origen_generacion, series_temporales),
+            EventoSismico(datetime(2023, 10, 3, 16, 0, 0), 1.0, -36.0, -60.0, cambios_estado, PendienteDeRevision(), clasificaciones_sismo[2], alcances_sismo[0], origen_generacion, series_temporales),
+            EventoSismico(datetime(2023, 10, 4, 18, 0, 0), 3.1, -37.0, -61.0, cambios_estado, PendienteDeRevision(), clasificaciones_sismo[1], alcances_sismo[1], origen_generacion, series_temporales),
+            EventoSismico(datetime(2023, 10, 5, 20, 0, 0), 2.7, -38.0, -62.0, cambios_estado, PendienteDeRevision(), clasificaciones_sismo[0], alcances_sismo[3], origen_generacion, series_temporales),
         ]
 

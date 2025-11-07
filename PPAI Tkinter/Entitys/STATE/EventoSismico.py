@@ -1,13 +1,18 @@
-from Entitys.Estado import Estado
+from Entitys.AnalistaSismos import AnalistaSismos
+from Entitys.STATE.Estado import Estado
 from Entitys.CambioEstado import CambioEstado
 from Entitys.ClasificacionSismo import ClasificacionSismo
 from Entitys.OrigenDeGeneracion import OrigenDeGeneracion
 from Entitys.AlcanceSismo import AlcanceSismo
+from Entitys.STATE.PendienteDeRevision import PendienteDeRevision
 from Entitys.SerieTemporal import SerieTemporal
 from datetime import datetime
 
 class EventoSismico:
-    def __init__(self, fechaHoraOcurrencia: datetime, magnitud: float, latitud: float, longitud: float, cambioEstado : list[CambioEstado], estado : Estado, clasificacionSismo : ClasificacionSismo, alcanceSismo : AlcanceSismo, origenGenercion : OrigenDeGeneracion, serieTemporal : list[SerieTemporal]):
+    def __init__(self, fechaHoraOcurrencia: datetime, magnitud: float, latitud: float, longitud: float,
+                 cambioEstado : list[CambioEstado], estado : Estado, clasificacionSismo : ClasificacionSismo,
+                 alcanceSismo : AlcanceSismo, origenGenercion : OrigenDeGeneracion, serieTemporal : list[SerieTemporal]):
+
         self._cambioEstadoActual = None
         self._fechaHoraFin = None
         self._fechaHoraOcurrencia = fechaHoraOcurrencia
@@ -16,7 +21,7 @@ class EventoSismico:
         self._longitudEpicentro = longitud
         self._longitudHipocentro = longitud
         self._ValorMagnitud = magnitud
-        self._cambioEstado = cambioEstado #TODO CAMBIAR ESTO A LISTA [cambioEstado]
+        self._cambioEstado = cambioEstado
         self._estado = estado
         self._alcanceSismo = alcanceSismo
         self._origenGeneracion = origenGenercion
@@ -108,40 +113,51 @@ class EventoSismico:
     @cambioEstado.setter
     def cambioEstado(self, nuevoCambioEstado : list[CambioEstado]):
         self._cambioEstado = nuevoCambioEstado
+
+    @property
+    def cambioEstadoActual(self):
+        return self._cambioEstadoActual
+    @cambioEstadoActual.setter
+    def cambioEstadoActual(self, nuevoCambioEstadoActual : CambioEstado):
+        self._cambioEstadoActual = nuevoCambioEstadoActual
+
+    @property
+    def estado(self):
+        return self._estado
+    @estado.setter
+    def estado(self, nuevoEstado : Estado):
+        self._estado = nuevoEstado
     #endregion
 
+    #TODO CHEQUEAR ESTO, NO ESTOY SEGURO DE QUE SE RESUELVA ASÍ
+    def esPendienteRevision(self) -> bool:
+        return isinstance(self._estado, PendienteDeRevision)
     
-    def getFechaHoraOcurrencia(self): # jr
+    def getFechaHoraOcurrencia(self) ->datetime: # jr
         return self._fechaHoraOcurrencia
 
-    def getUbicacion(self):
-        return (self.getCoordenadasEpicentro(), self.getCoordenadasHipocentro())# TODO CHEQUEAR ESTO CON EL DIAGRAMA
+    def getUbicacion(self) -> list[list[float]]:
+        return [self.getCoordenadasEpicentro(), self.getCoordenadasHipocentro()]# TODO CHEQUEAR ESTO CON EL DIAGRAMA
 
-    def getCoordenadasEpicentro(self):
-        return (self.latitudEpicentro, self.longitudEpicentro)
+    def getCoordenadasEpicentro(self) -> list[float]:
+        return [self.latitudEpicentro, self.longitudEpicentro]
     
-    def getCoordenadasHipocentro(self):
-        return (self.latitudHipocentro, self.longitudHipocentro)
+    def getCoordenadasHipocentro(self) -> list[float]:
+        return [self.latitudHipocentro, self.longitudHipocentro]
     
-
-    def getMagnitud(self): # jr
-        return self.ValorMagnitud
 
 # EventoSismico seleccionado 
 
-    def revisar(self, estado, Analista , fechaHoraActual):
-        self._estado = estado
-        self.buscarCambioEstadoActual()
-        self._cambioEstadoActual.fechaHoraFin = fechaHoraActual
-        self.cambiarCambioEstado(estado, Analista, fechaHoraActual)
+    def revisar(self, analista, fechaHoraActual) -> None:
+        self._estado.revisar(analista, fechaHoraActual, self)
 
-    def buscarCambioEstadoActual(self):
+    def buscarCambioEstadoActual(self) -> None:
         for cambio in self._cambioEstado:
             if cambio.sosActual():
                 self._cambioEstadoActual = cambio
         return None
 
-
+    #TODO probablemente tengamos que sacar esto de esta clase, debería estar solo en los estados
     def cambiarCambioEstado(self, estado, analista, fechaHoraActual):
         nuevo_cambio_estado = CambioEstado(fechaHoraActual, estado, analista)
         self._cambioEstado.append(nuevo_cambio_estado)
@@ -174,16 +190,16 @@ class EventoSismico:
         return [serie.obtenerDatos() for serie in self._seriesTemporales]
 
 
-    def actualizarEstadoConfirmado(self, estado, analista, fechaHoraActual):
-        self._estado = estado
-        self._cambioEstadoActual.fechaHoraFin = fechaHoraActual
-        self.cambiarCambioEstado(estado, analista, fechaHoraActual)
+    def confirmar(self, analista: AnalistaSismos, fechaHoraActual: datetime) -> None:
+        self._estado.confirmar(analista, fechaHoraActual, self)
 
 
-    def actualizarEstadoPendiente(self, estado, analista, fechaHoraActual):
-        self._estado = estado
+    def actualizarEstadoPendiente(self, analista, fechaHoraActual) -> None:
+        self._estado.actualizarEstadoPendiente(analista, fechaHoraActual, self)
+
+
+    def obtenerCambioEstadoActual(self):
         self.buscarCambioEstadoActual()
-        self._cambioEstadoActual.fechaHoraFin = fechaHoraActual
-        self.cambiarCambioEstado(estado, analista, fechaHoraActual)
+        return self._cambioEstadoActual
 
 

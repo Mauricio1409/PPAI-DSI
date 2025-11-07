@@ -1,4 +1,4 @@
-from Entitys.Estado import Estado
+from Entitys.STATE.Estado import Estado
 from datetime import datetime
 
 class CambioEstado:

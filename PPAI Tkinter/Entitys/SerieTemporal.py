@@ -5,9 +5,9 @@ from datetime import datetime
 
 class SerieTemporal:
     def __init__(self, condicionAlarma: int, fechaHoraInicioRegistroMuestras: datetime, fechaHoraRegistro: datetime, frecuenciaMuestreo: float, muestraSismica : list[MuestraSismica], sismografo : Sismografo):
-        self._condicionAlarma = condicionAlarma
-        self._fechaHoraInicioRegistroMuestras = fechaHoraInicioRegistroMuestras
-        self._fechaHoraRegistro = fechaHoraRegistro
+        self._condicionAlarma: int = condicionAlarma
+        self._fechaHoraInicioRegistroMuestras: datetime = fechaHoraInicioRegistroMuestras
+        self._fechaHoraRegistro: datetime = fechaHoraRegistro
         self._frecuenciaMuestreo = frecuenciaMuestreo
         self._muestras = muestraSismica
         self._sismografo = sismografo #TODO esto esta hardcodeado, debería buscar cual es su estación sismológica en la BDD

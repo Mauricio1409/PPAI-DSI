@@ -139,10 +139,10 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         for datosEvento in arrayDatos:
             self.cuadro.insert("", "end", 
                                text=datosEvento['fechaHoraOcurrencia'], 
-                               values=(datosEvento['ubicación'][0][0],
-                                       datosEvento['ubicación'][0][1],
-                                       datosEvento['ubicación'][1][0],
-                                       datosEvento['ubicación'][1][1],
+                               values=(datosEvento['ubicacion'][0][0],
+                                       datosEvento['ubicacion'][0][1],
+                                       datosEvento['ubicacion'][1][0],
+                                       datosEvento['ubicacion'][1][1],
                                        datosEvento['valorMagnitud']))
 
         self.cuadro.pack(fill="both", expand=True)
