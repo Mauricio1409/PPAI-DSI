@@ -5,11 +5,7 @@ class Estado(ABC):
         self._nombre = nombre
         self._ambito = ambito
 
-    def esAmbito(self, ambito : str):
-        if self.ambito == ambito:
-            return True
-        return False
-
+    #region Getters y Setters
     @property
     def nombre(self):
         return self._nombre
@@ -17,6 +13,7 @@ class Estado(ABC):
     @nombre.setter
     def nombre(self, nuevoNombre: str):
         self._nombre = nuevoNombre
+
     @property
     def ambito(self):
         return self._ambito
@@ -24,9 +21,11 @@ class Estado(ABC):
     @ambito.setter
     def ambito(self, nuevoAmbito : int):
         self._ambito = nuevoAmbito
+    #endregion
 
     def __str__(self):
-        return (f"Estado: {self.nombre}")
+        return f"Estado: {self.nombre}"
+
     
     def adquirirDatos(self):
         """
@@ -92,7 +91,7 @@ class Estado(ABC):
         print(f"Operación 'derivar' no permitida en estado: {self.nombre}")
         return False
     
-    def rechazar(self):
+    def rechazar(self, analista, fechaHoraActual, eventoSismico):
         """
         Método para rechazar el evento sísmico.
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
@@ -114,5 +113,4 @@ class Estado(ABC):
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'cerrar' no permitida en estado: {self.nombre}")
-        return False
 

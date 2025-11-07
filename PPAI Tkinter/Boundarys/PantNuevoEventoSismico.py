@@ -1,84 +1,95 @@
 import ttkbootstrap as ttk
 from tkinter import messagebox
-from recursos.VentanaGif import VentanaGif  # Importá la ventana
+from PIL import Image, ImageTk, ImageSequence
 
 from ManejadorNuevoEventoSismico import ManejadorNuevoEventoSismico
 
-
 class VentanaPantNuevoEventoSismico(ttk.Window):
+    def __init__(self):
+        super().__init__()
 
+        self.variableEjemplo = None
+        self.imagen = None
+        self.modificoDatos = None
+        self.punteroManejador = None
+        self.bodyFrame = ttk.Frame(master=self)
+        self.imgFrame = ttk.Frame(master=self.bodyFrame)
+        self.inputFrame = ttk.Frame(master=self.bodyFrame)
+        self.strMagnitud = ttk.StringVar()
+        self.strAlcance = ttk.StringVar()
+        self.strOrigenName = ttk.StringVar()
+        self.strClasificacion = ttk.StringVar()
+        self.lblImagenSismograma = ttk.Label(master=self.imgFrame)
+        self.opcionElegida= ttk.StringVar()
+        self.lblTituloCuadro = ttk.Label(master=self, text="Eventos Sísmicos Pendientes de Revisión:", font=("Arial", 20, "bold"))
+        self.lblTitulo = ttk.Label(master=self, text="Visualización del evento seleccionado", font=("Arial", 30, "bold"))
+        self.lblSeleccionarOpcion = ttk.Label(master=self, text="Seleccione una acción para el evento sismico seleccionado:", font=("Arial", 14, "bold"))
+        self.selectorOpciones = ttk.Combobox(master=self, state="readonly", font=("Arial", 12), textvariable=self.opcionElegida, values=["Confirmar Evento", "Rechazar Evento", "Solicitar Revisión a Experto"])
+        self.btnConfirmarOpcion = ttk.Button(master=self, text="Confirmar Opción", style='success.TButton', command= self.tomarOptGrilla)
+        self.btnEditar = ttk.Button(master=self.inputFrame, text="Modificar Datos", style='warning.TButton', command= lambda: self.seleccionarModificarDatos(True))
+        self.btnVolver = ttk.Button(master=self, text="Volver", style='my.TButton', command=self.continuarAVisualizarEventos)
+        self.lblClasificacion = ttk.Label(master=self.inputFrame, text="Clasificación del Evento Sísmico: ", font=("Arial", 12))
+        self.lblEdicion = ttk.Label(master=self.bodyFrame, text=f"Edición de datos del evento sismico Seleccionado", font=("Arial", 20, "bold"))
+        self.lblTituloSismograma = ttk.Label(master=self.bodyFrame, text="Sismograma del Evento Sísmico",font=("Arial", 20, "bold"))
+        self.lblOrigenName = ttk.Label(master=self.inputFrame, text=f"Nombre Origen: ", font=("Arial", 12))
+        self.lblGifMapaTitulo = ttk.Label(master=self, text="Visualización del Mapa del Evento Sísmico", font=("Arial", 30, "bold"))
+        self.lblGifMapaIMG = ttk.Label(master=self)  # Este label se usará para mostrar el gif del mapa
+        self.frames = []  # Lista para almacenar los frames del gif
+        self.lblAlcance = ttk.Label(master=self.inputFrame, text=f"Alcance: ", font=("Arial", 12))
+        self.lblMagnitud = ttk.Label(master=self.inputFrame, text=f"Magnitud:", font=("Arial", 12))
+        self.lblTituloSismograma = ttk.Label(master=self.bodyFrame, text="Sismograma del Evento Sísmico", font=("Arial", 20, "bold"))
+        self.inputMagnitud = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strMagnitud, state="readonly")
+        self.inputAlcance = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strAlcance, state="readonly")
+        self.inputOrigenName = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strOrigenName, state="readonly")
+        self.lblClasificacionActual = ttk.Label(master=self.inputFrame, textvariable=self.strClasificacion, font=("Arial", 12, "bold"))
+        self.btnCancelar = ttk.Button(master=self, text="Cancelar Caso de uso", style='danger.TButton', command=self.cancelarEjecucionCasoDeUso)
+        self.style.theme_use("darkly")
+        self.title("Nuevo Evento Sísmico")
+        self.geometry("1600x900")
 
-    def seleccionaEventoSismico(self, event):
-        seleccion = self.cuadro.selection()
-        if seleccion is not None:
-            item_id = seleccion[0]
-            index = self.cuadro.index(item_id)
-            self.punteroManejador.eventoSismicoSeleccionado(index)
+        #para estética (añadir icono a la app)
 
-    #TODO agregar funcionalidad a esto
-    def habilitar_ventana(self):
-        #self.button_reg_rev_manual.pack()
-        pass
+        #self.icon_path = "path/to/icon.ico"  # Cambia esto a la ruta de tu icono
+        #self.img = Image.open(self.icon_path)
+        #self.icon = ImageTk.PhotoImage(self.img)
+        #self.wm_iconphoto(False, self.icon)
 
-    def mostrarOpcionMapa(self):
-        respuesta = messagebox.askquestion("Visualizar Mapa", "¿Desea visualizar el mapa?")
+        # FRAMES 
 
-        if respuesta == "yes":
-            gif_path = "recursos/sismo.gif"
-            ventana = VentanaGif(gif_path)
-            ventana.grab_set()  # bloquea la ventana principal si querés
-        elif respuesta == "no":
-            self.punteroManejador.noVisualizarSeleccionado()
-
-    def habilitarEdicionDatos(self, alcance, origen, magnitud):
-        self.cuadro.pack_forget()
-        self.frame_cuadro.pack_forget()
-        self.frame_superior_cuadro.place_forget()
-        self.scrollbar.pack_forget()
-        
-        self.lblEdicion.pack(pady=10)
-        self.habilitarEdicionMagnitud(magnitud)
-        self.habilitarEdicionOrigen(origen)
-        self.habilitarEdicionAlcance(alcance)
-        self.btnEditar.grid(row=4, column=0, padx=10, pady=10)
-        self.btnCancelar.grid(row=4, column=1, padx=10, pady=10)
-        self.inputFrame.place(relx=0.5, rely=0.5, anchor='center')
-
-    def habilitarEdicionMagnitud(self, magnitud):
-        self.strMagnitud.set(magnitud)
-
-        self.lblMagnitud.grid(row=0, column=0, padx=10, pady=10)
-        self.inputMagnitud.grid(row=0, column=1, padx=10, pady=10)
-
-    def habilitarEdicionAlcance(self, alcance):
-        self.strAlcance.set(alcance)
-
-
-        self.lblAlcance.grid(row=1, column=0, padx=10, pady=10)
-        self.inputAlcance.grid(row=1, column=1, padx=10, pady=10)
-
-    def habilitarEdicionOrigen(self, origen):
-
-        self.strOrigenDesc.set(origen["descripcion"])
-        self.strOrigenName.set(origen["nombre"])
-
-
-
-        self.lblOrigenDesc.grid(row=2, column=0,padx=10, pady=10)
-        self.lblOrigenNom.grid(row=3, column=0,padx=10, pady=10)
-        self.inputOrigenDesc.grid(row=2, column=1, padx=10, pady=10)
-        self.inputOrigenName.grid(row=3, column=1, padx=10, pady=10)
-
-    #TODO opciones
-    def habilitarSelectorOpciones(self):
-        self.selectorOpciones.pack()
-        self.btnConfirmarOpcion.place(relx=0.5, rely=0.8, anchor='center')
+            # frame de botones es como un div de HTML
+        self.buttons_frame = ttk.Frame(master=self)
+        self.frame_superior_cuadro = ttk.Frame(master=self)
+        self.frame_cuadro = ttk.Frame(master=self.frame_superior_cuadro)
         
 
-    def opcion_registrar_revision_manual(self):
-        self.habilitar_ventana()
+        # BOTONES Y OTROS ELEMENTOS
+
+        # Estilo de los botones        # botón, como button de HTML
+        self.button_reg_rev_manual = ttk.Button(master=self.buttons_frame, text="Revisión Manual", style='my.TButton', command=self.opcionRegistrarRevisionManual) #comand # FALTA COMMAND
+
+        self.cuadro = None
+        self.scrollbar = None
+
+        # ESTILOS
+
+        # Packing inicial
+
+        self.buttons_frame.pack()
+
+    def cancelarEjecucionCasoDeUso(self):
+        respuesta = messagebox.askyesno("Cancelar Caso de Uso", "¿Está seguro de que desea cancelar la ejecución del caso de uso?")
+        if respuesta:
+            self.punteroManejador.casoDeUsoCancelado()
+            self.volverApantallaPrincipal()
+
+    def opcionRegistrarRevisionManual(self):
+        self.habilitarVentana()
         self.punteroManejador = ManejadorNuevoEventoSismico(punteroPantalla=self)
         self.punteroManejador.registrarNuevaRevision()
+
+    def habilitarVentana(self):
+        self.lblTituloCuadro.pack()
+        self.btnCancelar.place(relx=0.9, rely=0.05, anchor='center')
 
     def presentarEventosNoRevisados(self, arrayDatos):
         # Crear la tabla
@@ -128,10 +139,10 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         for datosEvento in arrayDatos:
             self.cuadro.insert("", "end", 
                                text=datosEvento['fechaHoraOcurrencia'], 
-                               values=(datosEvento['ubicacion'][0][0], 
-                                       datosEvento['ubicacion'][0][1],
-                                       datosEvento['ubicacion'][1][0],
-                                       datosEvento['ubicacion'][1][1],
+                               values=(datosEvento['ubicación'][0][0],
+                                       datosEvento['ubicación'][0][1],
+                                       datosEvento['ubicación'][1][0],
+                                       datosEvento['ubicación'][1][1],
                                        datosEvento['valorMagnitud']))
 
         self.cuadro.pack(fill="both", expand=True)
@@ -142,78 +153,136 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.cuadro.bind("<Return>", self.seleccionaEventoSismico)
         self.cuadro.bind("<Double-1>", self.seleccionaEventoSismico)
 
+    def seleccionaEventoSismico(self, _event):
+        seleccion = self.cuadro.selection()
+        if seleccion is not None:
+            item_id = seleccion[0]
+            index = self.cuadro.index(item_id)
+            self.punteroManejador.eventoSismicoSeleccionado(index)
 
-    def seleccionaNoModificarDatos(self): #TODO TENGO DUDAS SERIAS SOBRE ESTO, CHEQUEAR DIAGRAMA
-        pass
+    def animateGif(self, index):
+        self.lblGifMapaIMG.configure(image=self.frames[index])
+        self.after(100, lambda: self.animateGif((index + 1) % len(self.frames)))
+
+
+    def continuarAVisualizarEventos(self):
+        self.lblGifMapaIMG.place_forget()
+        self.lblGifMapaTitulo.pack_forget()
+        self.btnVolver.place_forget()
+        self.seleccionarNoVisualizar()
+
+    def mostrarOpcionMapa(self):
+        respuesta = messagebox.askquestion("Visualizar Mapa", "¿Desea visualizar el mapa?")
+
+        if respuesta == "yes":
+            gif_path = "recursos/sismo.gif"
+            #ventana = VentanaGif(gif_path)
+            #ventana.grab_set()  # bloquea la ventana principal si querés
+            gif = Image.open(gif_path)
+            self.frames = [ImageTk.PhotoImage(frame.copy().convert("RGBA")) for frame in ImageSequence.Iterator(gif)]
+
+            self.lblTituloCuadro.pack_forget()
+            self.cuadro.pack_forget()
+            self.frame_cuadro.pack_forget()
+            self.frame_superior_cuadro.place_forget()
+            self.scrollbar.pack_forget()
+
+            self.lblGifMapaTitulo.pack(pady=30)
+            self.lblGifMapaIMG.place(relx=0.5, rely=0.5, anchor='center')
+            self.btnVolver.place(relx=0.8, rely=0.8, anchor='center')
+
+            self.animateGif(0)
+        elif respuesta == "no":
+            self.seleccionarNoVisualizar()
+
+    def seleccionarNoVisualizar(self):
+        self.punteroManejador.noVisualizarSeleccionado()
+
+# region HABILITAR EDICION DE DATOS
+    def habilitarEdicionDatos(self):
+        self.lblTituloCuadro.pack_forget()
+        self.cuadro.pack_forget()
+        self.frame_cuadro.pack_forget()
+        self.frame_superior_cuadro.place_forget()
+        self.scrollbar.pack_forget()
+
+        self.lblTitulo.pack(pady=20)
+        self.lblEdicion.grid(row=0, column=0, padx=10, pady=10)
+        self.btnEditar.grid(row=4, column=1, padx=10, pady=10)
+        #self.bodyFrame.pack(fill="x", expand=True, padx=150)
+        self.bodyFrame.place(relx=0.5, rely=0.5, relwidth=0.7, relheight=0.6, anchor="center")
+        self.inputFrame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
+        #self.inputFrame.place(relx=0.5, rely=0.5, anchor='center')
+        
+    def habilitarEdicionMagnitud(self, magnitud):
+        self.strMagnitud.set(magnitud)
+        self.lblMagnitud.grid(row=1, column=0, padx=10, pady=10)
+        self.inputMagnitud.grid(row=1, column=1, padx=10, pady=10)
+
+    def habilitarEdicionAlcance(self, alcance):
+        self.strAlcance.set(alcance)
+        self.lblAlcance.grid(row=2, column=0, padx=10, pady=10)
+        self.inputAlcance.grid(row=2, column=1, padx=10, pady=10)
+
+    def habilitarEdicionOrigen(self, origen):
+        self.strOrigenName.set(origen)
+        self.lblOrigenName.grid(row=3, column=0, padx=10, pady=10)
+        self.inputOrigenName.grid(row=3, column=1, padx=10, pady=10)
+# endregion
+    def habilitarSelectorOpciones(self):
+        self.lblSeleccionarOpcion.place(relx=0.5, rely=0.75, anchor='center')
+        self.opcionElegida.set("Elija una opción")
+        self.selectorOpciones.place(relx=0.49, rely=0.8, anchor='e')
+        self.btnConfirmarOpcion.place(relx=0.51, rely=0.8, anchor='w')
+
+    def seleccionarModificarDatos(self, modifico):
+        self.modificoDatos = modifico
+        # Habilitar los campos de entrada para editar
+        self.inputAlcance.config(state="normal")
+        self.inputMagnitud.config(state="normal")
+        self.inputOrigenName.config(state="normal")
+
+    def mostrarDetallesEvento(self, clasifciacion, rutaSismograma):
+        self.strClasificacion.set(clasifciacion)
+        self.lblClasificacion.grid(row=0, column=0, padx=10, pady=10)
+        self.lblClasificacionActual.grid(row=0, column=1, padx=10, pady=10)
+
+
+        self.imagen = ttk.PhotoImage(file=rutaSismograma)
+
+
+        self.lblTituloSismograma.grid(row=0, column=1, padx=10, pady=10)
+        self.lblImagenSismograma.config(image=self.imagen)
+        self.lblImagenSismograma.pack()
+        self.imgFrame.grid(row=1, column=1, padx=10, pady=10, sticky="ne")
+
+
+
+
 
     def tomarOptGrilla(self):
-        self.punteroManejador.tomarOptGrilla(self.selectorOpciones.get())
+        opcion_elegida = self.selectorOpciones.get()
+        if opcion_elegida == "Elija una opción":
+            messagebox.showwarning("Advertencia", "Por favor, seleccione una acción válida.")
+            return
+        self.punteroManejador.tomarOptGrilla(opcion_elegida, self.strAlcance.get(), self.strOrigenName.get(), self.strMagnitud.get(), self.modificoDatos)
 
-
-    def habilitarBotonVolver(self):
-        self.btnVolver.place(relx=0.8, rely=0.8, anchor='center')
+#################################################################################################################
 
     def volverApantallaPrincipal(self):
         self.lblEdicion.pack_forget()
         self.inputFrame.place_forget()
-        self.selectorOpciones.pack_forget()
+        self.selectorOpciones.place_forget()
         self.btnConfirmarOpcion.place_forget()
         self.btnVolver.place_forget()
+        self.lblTitulo.pack_forget()
+        self.lblSeleccionarOpcion.place_forget()
+        self.bodyFrame.place_forget()
+        self.lblGifMapaIMG.place_forget()
+        self.lblGifMapaTitulo.pack_forget()
+        self.cuadro.pack_forget()
+        self.lblTituloCuadro.pack_forget()
+        self.habilitarVentana()
         self.punteroManejador.registrarNuevaRevision()
 
-    def __init__(self):
-        super().__init__()
-        self.punteroManejador = None
-
-
-        self.inputFrame = ttk.Frame(master=self)
-        self.strMagnitud = ttk.StringVar()
-        self.strAlcance = ttk.StringVar()
-        self.strOrigenDesc = ttk.StringVar()
-        self.strOrigenName = ttk.StringVar()
-        self.selectorOpciones = ttk.Combobox(master=self, state="readonly", font=("Arial", 12), values=["Confirmar Evento", "Rechazar Evento", "Solicitar Revisión a Experto"])
-        self.btnConfirmarOpcion = ttk.Button(master=self, text="Confirmar Opción", style='my.TButton', command= self.tomarOptGrilla)
-        self.btnEditar = ttk.Button(master=self.inputFrame, text="Modificar Datos", style='my.TButton', command= lambda: print("editar")) #TODO añadir funciones
-        self.btnCancelar = ttk.Button(master=self.inputFrame, text="No Modificar", style='my.TButton', command= lambda: print("cancelar")) #TODO añadir funciones
-        self.btnVolver = ttk.Button(master=self, text="Volver", style='my.TButton', command=self.volverApantallaPrincipal) #TODO añadir funciones
-        self.lblEdicion = ttk.Label(master=self, text=f"Edición de Datos del evento sismico Seleccionado", font=("Arial", 20))
-        self.lblOrigenDesc = ttk.Label(master=self.inputFrame, text=f"Descripción Origen: ", font=("Arial", 12))
-        self.lblOrigenNom = ttk.Label(master=self.inputFrame, text=f"Nombre Origen: ", font=("Arial", 12))
-        self.lblAlcance = ttk.Label(master=self.inputFrame, text=f"Alcance: ", font=("Arial", 12))
-        self.lblMagnitud = ttk.Label(master=self.inputFrame, text=f"Magnitud:", font=("Arial", 12))
-        self.inputMagnitud = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strMagnitud)
-        self.inputAlcance = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strAlcance)
-        self.inputOrigenDesc = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strOrigenDesc)
-        self.inputOrigenName = ttk.Entry(master=self.inputFrame, font=("Arial", 12), textvariable=self.strOrigenName)
-        self.style.theme_use("journal")
-        self.title("Nuevo Evento Sísmico")
-        self.geometry("1600x900")
-
-        #para estetica (añadir icono a la app)
-
-        #self.icon_path = "path/to/icon.ico"  # Cambia esto a la ruta de tu icono
-        #self.img = Image.open(self.icon_path)
-        #self.icon = ImageTk.PhotoImage(self.img)
-        #self.wm_iconphoto(False, self.icon)
-
-        # FRAMES 
-
-            # frame de botones es como un div de HTML
-        self.buttons_frame = ttk.Frame(master=self)
-        self.frame_superior_cuadro = ttk.Frame(master=self)
-        self.frame_cuadro = ttk.Frame(master=self.frame_superior_cuadro)
-        
-
-        # BOTONES Y OTROS ELEMENTOS
-
-        # Estilo de los botones        # boton, como button de HTML
-        self.button_reg_rev_manual = ttk.Button(master=self.buttons_frame, text="Revisión Manual", style='my.TButton', command=self.opcion_registrar_revision_manual) #comand # FALTA COMMAND
-
-        self.cuadro = None
-        self.scrollbar = None
-
-        # ESTILOS
-
-        # Packing inicial
-
-        self.buttons_frame.pack()
+    

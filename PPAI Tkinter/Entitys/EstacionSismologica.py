@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 class EstacionSismologica:
     def __init__(

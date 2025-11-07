@@ -3,6 +3,7 @@ class OrigenDeGeneracion:
         self._descripcion = descripcion
         self._nombre = nombre
 
+# region Getters y Setters
     @property
     def descripcion(self):
         return self._descripcion
@@ -18,6 +19,7 @@ class OrigenDeGeneracion:
     @nombre.setter
     def nombre(self, value: str):
         self._nombre = value
+# endregion
 
     def obtenerDatos(self):
         return {

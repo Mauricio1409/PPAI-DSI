@@ -1,21 +1,34 @@
-from Entitys.TipoDeDato import TipoDeDato
+from Entitys.tipoDato import TipoDato
 
 class DetalleMuestraSismica:
-    def __init__(self, valor: int, tipoDato: TipoDeDato):
+    def __init__(self, valor: float, tipo: TipoDato):
         self._valor = valor
-        self._tipoDato = tipoDato
+        self.tipo = tipo
 
+    # region Getters y Setters
     @property
     def valor(self):
         return self._valor
-    @valor.setter
-    def valor(self, nuevoValor : int):
-         self._valor = nuevoValor
 
-    def __repr__(self):
-        return f"DetalleMuestraSismica(valor={self._valor})"
+    @valor.setter
+    def valor(self, nuevoValor: int):
+        self._valor = nuevoValor
+
+    @property
+    def tipo(self):
+        return self._tipo
+
+    @tipo.setter
+    def tipo(self, nuevoTipo: TipoDato):
+        self._tipo = nuevoTipo
+
+    # endregion
 
     def obtenerDatos(self):
         return {
-            "valor": self._valor
+            "valor": self._valor,
+            "tipo": self._tipo.denominacion
         }
+
+    def __repr__(self):
+        return f"DetalleMuestraSismica(valor={self._valor})"

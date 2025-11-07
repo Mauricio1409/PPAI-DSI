@@ -9,7 +9,7 @@ class Derivado(Estado):
         print("Confirmando el estado Derivado...")
         # Lógica específica para confirmar el estado Derivado
         
-    def rechazar(self):
+    def rechazar(self, analista, fechaHoraActual, eventoSismico):
         print("Rechazando el estado Derivado...")
         # Lógica específica para rechazar el estado Derivado
         
