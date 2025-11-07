@@ -1,4 +1,5 @@
 from Entitys.AnalistaSismos import AnalistaSismos
+from Entitys.MagnitudRichter import MagnitudRichter
 from Entitys.STATE.Estado import Estado
 from Entitys.CambioEstado import CambioEstado
 from Entitys.ClasificacionSismo import ClasificacionSismo
@@ -9,24 +10,28 @@ from Entitys.SerieTemporal import SerieTemporal
 from datetime import datetime
 
 class EventoSismico:
-    def __init__(self, fechaHoraOcurrencia: datetime, magnitud: float, latitud: float, longitud: float,
-                 cambioEstado : list[CambioEstado], estado : Estado, clasificacionSismo : ClasificacionSismo,
-                 alcanceSismo : AlcanceSismo, origenGenercion : OrigenDeGeneracion, serieTemporal : list[SerieTemporal]):
+    def __init__(self, fechaHoraOcurrencia: datetime, magnitud: MagnitudRichter, latitud_hipocentro: float,
+                 longitud_hipocentro: float, cambioEstado : list[CambioEstado], estado : Estado,
+                 clasificacionSismo : ClasificacionSismo, latitud_epicentro : float, longitud_epicentro : float,
+                 alcanceSismo : AlcanceSismo, origenGenercion : OrigenDeGeneracion, seriesTemporales : list[SerieTemporal],
+                 eventoSismicoId: int = None):
 
         self._cambioEstadoActual = None
         self._fechaHoraFin = None
+        self._eventoSismicoId = eventoSismicoId
         self._fechaHoraOcurrencia = fechaHoraOcurrencia
-        self._latitudEpicentro = latitud
-        self._latitudHipocentro = latitud
-        self._longitudEpicentro = longitud
-        self._longitudHipocentro = longitud
-        self._ValorMagnitud = magnitud
+        self._latitudEpicentro = latitud_epicentro
+        self._latitudHipocentro = latitud_hipocentro
+        self._longitudEpicentro = longitud_epicentro
+        self._longitudHipocentro = longitud_hipocentro
+        self._Magnitud = magnitud
+        self.ValorMagnitud = magnitud.numero
         self._cambioEstado = cambioEstado
         self._estado = estado
         self._alcanceSismo = alcanceSismo
         self._origenGeneracion = origenGenercion
         self._clasificacionSismo = clasificacionSismo
-        self._seriesTemporales = serieTemporal
+        self._seriesTemporales = seriesTemporales
 
     #region Getters y Setters
     @property
@@ -127,6 +132,10 @@ class EventoSismico:
     @estado.setter
     def estado(self, nuevoEstado : Estado):
         self._estado = nuevoEstado
+
+    @property
+    def eventoSismicoId(self):
+        return self._eventoSismicoId
     #endregion
 
     #TODO CHEQUEAR ESTO, NO ESTOY SEGURO DE QUE SE RESUELVA ASÍ
@@ -146,7 +155,7 @@ class EventoSismico:
         return [self.latitudHipocentro, self.longitudHipocentro]
     
 
-# EventoSismico seleccionado 
+    # EventoSismico seleccionado
 
     def revisar(self, analista, fechaHoraActual) -> None:
         self._estado.revisar(analista, fechaHoraActual, self)
@@ -156,16 +165,6 @@ class EventoSismico:
             if cambio.sosActual():
                 self._cambioEstadoActual = cambio
         return None
-
-    #TODO probablemente tengamos que sacar esto de esta clase, debería estar solo en los estados
-    def cambiarCambioEstado(self, estado, analista, fechaHoraActual):
-        nuevo_cambio_estado = CambioEstado(fechaHoraActual, estado, analista)
-        self._cambioEstado.append(nuevo_cambio_estado)
-        print("cambios de estados realizados hasta acá: ", self._cambioEstado)
-
-        print("cambio de estado actual ANTES DEL CAMBIO: ", self._cambioEstadoActual)
-        self._cambioEstadoActual = nuevo_cambio_estado
-        print("cambio de estado actual DESPUÉS DEL CAMBIO: ", self._cambioEstadoActual)
 
 
     def actualizarEstadoRechazado(self, analista, fechaHoraActual):

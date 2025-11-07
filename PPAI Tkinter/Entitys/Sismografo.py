@@ -1,8 +1,11 @@
+from datetime import datetime
+
 from Entitys.EstacionSismologica import EstacionSismologica
 class Sismografo:
-    def __init__(self, fechaAdquisicion: int, identificadorSismografo: int, numeroSerie: int, estacionSismologica : EstacionSismologica):
+    def __init__(self, fechaAdquisicion: datetime, numeroSerie: int,
+                 estacionSismologica : EstacionSismologica, sismografoId: int = None):
+        self._sismografoId = sismografoId
         self._fechaAdquisicion = fechaAdquisicion
-        self._identificadorSismografo = identificadorSismografo
         self._numeroSerie = numeroSerie
         self._estacionSismologica = estacionSismologica
 
@@ -14,14 +17,6 @@ class Sismografo:
     @fechaAdquisicion.setter
     def fechaAdquisicion(self, value: int):
         self._fechaAdquisicion = value
-
-    @property
-    def identificadorSismografo(self):
-        return self._identificadorSismografo
-
-    @identificadorSismografo.setter
-    def identificadorSismografo(self, value: int):
-        self._identificadorSismografo = value
 
     @property
     def numeroSerie(self):
@@ -38,9 +33,12 @@ class Sismografo:
     @estacionSismologica.setter
     def estacionSismologica(self, valor):
         self._estacionSismologica = valor
+    @property
+    def sismografoId(self):
+        return self._sismografoId
 # endregion
 
     def __repr__(self):
         return (f"Sismografo(fechaAdquisicion={self._fechaAdquisicion}, "
-                f"identificadorSismografo={self._identificadorSismografo}, "
+                f"identificadorSismografo={self._sismografoId}, "
                 f"numeroSerie={self._numeroSerie})")

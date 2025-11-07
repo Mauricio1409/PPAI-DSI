@@ -3,18 +3,18 @@ from datetime import datetime
 from Entitys.AnalistaSismos import AnalistaSismos
 from Entitys.STATE.Confirmado import Confirmado
 from Entitys.STATE.Estado import Estado
-from Entitys.STATE.Rechazado import Recahazado
+from Entitys.STATE.Rechazado import Rechazado
 from Entitys.CambioEstado import CambioEstado
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from Entitys.STATE.EventoSismico import EventoSismico
+    from Entitys.EventoSismico import EventoSismico
     from Entitys.STATE.PendienteDeRevision import PendienteDeRevision
 
 
 class Bloqueado(Estado):
     def __init__(self):
-        super().__init__("Bloqueado", "EventoSismico")
+        super().__init__("BLOQUEADO")
         
     def confirmar(self, analista, fechaHoraActual, eventoSismico):
         cambioDeEstado = eventoSismico.cambioEstado
@@ -36,7 +36,7 @@ class Bloqueado(Estado):
         cambioEstadoActualEventoSismico.fechaHoraFin = fechaHoraActual
 
         # creo el estado rechazado
-        rechazado = Recahazado()
+        rechazado = Rechazado()
 
         self.cambiarCambioEstado(analista, fechaHoraActual, eventoSismico, rechazado)
 

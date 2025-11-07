@@ -1,5 +1,6 @@
 class TipoDato:
-    def __init__(self, denominacion : str, nombreUnidadMedida :str, valorUmbral : float):
+    def __init__(self, denominacion : str, nombreUnidadMedida :str, valorUmbral : float, tipoDatoId : int = None):
+        self._tipoDatoId = tipoDatoId
         self._denominacion = denominacion
         self._nombreUnidadMedida = nombreUnidadMedida
         self._valorUmbral = valorUmbral
@@ -25,5 +26,8 @@ class TipoDato:
     @valorUmbral.setter
     def valorUmbral(self, nuevoValorUmbral: float):
         self._valorUmbral = nuevoValorUmbral
+    @property
+    def tipoDatoId(self):
+        return self._tipoDatoId
     # endregion
 

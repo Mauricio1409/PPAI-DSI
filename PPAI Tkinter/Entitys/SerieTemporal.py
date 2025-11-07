@@ -4,8 +4,11 @@ from datetime import datetime
 
 
 class SerieTemporal:
-    def __init__(self, condicionAlarma: int, fechaHoraInicioRegistroMuestras: datetime, fechaHoraRegistro: datetime, frecuenciaMuestreo: float, muestraSismica : list[MuestraSismica], sismografo : Sismografo):
-        self._condicionAlarma: int = condicionAlarma
+    def __init__(self, condicionAlarma: str, fechaHoraInicioRegistroMuestras: datetime, fechaHoraRegistro: datetime,
+                 frecuenciaMuestreo: float, muestraSismica : list[MuestraSismica], sismografo : Sismografo,
+                 serieTemporalId: int = None):
+        self._serieTemporalId = serieTemporalId
+        self._condicionAlarma: str = condicionAlarma
         self._fechaHoraInicioRegistroMuestras: datetime = fechaHoraInicioRegistroMuestras
         self._fechaHoraRegistro: datetime = fechaHoraRegistro
         self._frecuenciaMuestreo = frecuenciaMuestreo
@@ -13,6 +16,10 @@ class SerieTemporal:
         self._sismografo = sismografo #TODO esto esta hardcodeado, debería buscar cual es su estación sismológica en la BDD
 
     # region Getters y Setters
+    @property
+    def serieTemporalId(self):
+        return self._serieTemporalId
+
     @property
     def condicionAlarma(self):
         return self._condicionAlarma

@@ -1,5 +1,6 @@
 class ClasificacionSismo:
-    def __init__(self, kmProfundidadDesde: int, kmProfundidadHasta: int, nombre: str):
+    def __init__(self, kmProfundidadDesde: int, kmProfundidadHasta: int, nombre: str, clasificacionSismoId: int = None):
+        self._clasificacionSismoId = clasificacionSismoId
         self._kmProfundidadDesde = kmProfundidadDesde
         self._kmProfundidadHasta = kmProfundidadHasta
         self._nombre = nombre
@@ -28,6 +29,10 @@ class ClasificacionSismo:
     @nombre.setter
     def nombre(self, value: str):
         self._nombre = value
+
+    @property
+    def clasificacionSismoId(self):
+        return self._clasificacionSismoId
 # endregion
 
 

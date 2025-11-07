@@ -1,5 +1,5 @@
 from datetime import datetime
-from Entitys.STATE.EventoSismico import EventoSismico
+from Entitys.EventoSismico import EventoSismico
 from ManejadorGenerarSismograma import ManejadorGenerarSismograma
 from Entitys.STATE.Estado import Estado
 

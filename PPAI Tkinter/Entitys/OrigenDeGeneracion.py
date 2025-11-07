@@ -1,5 +1,6 @@
 class OrigenDeGeneracion:
-    def __init__(self, descripcion: str, nombre: str):
+    def __init__(self, descripcion: str, nombre: str, origenDeGeneracionId: int = None):
+        self._origenDeGeneracionId = origenDeGeneracionId
         self._descripcion = descripcion
         self._nombre = nombre
 
@@ -19,6 +20,10 @@ class OrigenDeGeneracion:
     @nombre.setter
     def nombre(self, value: str):
         self._nombre = value
+
+    @property
+    def origenDeGeneracionId(self):
+        return self._origenDeGeneracionId
 # endregion
 
     def obtenerDatos(self):

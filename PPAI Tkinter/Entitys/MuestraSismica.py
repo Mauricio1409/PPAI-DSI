@@ -2,11 +2,15 @@ from Entitys.DetalleMuestraSismica import DetalleMuestraSismica
 from datetime import datetime
 
 class MuestraSismica:
-    def __init__(self, fechaHoraMuestra: datetime, detalleMuestra : list[DetalleMuestraSismica]):
+    def __init__(self, fechaHoraMuestra: datetime, detalleMuestra : list[DetalleMuestraSismica], muestraSismicaId: int = None):
+        self._muestraSismicaId = muestraSismicaId
         self._fechaHoraMuestra = fechaHoraMuestra
         self._detalles = detalleMuestra
 
 # region Getters y Setters
+    @property
+    def muestraSismicaId(self):
+        return self._muestraSismicaId
     @property
     def fechaHoraMuestra(self):
         return self._fechaHoraMuestra

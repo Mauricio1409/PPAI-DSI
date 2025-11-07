@@ -1,5 +1,6 @@
 class AlcanceSismo:
-    def __init__(self, descripcion: str, nombre: str):
+    def __init__(self, descripcion: str, nombre: str, alcanceSismoId: int = None):
+        self._alcanceSismoId = alcanceSismoId
         self._descripcion = descripcion
         self._nombre = nombre
 
@@ -19,6 +20,10 @@ class AlcanceSismo:
     @nombre.setter
     def nombre(self, value: str):
         self._nombre = value
+
+    @property
+    def alcanceSismoId(self):
+        return self._alcanceSismoId
 # endregion
 
     def obtenerAlcance(self):

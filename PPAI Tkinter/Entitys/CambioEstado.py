@@ -2,13 +2,20 @@ from Entitys.STATE.Estado import Estado
 from datetime import datetime
 
 class CambioEstado:
-    def __init__(self, fechaHoraInicio: datetime, estado : Estado, analista, fechaHoraFin: datetime = None):
+    def __init__(self, fechaHoraInicio: datetime, estado : Estado, analista, fechaHoraFin: datetime = None, cambioEstadoId: int = None):
+        self._cambioEstadoId = cambioEstadoId
         self._fechaHoraInicio = fechaHoraInicio
         self._fechaHoraFin = fechaHoraFin
         self._estado = estado
         self._analistaResponsable = analista
 
 #region Getters y Setters
+    @property
+    def analistaResponsable(self):
+        return self._analistaResponsable
+    @property
+    def cambioEstadoId(self):
+        return self._cambioEstadoId
     @property
     def fechaHoraInicio(self):
         return self._fechaHoraInicio
@@ -24,6 +31,9 @@ class CambioEstado:
     @fechaHoraFin.setter
     def fechaHoraFin(self, value: datetime):
         self._fechaHoraFin = value
+    @property
+    def estado(self):
+        return self._estado
 
 #endregion
 

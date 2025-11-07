@@ -1,9 +1,8 @@
 from abc import ABC
 
 class Estado(ABC):
-    def __init__(self, nombre: str, ambito : str):
-        self._nombre = nombre
-        self._ambito = ambito
+    def __init__(self, nombre: str):
+        self._nombre: str = nombre
 
     #region Getters y Setters
     @property
@@ -14,18 +13,14 @@ class Estado(ABC):
     def nombre(self, nuevoNombre: str):
         self._nombre = nuevoNombre
 
-    @property
-    def ambito(self):
-        return self._ambito
-
-    @ambito.setter
-    def ambito(self, nuevoAmbito : int):
-        self._ambito = nuevoAmbito
     #endregion
 
     def __str__(self):
         return f"Estado: {self.nombre}"
 
+    def registrarPendienteCierre(self):
+        print(f"Operación 'RegistrarPendienteCierre' no permitida en estado: {self.nombre}")
+        return False
 
     def adquirirDatos(self):
         """

@@ -3,7 +3,7 @@ from Entitys.STATE.Estado import Estado
 
 class AutoConfirmado(Estado):
     def __init__(self):
-        super().__init__("AutoConfirmado", "EventoSismico")
+        super().__init__("AUTO_CONFIRMADO")
         
     def adquirirDatos(self):
         print("Adquiriendo datos para evento AutoDetectado...")

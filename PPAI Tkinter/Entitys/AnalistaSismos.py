@@ -1,8 +1,8 @@
 class AnalistaSismos:
-    def __init__(self, nombre: str, apellido: str, id_analista: int):
+    def __init__(self, nombre: str, apellido: str, analista_id: int):
         self._nombre = nombre
         self._apellido = apellido
-        self._id_analista = id_analista
+        self._analista_id = analista_id
 
 
     @property
@@ -19,7 +19,7 @@ class AnalistaSismos:
         self._apellido = nuevoApellido
     @property
     def id_analista(self):
-        return self._id_analista
+        return self._analista_id
     @id_analista.setter
     def id_analista(self, nuevoId: int):
-        self._id_analista = nuevoId
+        self._analista_id = nuevoId

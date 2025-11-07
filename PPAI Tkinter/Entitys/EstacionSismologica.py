@@ -3,6 +3,7 @@ from datetime import datetime
 class EstacionSismologica:
     def __init__(
         self,
+        estacionSismologicaId: int,
         codigoEstacion: int,
         documentoCertificacionAdq: int,
         fechaSolicitudCertificacion: datetime,
@@ -11,6 +12,7 @@ class EstacionSismologica:
         nombre: str,
         numeroCertificacionAdquisicion: int
     ):
+        self._estacionSismologicaId = estacionSismologicaId
         self._codigoEstacion = codigoEstacion
         self._documentoCertificacionAdq = documentoCertificacionAdq
         self._fechaSolicitudCertificacion = fechaSolicitudCertificacion
@@ -75,6 +77,10 @@ class EstacionSismologica:
     @numeroCertificacionAdquisicion.setter
     def numeroCertificacionAdquisicion(self, value: int):
         self._numeroCertificacionAdquisicion = value
+
+    @property
+    def estacionSismologicaId(self):
+        return self._estacionSismologicaId
 #endregion
 
 

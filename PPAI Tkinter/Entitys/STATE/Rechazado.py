@@ -1,5 +1,5 @@
 from Entitys.STATE.Estado import Estado
 
-class Recahazado(Estado):
+class Rechazado(Estado):
     def __init__(self):
-        super().__init__("Rechazado", "EventoSismico")
+        super().__init__("RECHAZADO")

@@ -6,12 +6,12 @@ from Entitys.STATE.Estado import Estado
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from Entitys.STATE.EventoSismico import EventoSismico
+    from Entitys.EventoSismico import EventoSismico
     from Entitys.STATE.Bloqueado import Bloqueado
 
 class PendienteDeRevision(Estado):
     def __init__(self):
-        super().__init__("Pendiente de Revisión", "EventoSismico")
+        super().__init__("PENDIENTE_DE_REVISION")
         
         
     def anular(self):

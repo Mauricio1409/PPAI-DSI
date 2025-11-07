@@ -6,23 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="4544443a-2ebf-423d-810a-cc4ad7f3bbe2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Boundarys/PantNuevoEventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Boundarys/PantNuevoEventoSismico.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/AutoConfirmado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/AutoConfirmado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/AutoDetectado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/AutoDetectado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/Bloqueado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Bloqueado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/CambioEstado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/CambioEstado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/Cerrado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Cerrado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/Confirmado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Confirmado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/Derivado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Derivado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/Estado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Estado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/EventoSinRevision.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/EventoSinRevision.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/EventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/EventoSismico.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/PendienteDeCierre.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/PendienteDeCierre.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/PendienteDeRevision.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/PendienteDeRevision.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/Rechazado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Rechazado.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entitys/SerieTemporal.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/SerieTemporal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/AnalistaSismos.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/AnalistaSismos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/STATE/Bloqueado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Bloqueado.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/STATE/EventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/EventoSismico.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/STATE/PendienteDeRevision.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/PendienteDeRevision.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/Sesion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/Sesion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ManejadorNuevoEventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/ManejadorNuevoEventoSismico.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/PPAI_DATABASE.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/PPAI_DATABASE.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/PPAI_DATABASE.db-journal" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +62,7 @@
     "Python.main.executor": "Run",
     "Python.test.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
@@ -137,7 +130,7 @@
       <workItem from="1762268203626" duration="447000" />
       <workItem from="1762268679829" duration="789000" />
       <workItem from="1762520200702" duration="1401000" />
-      <workItem from="1762521917301" duration="7839000" />
+      <workItem from="1762521917301" duration="12237000" />
     </task>
     <servers />
   </component>

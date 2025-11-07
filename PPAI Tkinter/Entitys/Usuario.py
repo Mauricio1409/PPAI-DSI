@@ -1,7 +1,8 @@
 from Entitys.AnalistaSismos import AnalistaSismos
 
 class Usuario:
-    def __init__(self, nombre: str, contrasena: str, logueado: AnalistaSismos):
+    def __init__(self, nombre: str, contrasena: str, logueado: AnalistaSismos, usuarioId: int = None):
+        self._usuarioId = usuarioId
         self._nombre = nombre
         self._contrasena = contrasena
         self._logueado = logueado
@@ -29,6 +30,9 @@ class Usuario:
     @logueado.setter
     def logueado(self, estado: AnalistaSismos):
         self._logueado = estado
+    @property
+    def usuarioId(self):
+        return self._usuarioId
 #endregion
 
     def __str__(self):

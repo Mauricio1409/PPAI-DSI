@@ -2,10 +2,10 @@ from Entitys.STATE.Estado import Estado
 
 class AutoDetectado(Estado):
     def __init__(self):
-        super().__init__("AutoDetectado", "EventoSismico")
+        super().__init__("AUTO_DETECTADO")
         
 
-    def revisar(self):
+    def revisar(self, analista, fechaHoraActual, eventoSismico):
         print("Revisando datos para evento AutoDetectado...")
         # Lógica específica para revisar datos de un evento AutoDetectado
         

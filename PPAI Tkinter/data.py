@@ -10,10 +10,10 @@ from Entitys.DetalleMuestraSismica import DetalleMuestraSismica
 from Entitys.MuestraSismica import MuestraSismica
 from Entitys.OrigenDeGeneracion import OrigenDeGeneracion
 from Entitys.STATE.PendienteDeRevision import PendienteDeRevision
-from Entitys.STATE.Rechazado import Recahazado
+from Entitys.STATE.Rechazado import Rechazado
 from Entitys.SerieTemporal import SerieTemporal
 from Entitys.EstacionSismologica import EstacionSismologica
-from Entitys.STATE.EventoSismico import EventoSismico
+from Entitys.EventoSismico import EventoSismico
 from Entitys.AnalistaSismos import AnalistaSismos
 from Entitys.Usuario import Usuario
 from Entitys.Sesion import Sesion
@@ -65,7 +65,7 @@ estado_auto_detectado = AutoDetectado()
 estado_confirmado = Confirmado()
 estado_cerrado = Cerrado()
 estado_bloqueado = Bloqueado()
-estado_rechazado = Recahazado()
+estado_rechazado = Rechazado()
 estado_pendiente = PendienteDeRevision()
 
 estados = [estado_cerrado, estado_auto_detectado, estado_cerrado, estado_bloqueado, estado_rechazado, estado_pendiente, estado_confirmado]
