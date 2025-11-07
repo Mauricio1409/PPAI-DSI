@@ -47,7 +47,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.title("Nuevo Evento Sísmico")
         self.geometry("1600x900")
 
-        #para estetica (añadir icono a la app)
+        #para estética (añadir icono a la app)
 
         #self.icon_path = "path/to/icon.ico"  # Cambia esto a la ruta de tu icono
         #self.img = Image.open(self.icon_path)
@@ -139,10 +139,10 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         for datosEvento in arrayDatos:
             self.cuadro.insert("", "end", 
                                text=datosEvento['fechaHoraOcurrencia'], 
-                               values=(datosEvento['ubicacion'][0][0], 
-                                       datosEvento['ubicacion'][0][1],
-                                       datosEvento['ubicacion'][1][0],
-                                       datosEvento['ubicacion'][1][1],
+                               values=(datosEvento['ubicación'][0][0],
+                                       datosEvento['ubicación'][0][1],
+                                       datosEvento['ubicación'][1][0],
+                                       datosEvento['ubicación'][1][1],
                                        datosEvento['valorMagnitud']))
 
         self.cuadro.pack(fill="both", expand=True)
@@ -153,7 +153,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.cuadro.bind("<Return>", self.seleccionaEventoSismico)
         self.cuadro.bind("<Double-1>", self.seleccionaEventoSismico)
 
-    def seleccionaEventoSismico(self, event):
+    def seleccionaEventoSismico(self, _event):
         seleccion = self.cuadro.selection()
         if seleccion is not None:
             item_id = seleccion[0]

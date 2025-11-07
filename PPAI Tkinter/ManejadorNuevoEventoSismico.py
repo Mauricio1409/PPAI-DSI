@@ -15,9 +15,6 @@ class ManejadorNuevoEventoSismico:
 
         self.eventosPendienteRevision = []
         self.arrayDatos = []
-        # self.arrayMagnitud = []
-        # self.arrayUbicacion = []
-        # self.arrayFechaHora = []
 
         self.estadoConfirmado = None
         self.CasoUsoSismograma = None
