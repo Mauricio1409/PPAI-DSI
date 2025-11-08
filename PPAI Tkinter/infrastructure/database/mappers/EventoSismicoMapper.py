@@ -16,6 +16,7 @@ class EventoSismicoMapper:
             eventoSismicoId=orm.eventoSismicoId,
             fechaHoraOcurrencia=orm.fechaHoraOcurrencia,
             magnitud=MagnitudRichterMapper.toDomain(orm.magnitudRitcher),
+            valorMagnitud=float(orm.valorMagnitud),
             latitud_epicentro=float(orm.latitudEpicentro),
             longitud_epicentro=float(orm.longitudEpicentro),
             latitud_hipocentro=float(orm.latitudHipocentro),
@@ -26,4 +27,23 @@ class EventoSismicoMapper:
             seriesTemporales=[SerieTemporalMapper.toDomain(serie) for serie in orm.seriesTemporales],
             estado=EstadoMapper.toDomain(orm.estado),
             cambioEstado=[CambioEstadoMapper.toDomain(cambio) for cambio in orm.cambiosEstado]
+        )
+
+    @staticmethod
+    def toORM(entity: EventoSismico) -> EventoSismicoORM:
+        return EventoSismicoORM(
+            eventoSismicoId=entity.eventoSismicoId,
+            fechaHoraOcurrencia=entity.fechaHoraOcurrencia,
+            magnitudRitcher=MagnitudRichterMapper.toORM(entity.magnitud),
+            valorMagnitud=entity.valorMagnitud,
+            latitudEpicentro=entity.latitudEpicentro,
+            longitudEpicentro=entity.longitudEpicentro,
+            latitudHipocentro=entity.latitudHipocentro,
+            longitudHipocentro=entity.longitudHipocentro,
+            clasificacionSismo=ClasificacionSismoMapper.toORM(entity.clasificacionSismo),
+            alcanceSismo=AlcanceSismoMapper.toORM(entity.alcanceSismo),
+            origenGeneracion=OrigenGeneracionMapper.toORM(entity.origenGeneracion),
+            seriesTemporales=[SerieTemporalMapper.toORM(serie) for serie in entity.seriesTemporales],
+            estado=EstadoMapper.toORM(entity.estado),
+            cambiosEstado=[CambioEstadoMapper.toORM(cambios) for cambios in entity.cambioEstado]
         )

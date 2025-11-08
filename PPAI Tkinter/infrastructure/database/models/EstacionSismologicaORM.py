@@ -6,9 +6,6 @@ from sqlalchemy import Integer, Numeric, Text, DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from infrastructure.database.engine.base import Base
 
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from infrastructure.database.models.SismografoORM import SismografoORM
 
 class EstacionSismologicaORM(Base):
     __tablename__ = "ESTACION_SISMOLOGICA"
@@ -22,8 +19,4 @@ class EstacionSismologicaORM(Base):
     nombre: Mapped[Optional[str]] = mapped_column("NOMBRE", Text)
     numeroCertificacionAdquisicion: Mapped[Optional[int]] = mapped_column("NUMERO_CERTIFICACION_ADQUISICION", Integer)
 
-    # Relaciones
-    sismografos: Mapped[list["SismografoORM"]] = relationship(
-        back_populates="estacionSismologica",
-        lazy="joined"
-    )
+

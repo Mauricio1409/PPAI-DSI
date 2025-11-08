@@ -65,25 +65,7 @@ class Bloqueado(Estado):
         self.cambiarCambioEstado(analista, fechaHoraActual, eventoSismico, estadoPendiente)
 
         eventoSismico.estado = estadoPendiente
-    
-    @staticmethod
-    def cambiarCambioEstado(analista: AnalistaSismos, fechaHoraActual: datetime,
-                            eventoSismico: 'EventoSismico', estado: Estado) -> None:
 
-        nuevo_cambio_estado = CambioEstado(fechaHoraActual, estado, analista)
-        eventoSismico._cambioEstado.append(nuevo_cambio_estado)
-        print('-'*50)
-        print("cambios de estados realizados hasta acá: ", eventoSismico.cambioEstado)
-        print('-' * 50)
-
-        print('-' * 50)
-        print("cambio de estado actual ANTES DEL CAMBIO: ", eventoSismico.cambioEstadoActual)
-        print('-' * 50)
-
-        eventoSismico._cambioEstadoActual = nuevo_cambio_estado
-        print('-' * 50)
-        print("cambio de estado actual DESPUÉS DEL CAMBIO: ", eventoSismico.cambioEstadoActual)
-        print('-' * 50)
 
     @staticmethod
     def obtenerCambioEstadoActual(cambiosDeEstado: list[CambioEstado]):

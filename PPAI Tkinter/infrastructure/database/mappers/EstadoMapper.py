@@ -10,7 +10,6 @@ from Entitys.STATE.AutoConfirmado import AutoConfirmado
 from Entitys.STATE.EventoSinRevision import EventoSinRevision
 from Entitys.STATE.Derivado import Derivado
 from infrastructure.database.models.EstadoOrm import EstadoORM
-from infrastructure.database.unit_of_work.uow_factory import uow_factory
 
 
 class EstadoMapper:
@@ -39,12 +38,5 @@ class EstadoMapper:
     @staticmethod
     def toORM(state: Estado) -> EstadoORM:
         """Devuelve un EstadoORM con el nombre correspondiente a la subclase."""
-        estadoId = EstadoMapper.get_id_por_nombre(state.nombre)
-        return EstadoORM(nombre=state.nombre, estadoId=estadoId)
+        return EstadoORM(nombre=state.nombre)
 
-    @staticmethod
-    def get_id_por_nombre(nombre: str) -> int:
-        with uow_factory() as uow:
-            session = uow.session
-            found = session.query(EstadoORM).filter(EstadoORM.nombre == nombre).first()
-            return found.id

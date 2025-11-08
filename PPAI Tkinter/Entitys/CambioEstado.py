@@ -1,8 +1,11 @@
-from Entitys.STATE.Estado import Estado
 from datetime import datetime
 
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from Entitys.STATE.Estado import Estado
+
 class CambioEstado:
-    def __init__(self, fechaHoraInicio: datetime, estado : Estado, analista, fechaHoraFin: datetime = None, cambioEstadoId: int = None):
+    def __init__(self, fechaHoraInicio: datetime, estado : 'Estado', analista, fechaHoraFin: datetime = None, cambioEstadoId: int = None):
         self._cambioEstadoId = cambioEstadoId
         self._fechaHoraInicio = fechaHoraInicio
         self._fechaHoraFin = fechaHoraFin
@@ -50,3 +53,7 @@ class CambioEstado:
         return (f"CambioEstado(fechaHoraInicio={self._fechaHoraInicio}, "
                 f"EstadoActual={self._estado.nombre},"
                 f"fechaHoraFin={self._fechaHoraFin})")
+
+    @cambioEstadoId.setter
+    def cambioEstadoId(self, value):
+        self._cambioEstadoId = value

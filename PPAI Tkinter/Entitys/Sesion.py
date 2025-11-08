@@ -2,7 +2,7 @@ from Entitys.Usuario import Usuario
 from datetime import datetime
 
 class Sesion:
-    def __init__(self, sesion_id: int, usuario: Usuario, fechaHoraInicio: datetime, fechaHoraFin: datetime):
+    def __init__(self, sesion_id: int| None, usuario: Usuario, fechaHoraInicio: datetime, fechaHoraFin: datetime):
         self._sesion_id = sesion_id
         self._usuario = usuario
         self._fechaHoraInicio = fechaHoraInicio
@@ -44,4 +44,8 @@ class Sesion:
     def __repr__(self):
         return (f"Sesion(sesion_id={self._sesion_id}, usuario={self._usuario}, "
                 f"fechaHoraInicio={self._fechaHoraInicio}, fechaHoraFin={self._fechaHoraFin})")
+
+    @sesionId.setter
+    def sesionId(self, value):
+        self._sesionId = value
     

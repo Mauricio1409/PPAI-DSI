@@ -45,4 +45,9 @@ class ClasificacionSismo:
 
     def __repr__(self):
         return (f"ClasificacionSismo(kmProfundidadDesde={self._kmProfundidadDesde}, "
-                f"kmProfundidadHasta={self._kmProfundidadHasta}, nombre={self._nombre})")
+                f"kmProfundidadHasta={self._kmProfundidadHasta}, nombre={self._nombre}, "
+                f"id={self._clasificacionSismoId})")
+
+    @clasificacionSismoId.setter
+    def clasificacionSismoId(self, value):
+        self._clasificacionSismoId = value

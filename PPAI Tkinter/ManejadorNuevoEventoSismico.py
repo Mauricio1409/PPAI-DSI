@@ -1,9 +1,12 @@
 from datetime import datetime
-from Entitys.EventoSismico import EventoSismico
-from ManejadorGenerarSismograma import ManejadorGenerarSismograma
-from Entitys.STATE.Estado import Estado
 
-from data import eventosSismicos, estados, sesion1
+from Entitys.AnalistaSismos import AnalistaSismos
+from Entitys.EventoSismico import EventoSismico
+from Entitys.Sesion import Sesion
+from ManejadorGenerarSismograma import ManejadorGenerarSismograma
+
+
+from data import eventosSismicos, sesion1
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -15,26 +18,22 @@ class ManejadorNuevoEventoSismico:
 
         self.punteroPantalla: 'VentanaPantNuevoEventoSismico' = punteroPantalla
         self.eventosSismicos: list[EventoSismico] = eventosSismicos
-        self.sesion = sesion1
-        self.arrayEstados: list[Estado] = estados
+        self.sesion: Sesion = sesion1
 
-        self.eventosPendienteRevision = []
+        self.eventosPendienteRevision: list[EventoSismico] = []
         self.arrayDatos = []
 
-        self.estadoConfirmado = None
         self.CasoUsoSismograma = None
-        self.datosModificados = False
+        self.datosModificados = False # todo check this
         self.ValorMagnitudMod = None
         self.origenGeneracionMod = None
         self.alcanceMod = None
-        self.datosSerieTemporal = None
-        self.estadoBloqueado = None
+        self.datosSerieTemporal: list[dict]| None = None
         self.eventoSismicoSeleccionadoActual: EventoSismico|None = None
-        self.estadoRechazado = None
         self.eventoBloqueado = None
-        self.fechaHoraActual = None
-        self.analistaLogueado = None
-        self.datosEventoSismico = None
+        self.fechaHoraActual: datetime|None = None
+        self.analistaLogueado: AnalistaSismos|None = None
+        self.datosEventoSismico: dict|None = None
 
     def registrarNuevaRevision(self):
         self.buscarEventosAutoDetectados()
@@ -45,34 +44,21 @@ class ManejadorNuevoEventoSismico:
         self.arrayDatos = []
         for evento in self.eventosSismicos:
             datos_evento = {}
-            if evento.esPendienteRevision():
-                # self.eventosPendienteRevision.append(evento)
-                # self.arrayFechaHora.append(evento.fechaHoraOcurrencia)
-                # self.arrayUbicacion.append(evento.getUbicacion())
-                # self.arrayMagnitud.append(evento.ValorMagnitud) ##CHEQUEAR ESTO CON EL DIAGRAMA
+            if evento.sosAutoDetectado():
                 datos_evento['evento'] = evento
                 datos_evento['fechaHoraOcurrencia'] = evento.fechaHoraOcurrencia
                 datos_evento['ubicacion'] = evento.getUbicacion()
-                datos_evento['valorMagnitud'] = evento.ValorMagnitud
+                datos_evento['valorMagnitud'] = evento.valorMagnitud
 
                 self.arrayDatos.append(datos_evento)
 
     def ordenarPorFechaHora(self):
-
             self.arrayDatos.sort(key= lambda datosEvento : datosEvento['fechaHoraOcurrencia'], reverse=True)
-            
-            # for i in range(len(self.arrayFechaHora)):
-            #     for j in range(i + 1, len(self.arrayFechaHora)):
-            #         if self.arrayFechaHora[i] < self.arrayFechaHora[j]:
-            #             # Intercambiar los elementos
-            #             self.arrayFechaHora[i], self.arrayFechaHora[j] = self.arrayFechaHora[j], self.arrayFechaHora[i]
-            #             self.arrayUbicacion[i], self.arrayUbicacion[j] = self.arrayUbicacion[j], self.arrayUbicacion[i]
-            #             self.arrayMagnitud[i], self.arrayMagnitud[j] = self.arrayMagnitud[j], self.arrayMagnitud[i]
-            #             self.eventosPendienteRevision[i], self.eventosPendienteRevision[j] = self.eventosPendienteRevision[j], self.eventosPendienteRevision[i]
+
 
     def eventoSismicoSeleccionado(self, index):
-        print(f"Se selecciono el evento sismico en el indice {index}, es el objeto {self.arrayDatos[index]['evento']}")
-        self.eventoSismicoSeleccionadoActual: EventoSismico = self.arrayDatos[index]['evento']
+        print(f"Se selecciono el evento sismico en el indice {index}, es el objeto {self.arrayDatos[index].get('evento')}")
+        self.eventoSismicoSeleccionadoActual: EventoSismico = self.arrayDatos[index].get('evento')
         self.actualizarEventoABloqueado(self.eventoSismicoSeleccionadoActual)
         self.buscarDatosEvento(self.eventoSismicoSeleccionadoActual)
         self.clasificarPorEstacion()
@@ -105,21 +91,10 @@ class ManejadorNuevoEventoSismico:
         print("DATOS SERIE TEMPORAL")
         print(self.datosSerieTemporal)
 
+
     def clasificarPorEstacion(self):
         
         self.datosSerieTemporal.sort(key= lambda Datos : Datos['estacionSismologica'].codigoEstacion)
-
-    def buscar_eventos_auto_detectados(self):
-        self.arrayDatos = []  # Reiniciar el array de datos
-        for evento in self.eventosSismicos:
-            datosEvento = {}
-            if evento.esPendienteRevision():
-                datosEvento['evento'] = evento
-                datosEvento['fechaHoraOcurrencia'] = evento.fechaHoraOcurrencia
-                datosEvento['ubicacion'] = evento.getUbicacion()
-                datosEvento['valorMagnitud'] = evento.ValorMagnitud
-
-                self.arrayDatos.append(datosEvento)
 
 
     def generarSismograma(self, datosSerieTemporal):
@@ -144,7 +119,7 @@ class ManejadorNuevoEventoSismico:
         if self.validarExistenciaMagnitudAlcanceOrigen(valorMagnitud, alcanceSismo, origenGeneracion):
 
             if modifico:
-                self.eventoSismicoSeleccionadoActual.ValorMagnitud = valorMagnitud
+                self.eventoSismicoSeleccionadoActual.valorMagnitud = valorMagnitud
                 self.eventoSismicoSeleccionadoActual.alcanceSismo.nombre = alcanceSismo
                 self.eventoSismicoSeleccionadoActual.origenGeneracion.nombre = origenGeneracion
                 print("Datos modificados correctamente")
@@ -157,8 +132,7 @@ class ManejadorNuevoEventoSismico:
 
             elif opcion == "Rechazar Evento":
 
-                self.getFechaHora()
-                self.eventoSismicoSeleccionadoActual.actualizarEstadoRechazado(self.analistaLogueado, self.fechaHoraActual)
+                self.ActualizarEventoARechazado()
                 self.finCasoDeUso()
 
             elif opcion == "Solicitar Revisión a Experto":
@@ -166,6 +140,10 @@ class ManejadorNuevoEventoSismico:
                 print("Revision Solicitada")
         else:
             print("No se tienen los datos necesarios del evento sismico.")
+
+    def ActualizarEventoARechazado(self):
+        self.getFechaHora()
+        self.eventoSismicoSeleccionadoActual.actualizarEstadoRechazado(self.analistaLogueado, self.fechaHoraActual)
 
 
     def finCasoDeUso(self): #TODO no se que debería hacer con esto, si es que debería hacer algo, cerrar la venta quizás(?

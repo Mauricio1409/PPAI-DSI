@@ -25,7 +25,6 @@ class SismografoORM(Base):
 
     # Relaciones
     estacionSismologica: Mapped[Optional["EstacionSismologicaORM"]] = relationship(
-        back_populates="sismografos",
         lazy="joined"
     )
     # 1 → N con SerieTemporal (FK vive en SERIE_TEMPORAL)

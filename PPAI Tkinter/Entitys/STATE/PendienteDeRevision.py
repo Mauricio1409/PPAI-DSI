@@ -22,33 +22,22 @@ class PendienteDeRevision(Estado):
         print("Controlando el tiempo para el estado Pendiente de Revisión...")
         # Lógica para controlar el tiempo en este estado
         
-    def revisar(self, analista: AnalistaSismos, fechaHoraActual: datetime, eventoSismico: 'EventoSismico') -> None:
+    def revisar(self, analista: AnalistaSismos, fechaHoraActual: datetime, eventoSismico: 'EventoSismico',
+                cambiosEstado: list[CambioEstado]) -> None:
         from Entitys.STATE.Bloqueado import Bloqueado
         # ATENCIÓN, este import DEBE estar OBLIGATORIAMENTE acá, si lo ponemos al inicio del archivo genera
         # un circular import exception
 
-        cambioEstadoEventoSismico = eventoSismico.obtenerCambioEstadoActual()
+        cambioEstadoEventoSismico = self.buscarCambioEstadoActual(cambiosEstado)
         cambioEstadoEventoSismico.fechaHoraFin = fechaHoraActual
         estadoBloqueado = Bloqueado()
         self.cambiarCambioEstado(analista, fechaHoraActual, eventoSismico, estadoBloqueado)
         eventoSismico.estado = estadoBloqueado
 
-
     @staticmethod
-    def cambiarCambioEstado(analista: AnalistaSismos, fechaHoraActual: datetime,
-                            eventoSismico: 'EventoSismico', estado: Estado) -> None:
+    def buscarCambioEstadoActual(cambiosDeEstado: list[CambioEstado]) -> CambioEstado|None:
+        for cambio in cambiosDeEstado:
+            if cambio.sosActual():
+                return cambio
+        return None
 
-        nuevo_cambio_estado = CambioEstado(fechaHoraActual, estado, analista)
-        eventoSismico._cambioEstado.append(nuevo_cambio_estado)
-        print('-' * 50)
-        print("cambios de estados realizados hasta acá: ", eventoSismico.cambioEstado)
-        print('-' * 50)
-
-        print('-' * 50)
-        print("cambio de estado actual ANTES DEL CAMBIO: ", eventoSismico.cambioEstadoActual)
-        print('-' * 50)
-
-        eventoSismico._cambioEstadoActual = nuevo_cambio_estado
-        print('-' * 50)
-        print("cambio de estado actual DESPUÉS DEL CAMBIO: ", eventoSismico.cambioEstadoActual)
-        print('-' * 50)

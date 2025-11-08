@@ -2,7 +2,7 @@ from Entitys.STATE.Estado import Estado
 
 class Derivado(Estado):
     def __init__(self):
-        super().__init__("DERIVADO",)
+        super().__init__("DERIVADO")
         
         
     def confirmar(self, analista, fechaHoraActual, eventoSismico):

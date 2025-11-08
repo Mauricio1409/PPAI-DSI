@@ -1,4 +1,13 @@
 from abc import ABC
+from datetime import datetime
+
+from Entitys.CambioEstado import CambioEstado
+
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from Entitys.AnalistaSismos import AnalistaSismos
+    from Entitys.EventoSismico import EventoSismico
+
 
 class Estado(ABC):
     def __init__(self, nombre: str):
@@ -28,16 +37,16 @@ class Estado(ABC):
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'adquirirDatos' no permitida en estado: {self.nombre}")
-        return False
 
 
-    def revisar(self, analista, fechaHoraActual, eventoSismico):
+
+    def revisar(self, analista: 'AnalistaSismos', fechaHoraActual: 'datetime', eventoSismico: 'EventoSismico',
+                cambiosEstado: list['CambioEstado']) -> None:
         """
         Método para revisar el evento sísmico.
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'revisar' no permitida en estado: {self.nombre}")
-        return False
 
 
     def confirmarRevision(self):
@@ -46,7 +55,6 @@ class Estado(ABC):
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'confirmarRevision' no permitida en estado: {self.nombre}")
-        return False
 
 
     def registrarAutomatico(self):
@@ -55,7 +63,6 @@ class Estado(ABC):
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'registrarAutomatico' no permitida en estado: {self.nombre}")
-        return False
 
 
     def anular(self):
@@ -64,7 +71,6 @@ class Estado(ABC):
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'anular' no permitida en estado: {self.nombre}")
-        return False
 
 
     def controlarTiempo(self):
@@ -73,7 +79,6 @@ class Estado(ABC):
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'controlarTiempo' no permitida en estado: {self.nombre}")
-        return False
 
 
     def confirmar(self, analista, fechaHoraActual, eventoSismico):
@@ -82,7 +87,6 @@ class Estado(ABC):
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'confirmar' no permitida en estado: {self.nombre}")
-        return False
 
 
     def derivar(self):
@@ -91,7 +95,6 @@ class Estado(ABC):
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'derivar' no permitida en estado: {self.nombre}")
-        return False
 
 
     def rechazar(self, analista, fechaHoraActual, eventoSismico):
@@ -100,7 +103,6 @@ class Estado(ABC):
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'rechazar' no permitida en estado: {self.nombre}")
-        return False
 
 
     def registrarPendientesCierre(self):
@@ -109,7 +111,6 @@ class Estado(ABC):
         Retorna False por defecto indicando que esta operación no está permitida en este estado.
         """
         print(f"Operación 'registrarPendientesCierre' no permitida en estado: {self.nombre}")
-        return False
 
 
     def cerrar(self):
@@ -122,3 +123,26 @@ class Estado(ABC):
     def actualizarEstadoPendiente(self, analista, fechaHoraActual, eventoSismico):
         print(f"Operacion no soportada en estado: {self.nombre}")
 
+
+    def __repr__(self):
+        return f"(Estado: {self.nombre})"
+
+
+    @staticmethod
+    def cambiarCambioEstado(analista: 'AnalistaSismos', fechaHoraActual: 'datetime',
+                            eventoSismico: 'EventoSismico', estado: 'Estado') -> None:
+        nuevo_cambio_estado = CambioEstado(fechaHoraActual, estado, analista)
+        eventoSismico.agregarCambioEstado(nuevo_cambio_estado)
+        print('-' * 50)
+        print("cambios de estados realizados hasta acá: ")
+        print('-' * 50)
+        print('-' * 50)
+        for cambio in eventoSismico.cambioEstado:
+            print(cambio)
+        print('-' * 50)
+
+
+        eventoSismico._cambioEstadoActual = nuevo_cambio_estado
+        print('-' * 50)
+        print("cambio de estado actual DESPUÉS DEL CAMBIO: ", eventoSismico.cambioEstadoActual)
+        print('-' * 50)

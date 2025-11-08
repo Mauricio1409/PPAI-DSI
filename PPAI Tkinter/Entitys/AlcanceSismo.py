@@ -34,3 +34,7 @@ class AlcanceSismo:
 
     def __repr__(self):
         return f"AlcanceSismo(descripcion={self._descripcion}, nombre={self._nombre})"
+
+    @alcanceSismoId.setter
+    def alcanceSismoId(self, value):
+        self._alcanceSismoId = value

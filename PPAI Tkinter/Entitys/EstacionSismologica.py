@@ -3,14 +3,14 @@ from datetime import datetime
 class EstacionSismologica:
     def __init__(
         self,
-        estacionSismologicaId: int,
         codigoEstacion: int,
         documentoCertificacionAdq: int,
         fechaSolicitudCertificacion: datetime,
         latitud: float,
         longitud: float,
         nombre: str,
-        numeroCertificacionAdquisicion: int
+        numeroCertificacionAdquisicion: int,
+        estacionSismologicaId: int | None = None
     ):
         self._estacionSismologicaId = estacionSismologicaId
         self._codigoEstacion = codigoEstacion
@@ -105,3 +105,7 @@ class EstacionSismologica:
             f"nombre={self._nombre}, "
             f"numeroCertificacionAdquisicion={self._numeroCertificacionAdquisicion})"
         )
+
+    @estacionSismologicaId.setter
+    def estacionSismologicaId(self, value):
+        self._estacionSismologicaId = value

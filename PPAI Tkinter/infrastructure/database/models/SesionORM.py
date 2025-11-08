@@ -28,6 +28,5 @@ class SesionORM(Base):
 
     # Relaciones
     usuario: Mapped[Optional['UsuarioORM']] = relationship(
-        back_populates="sesiones",
         lazy="joined"
     )

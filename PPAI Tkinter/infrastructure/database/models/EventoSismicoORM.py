@@ -69,6 +69,6 @@ class EventoSismicoORM(Base):
 
     # Inversa de CAMBIO_ESTADO.eventoSismico
     cambiosEstado: Mapped[list["CambioEstadoORM"]] = relationship(
-        back_populates="eventoSismico",
         lazy="joined"
     )
+

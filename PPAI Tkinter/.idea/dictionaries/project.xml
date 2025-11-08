@@ -8,8 +8,11 @@
       <w>clavedato</w>
       <w>codigo</w>
       <w>condicion</w>
+      <w>contrasena</w>
+      <w>denominacion</w>
       <w>descripcion</w>
       <w>descriptas</w>
+      <w>deserializa</w>
       <w>edicion</w>
       <w>estacion</w>
       <w>generacion</w>
@@ -24,6 +27,8 @@
       <w>sesion</w>
       <w>seteo</w>
       <w>sismico</w>
+      <w>sismografo</w>
+      <w>sismografos</w>
       <w>sismologica</w>
       <w>ubicacion</w>
     </words>

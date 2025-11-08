@@ -75,12 +75,12 @@ class SerieTemporal:
             "muestras": [muestra.obtenerDatos() for muestra in self.muestras]
         }
 
-    '''
+
     def __repr__(self):
         return (f"SerieTemporal(condicionAlarma={self._condicionAlarma}, "
                 f"fechaHoraInicioRegistroMuestras={self._fechaHoraInicioRegistroMuestras}, "
                 f"fechaHoraRegistro={self._fechaHoraRegistro}, "
                 f"frecuenciaMuestreo={self._frecuenciaMuestreo}, "
                 f"muestras={self._muestras})")
-    '''
+
 

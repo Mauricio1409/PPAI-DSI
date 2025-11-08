@@ -1,5 +1,5 @@
 class AnalistaSismos:
-    def __init__(self, nombre: str, apellido: str, analista_id: int):
+    def __init__(self, nombre: str, apellido: str, analista_id: int|None = None):
         self._nombre = nombre
         self._apellido = apellido
         self._analista_id = analista_id
@@ -23,3 +23,6 @@ class AnalistaSismos:
     @id_analista.setter
     def id_analista(self, nuevoId: int):
         self._analista_id = nuevoId
+
+    def __repr__(self):
+        return f"(Nombre: {self.nombre} | Apellido:  {self.apellido} | id: {self.id_analista})"

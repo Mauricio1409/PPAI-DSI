@@ -15,14 +15,11 @@ class SqlAlchemyUnitOfWork:
         self._sf = session_factory
         # propiedades inicializadas en __enter__
         self.session: Session
-        self.product_repo: ProductoRepositoryImpl
-        self.sale_repo: SaleRepositoryImpl
+
 
     # Context manager
     def __enter__(self) -> 'SqlAlchemyUnitOfWork':
         self.session: Session = self._sf()  # nueva Session por acción
-        self.product_repo: ProductoRepositoryImpl = ProductoRepositoryImpl(self.session)
-        self.sale_repo: SaleRepositoryImpl = SaleRepositoryImpl(self.session)
         return self
 
     def __exit__(self, exc_type, exc, tb) -> None:

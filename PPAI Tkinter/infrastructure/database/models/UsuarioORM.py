@@ -27,12 +27,8 @@ class UsuarioORM(Base):
 
     # Relaciones
     analista: Mapped[Optional["AnalistaSismosORM"]] = relationship(
-        back_populates="usuarios",
         lazy="joined"
     )
-    sesiones: Mapped[List["SesionORM"]] = relationship(
-        back_populates="usuario",
-        lazy="joined"
-    )
+
 
 

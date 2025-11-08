@@ -35,9 +35,5 @@ class CambioEstadoORM(Base):
     )
 
     # Back-pop hacia EventoSismicoORM.cambiosEstado
-    eventoSismico: Mapped["EventoSismicoORM"] = relationship(
-        back_populates="cambiosEstado",
-        lazy="joined"
-    )
     estado: Mapped["EstadoORM"] = relationship(lazy="joined")
     analista: Mapped["AnalistaSismosORM"] = relationship(lazy="joined")

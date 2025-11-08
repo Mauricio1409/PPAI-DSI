@@ -9,7 +9,6 @@ _DEFAULT_KWARGS = dict(
     pool_pre_ping=True,
     pool_recycle=1800,      # 30 min
     echo=True,
-    isolation_level="READ COMMITTED",
 )
 
 def create_db_engine(db_url: Optional[str] = None, **overrides) -> Engine:
@@ -19,7 +18,8 @@ def create_db_engine(db_url: Optional[str] = None, **overrides) -> Engine:
     - overrides: permite ajustar parámetros (p. ej. echo=False en tests).
     """
     if db_url is None:
-        db_url = './infrastructure/database/PPAI_DATABASE.db'
+        db_url = "sqlite:///./infrastructure/database/PPAI_DATABASE.db"
+
 
 
     kwargs = {**_DEFAULT_KWARGS, **overrides}
