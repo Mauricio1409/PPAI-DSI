@@ -2,7 +2,7 @@ from Entitys.Usuario import Usuario
 from datetime import datetime
 
 class Sesion:
-    def __init__(self, sesion_id: int| None, usuario: Usuario, fechaHoraInicio: datetime, fechaHoraFin: datetime):
+    def __init__(self, sesion_id: int| None, usuario: Usuario, fechaHoraInicio: datetime, fechaHoraFin: datetime|None):
         self._sesion_id = sesion_id
         self._usuario = usuario
         self._fechaHoraInicio = fechaHoraInicio

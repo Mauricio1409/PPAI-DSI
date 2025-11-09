@@ -24,7 +24,7 @@ from Entitys.tipoDato import TipoDato
 # -----------------------------
 # Datos para AnalistaSismos
 # -----------------------------
-analista1 = AnalistaSismos("Juan", "Rodriguéz")
+analista1 = AnalistaSismos("Juan", "Rodriguéz", 1)
 
 # -----------------------------
 # Datos para Usuario

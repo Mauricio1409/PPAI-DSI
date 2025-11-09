@@ -8,7 +8,7 @@ _DEFAULT_KWARGS = dict(
     max_overflow=20,
     pool_pre_ping=True,
     pool_recycle=1800,      # 30 min
-    echo=True,
+    echo=False,
 )
 
 def create_db_engine(db_url: Optional[str] = None, **overrides) -> Engine:

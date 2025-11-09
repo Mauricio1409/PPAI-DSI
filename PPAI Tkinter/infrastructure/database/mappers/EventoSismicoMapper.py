@@ -31,6 +31,21 @@ class EventoSismicoMapper:
 
     @staticmethod
     def toORM(entity: EventoSismico) -> EventoSismicoORM:
+        cambios_estado = []
+
+        for cambio in entity.cambioEstado:
+            cambioORM = CambioEstadoMapper.toORM(cambio)
+            cambioORM.eventoSismicoId = entity.eventoSismicoId
+            cambios_estado.append(cambioORM)
+
+        print("-"*50)
+        print('\n'*4)
+        print("cambios_estado: ")
+        for cambio in cambios_estado:
+            print(cambio)
+        print('\n' * 4)
+        print("-"*50)
+
         return EventoSismicoORM(
             eventoSismicoId=entity.eventoSismicoId,
             fechaHoraOcurrencia=entity.fechaHoraOcurrencia,
@@ -45,5 +60,5 @@ class EventoSismicoMapper:
             origenGeneracion=OrigenGeneracionMapper.toORM(entity.origenGeneracion),
             seriesTemporales=[SerieTemporalMapper.toORM(serie) for serie in entity.seriesTemporales],
             estado=EstadoMapper.toORM(entity.estado),
-            cambiosEstado=[CambioEstadoMapper.toORM(cambios) for cambios in entity.cambioEstado]
+            cambiosEstado=cambios_estado
         )

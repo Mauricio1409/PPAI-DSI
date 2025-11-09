@@ -2,7 +2,7 @@ import ttkbootstrap as ttk
 from tkinter import messagebox
 from PIL import Image, ImageTk, ImageSequence
 
-from ManejadorNuevoEventoSismico import ManejadorNuevoEventoSismico
+from CasoUso.ManejadorNuevoEventoSismico import ManejadorNuevoEventoSismico
 
 class VentanaPantNuevoEventoSismico(ttk.Window):
     def __init__(self):

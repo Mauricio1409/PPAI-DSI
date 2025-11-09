@@ -3,10 +3,10 @@ from datetime import datetime
 from Entitys.AnalistaSismos import AnalistaSismos
 from Entitys.EventoSismico import EventoSismico
 from Entitys.Sesion import Sesion
-from ManejadorGenerarSismograma import ManejadorGenerarSismograma
+from CasoUso.ManejadorGenerarSismograma import ManejadorGenerarSismograma
 
-
-from data import eventosSismicos, sesion1
+from infrastructure.database.repositories.EventoSismicoRepository import EventoSismicoRepository
+from infrastructure.database.repositories.SesionRepository import SesionRepository
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -17,8 +17,12 @@ class ManejadorNuevoEventoSismico:
     def __init__(self, punteroPantalla: 'VentanaPantNuevoEventoSismico',):
 
         self.punteroPantalla: 'VentanaPantNuevoEventoSismico' = punteroPantalla
-        self.eventosSismicos: list[EventoSismico] = eventosSismicos
-        self.sesion: Sesion = sesion1
+
+        repoEventoSismico = EventoSismicoRepository()
+        self.eventosSismicos: list[EventoSismico] = repoEventoSismico.get_all()
+
+        repoSesion = SesionRepository()
+        self.sesion: Sesion = repoSesion.get_actual()
 
         self.eventosPendienteRevision: list[EventoSismico] = []
         self.arrayDatos = []
@@ -53,7 +57,7 @@ class ManejadorNuevoEventoSismico:
                 self.arrayDatos.append(datos_evento)
 
     def ordenarPorFechaHora(self):
-            self.arrayDatos.sort(key= lambda datosEvento : datosEvento['fechaHoraOcurrencia'], reverse=True)
+            self.arrayDatos.sort(key = lambda datosEvento : datosEvento['fechaHoraOcurrencia'], reverse=True)
 
 
     def eventoSismicoSeleccionado(self, index):
@@ -72,6 +76,9 @@ class ManejadorNuevoEventoSismico:
         self.buscarUsuarioLogueado()
         self.getFechaHora()
         eventoSismico.revisar(self.analistaLogueado, self.fechaHoraActual)
+        repoEventoSismico = EventoSismicoRepository()
+        #Guardar los cambios realizados al evento sismico (incluye guardar el estado y los nuevos cambioEstado)
+        self.eventoSismicoSeleccionadoActual=repoEventoSismico.update(eventoSismico)
 
     def buscarUsuarioLogueado(self):
         self.analistaLogueado = self.sesion.obtenerUsuario()
@@ -122,12 +129,15 @@ class ManejadorNuevoEventoSismico:
                 self.eventoSismicoSeleccionadoActual.valorMagnitud = valorMagnitud
                 self.eventoSismicoSeleccionadoActual.alcanceSismo.nombre = alcanceSismo
                 self.eventoSismicoSeleccionadoActual.origenGeneracion.nombre = origenGeneracion
+                print('-'*100)
                 print("Datos modificados correctamente")
+                print("Nuevos datos del Evento Sismico:")
+                print(self.eventoSismicoSeleccionadoActual)
+                print('-'*100)
+
 
             if opcion == "Confirmar Evento":
-                self.getFechaHora()
-                self.eventoSismicoSeleccionadoActual.confirmar(self.analistaLogueado, self.fechaHoraActual)
-                print("evento confirmado")
+                self.actualizarEstadoAConfirmado()
                 self.finCasoDeUso()
 
             elif opcion == "Rechazar Evento":
@@ -144,6 +154,24 @@ class ManejadorNuevoEventoSismico:
     def ActualizarEventoARechazado(self):
         self.getFechaHora()
         self.eventoSismicoSeleccionadoActual.actualizarEstadoRechazado(self.analistaLogueado, self.fechaHoraActual)
+        print('-'*100)
+        print("evento rechazado")
+        print('-'*100)
+        repoEventoSismico = EventoSismicoRepository()
+        # Guardar los cambios realizados al evento sismico (incluye guardar el estado y los nuevos cambioEstado)
+        # También incluye la modificación de los datos del evento (valor Magnitud, alcance y origen) (si es que estos fueron modificados)
+        self.eventoSismicoSeleccionadoActual = repoEventoSismico.update(self.eventoSismicoSeleccionadoActual)
+
+
+    def actualizarEstadoAConfirmado(self):
+        self.getFechaHora()
+        self.eventoSismicoSeleccionadoActual.confirmar(self.analistaLogueado, self.fechaHoraActual)
+        print('-'*100)
+        print("evento confirmado")
+        print('-'*100)
+        repoEventoSismico = EventoSismicoRepository()
+        # Guardar los cambios realizados al evento sismico (incluye guardar el estado y los nuevos cambioEstado)
+        self.eventoSismicoSeleccionadoActual = repoEventoSismico.update(self.eventoSismicoSeleccionadoActual)
 
 
     def finCasoDeUso(self): #TODO no se que debería hacer con esto, si es que debería hacer algo, cerrar la venta quizás(?

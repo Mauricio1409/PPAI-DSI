@@ -16,6 +16,11 @@ class SesionRepository:
     def save(self, entity: Sesion) -> None:
         with self.uow_factory() as uow:
             orm = SesionMapper.toORM(entity)
-            uow.session.add(orm)
+            uow.session.merge(orm)
             uow.session.flush()
             entity.sesionId = orm.sesionId
+
+    def get_actual(self) -> Sesion:
+        with self.uow_factory() as uow:
+            found = uow.session.query(SesionORM).filter(SesionORM.fechaHoraFin == None).first()
+            return SesionMapper.toDomain(found) if found else None

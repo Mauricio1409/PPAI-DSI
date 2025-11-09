@@ -37,3 +37,7 @@ class CambioEstadoORM(Base):
     # Back-pop hacia EventoSismicoORM.cambiosEstado
     estado: Mapped["EstadoORM"] = relationship(lazy="joined")
     analista: Mapped["AnalistaSismosORM"] = relationship(lazy="joined")
+
+
+    def __repr__(self):
+        return f"<CambioEstadoORM(cambioEstadoId={self.cambioEstadoId}, fechaHoraInicio={self.fechaHoraInicio}, fechaHoraFin={self.fechaHoraFin}, eventoSismicoId={self.eventoSismicoId}, estadoId={self.estadoId}, analistaId={self.analistaId})>"

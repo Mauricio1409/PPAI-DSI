@@ -51,7 +51,7 @@ class Bloqueado(Estado):
 
     def actualizarEstadoPendiente(self, analista, fechaHoraActual, eventoSismico):
 
-        from Entitys.STATE.PendienteDeRevision import PendienteDeRevision
+        from Entitys.STATE.AutoDetectado import AutoDetectado
         # ATENCIÓN, este import DEBE estar OBLIGATORIAMENTE acá, si lo ponemos al inicio del archivo genera
         # un circular import exception
 
@@ -60,7 +60,7 @@ class Bloqueado(Estado):
 
         cambioEstadoActualEventoSismico.fechaHoraFin = fechaHoraActual
 
-        estadoPendiente = PendienteDeRevision()
+        estadoPendiente = AutoDetectado()
 
         self.cambiarCambioEstado(analista, fechaHoraActual, eventoSismico, estadoPendiente)
 

@@ -17,6 +17,16 @@ class EventoSismicoRepository:
     def save(self, eventoSismico: EventoSismico) -> None:
         with self.uow_factory() as uow:
             orm = EventoSismicoMapper.toORM(eventoSismico)
-            uow.session.add(orm)
+            uow.session.merge(orm)
             uow.session.flush()
             eventoSismico.eventoSismicoId = orm.eventoSismicoId
+
+    def update(self, eventoSismico: EventoSismico) -> EventoSismico:
+        id_evento = eventoSismico.eventoSismicoId
+        with self.uow_factory() as uow:
+            orm = EventoSismicoMapper.toORM(eventoSismico)
+            uow.session.merge(orm)
+            uow.session.flush()
+
+            newEventoORM= uow.session.query(EventoSismicoORM).filter_by(eventoSismicoId=id_evento).first()
+            return EventoSismicoMapper.toDomain(newEventoORM)
