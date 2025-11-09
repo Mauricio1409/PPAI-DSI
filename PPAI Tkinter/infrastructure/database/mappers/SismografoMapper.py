@@ -22,11 +22,3 @@ class SismografoMapper:
             numeroSerie=entity.numeroSerie,
             estacionSismologica=EstacionSismologicaMapper.toORM(entity.estacionSismologica) if entity.estacionSismologica else None,
         )
-
-    @staticmethod
-    def newToORM(entity: Sismografo) -> SismografoORM:
-        return SismografoORM(
-            fechaAdquisicion=entity.fechaAdquisicion,
-            numeroSerie=entity.numeroSerie,
-            estacionSismologica=EstacionSismologicaMapper.toORM(entity.estacionSismologica) if entity.estacionSismologica else None,
-        )

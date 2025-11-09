@@ -28,14 +28,3 @@ class SerieTemporalMapper:
              sismografo=SismografoMapper.toORM(entity.sismografo),
              muestras=[MuestraSismicaMapper.toORM(muestra) for muestra in entity.muestras]
          )
-
-     @staticmethod
-     def newToORM(entity: SerieTemporal) -> SerieTemporalORM:
-         return SerieTemporalORM(
-             condicionAlarma=entity.condicionAlarma,
-             fechaHoraRegistro=entity.fechaHoraRegistro,
-             fechaHoraInicioRegistroMuestras=entity.fechaHoraInicioRegistroMuestras,
-             frecuenciaMuestreo=entity.frecuenciaMuestreo,
-             sismografo=SismografoMapper.toORM(entity.sismografo),
-             muestras=[MuestraSismicaMapper.toORM(muestra) for muestra in entity.muestras]
-         )

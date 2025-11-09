@@ -52,7 +52,8 @@ class CambioEstado:
     def __repr__(self):
         return (f"CambioEstado(fechaHoraInicio={self._fechaHoraInicio}, "
                 f"EstadoActual={self._estado.nombre},"
-                f"fechaHoraFin={self._fechaHoraFin})")
+                f"fechaHoraFin={self._fechaHoraFin})"
+                f"analistaResponsable={self._analistaResponsable}")
 
     @cambioEstadoId.setter
     def cambioEstadoId(self, value):

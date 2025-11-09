@@ -18,12 +18,16 @@ def start_program():
     usuario1 = user_repo.get_by_id(1)
 
     print('-'*100)
-    print("Creando Sesion para el usuario:", usuario1.nombre)
-    sesion1 = Sesion(None, usuario1, datetime.now(), None)
+    print("Creando Sesion para el usuario:", usuario1)
+    sesion_actual = Sesion(None, usuario1, datetime.now(), None)
 
-    sesion_repo.save(sesion1)
+    print("-"*100)
+    print("guardando sesion...")
+
+    sesion_repo.save(sesion_actual)
     print()
     print("Sesion creada con éxito.")
+    print("sesion: ", sesion_actual)
     print('-'*100)
 
     try:
@@ -34,14 +38,22 @@ def start_program():
 
         print("\n"*4)
         print('-'*100)
-        print("Ejecución finalizada.")
+        print("Ejecución finalizada con éxito.")
     except Exception as e:
+        print("\n"*4)
+        print('-'*100)
+        print("Ha ocurrido un error durante la ejecución del programa.")
+        print("\n*4")
+        print("-"*100)
         raise e
     finally:
-        sesion_actual = sesion_repo.get_actual()
+        print("\n"*5)
+        print('-'*100)
+        print("Cerrando sesion actual")
+        print("...")
         sesion_actual.fechaHoraFin = datetime.now()
-        sesion_repo.save(sesion_actual)
-        print()
+        sesion_actual=sesion_repo.update(sesion_actual)
+        print("...")
         print("Sesion Cerrada")
         print('-'*100)
 

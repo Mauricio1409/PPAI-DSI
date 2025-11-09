@@ -23,12 +23,3 @@ class SesionMapper:
             fechaHoraInicio=entity.fechaHoraInicio,
             fechaHoraFin=entity.fechaHoraFin,
         )
-
-    @staticmethod
-    def newToORM(entity: Sesion) -> SesionORM:
-        usuario=UsuarioMapper.toORM(entity.usuario) if entity.usuario else None
-        return SesionORM(
-            fechaHoraInicio=entity.fechaHoraInicio,
-            fechaHoraFin=entity.fechaHoraFin,
-            usuario=usuario
-        )

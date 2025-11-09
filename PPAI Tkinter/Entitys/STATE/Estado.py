@@ -120,9 +120,12 @@ class Estado(ABC):
         """
         print(f"Operación 'cerrar' no permitida en estado: {self.nombre}")
 
-    def actualizarEstadoPendiente(self, analista, fechaHoraActual, eventoSismico):
+    def actualizarEstadoAAutoDetectado(self, analista, fechaHoraActual, eventoSismico):
         print(f"Operacion no soportada en estado: {self.nombre}")
 
+    def actualizarAutomatico(self):
+        print(f"Operacion no soportada en estado: {self.nombre}")
+        # Lógica específica para actualizar el estado automáticamente
 
     def __repr__(self):
         return f"(Estado: {self.nombre})"
@@ -133,16 +136,16 @@ class Estado(ABC):
                             eventoSismico: 'EventoSismico', estado: 'Estado') -> None:
         nuevo_cambio_estado = CambioEstado(fechaHoraActual, estado, analista)
         eventoSismico.agregarCambioEstado(nuevo_cambio_estado)
-        print('-' * 50)
+        print('-' * 100)
         print("cambios de estados realizados hasta acá: ")
-        print('-' * 50)
-        print('-' * 50)
+        print('-' * 100)
+        print('-' * 100)
         for cambio in eventoSismico.cambioEstado:
             print(cambio)
-        print('-' * 50)
+        print('-' * 100)
 
 
         eventoSismico._cambioEstadoActual = nuevo_cambio_estado
-        print('-' * 50)
+        print('-' * 100)
         print("cambio de estado actual DESPUÉS DEL CAMBIO: ", eventoSismico.cambioEstadoActual)
-        print('-' * 50)
+        print('-' * 100)

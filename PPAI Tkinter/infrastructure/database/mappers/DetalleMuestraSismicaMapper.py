@@ -18,9 +18,3 @@ class DetalleMuestraSismicaMapper:
             valor=entity.valor,
             tipoDato=TipoDatoMapper.toORM(entity.tipo)
         )
-    @staticmethod
-    def newToORM(entity: DetalleMuestraSismica) -> DetalleMuestraSismicaORM:
-        return DetalleMuestraSismicaORM(
-            valor=entity.valor,
-            tipoDato=TipoDatoMapper.toORM(entity.tipo)
-        )

@@ -18,9 +18,3 @@ class MuestraSismicaMapper:
                 fechaHoraMuestra=entity.fechaHoraMuestra,
                 detalles=[DetalleMuestraSismicaMapper.toORM(detalle) for detalle in entity.detalles]
             )
-     @staticmethod
-     def newToORM(entity: MuestraSismica) -> MuestraSismicaORM:
-            return MuestraSismicaORM(
-                fechaHoraMuestra=entity.fechaHoraMuestra,
-                detalles=[DetalleMuestraSismicaMapper.toORM(detalle) for detalle in entity.detalles]
-            )

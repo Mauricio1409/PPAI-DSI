@@ -1,15 +1,8 @@
-from datetime import datetime
-
-from Entitys.AnalistaSismos import AnalistaSismos
 from Entitys.STATE.Confirmado import Confirmado
 from Entitys.STATE.Estado import Estado
 from Entitys.STATE.Rechazado import Rechazado
 from Entitys.CambioEstado import CambioEstado
 
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from Entitys.EventoSismico import EventoSismico
-    from Entitys.STATE.PendienteDeRevision import PendienteDeRevision
 
 
 class Bloqueado(Estado):
@@ -49,7 +42,7 @@ class Bloqueado(Estado):
         # Por ejemplo: cambiar el estado a Derivado
         return True
 
-    def actualizarEstadoPendiente(self, analista, fechaHoraActual, eventoSismico):
+    def actualizarEstadoAAutoDetectado(self, analista, fechaHoraActual, eventoSismico):
 
         from Entitys.STATE.AutoDetectado import AutoDetectado
         # ATENCIÓN, este import DEBE estar OBLIGATORIAMENTE acá, si lo ponemos al inicio del archivo genera
@@ -60,11 +53,11 @@ class Bloqueado(Estado):
 
         cambioEstadoActualEventoSismico.fechaHoraFin = fechaHoraActual
 
-        estadoPendiente = AutoDetectado()
+        estadoAutoDetectado = AutoDetectado()
 
-        self.cambiarCambioEstado(analista, fechaHoraActual, eventoSismico, estadoPendiente)
+        self.cambiarCambioEstado(analista, fechaHoraActual, eventoSismico, estadoAutoDetectado)
 
-        eventoSismico.estado = estadoPendiente
+        eventoSismico.estado = estadoAutoDetectado
 
 
     @staticmethod

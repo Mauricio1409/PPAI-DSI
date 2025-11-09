@@ -196,8 +196,8 @@ class EventoSismico:
         self._estado.confirmar(analista, fechaHoraActual, self)
 
 
-    def actualizarEstadoPendiente(self, analista, fechaHoraActual) -> None:
-        self._estado.actualizarEstadoPendiente(analista, fechaHoraActual, self)
+    def actualizarEstadoAutoDetectado(self, analista, fechaHoraActual) -> None:
+        self._estado.actualizarEstadoAAutoDetectado(analista, fechaHoraActual, self)
 
 
     def obtenerCambioEstadoActual(self):
@@ -210,11 +210,12 @@ class EventoSismico:
 
 
     def __repr__(self):
-        return (f"EventoSismico(fechaHoraOcurrencia={self._fechaHoraOcurrencia}, magnitud={self._magnitudRitcher},"
-                f" latitudHipocentro={self._latitudHipocentro}, longitudHipocentro={self._longitudHipocentro},"
-                f" estado={self._estado}, alcanceSismo={self._alcanceSismo}, origenGeneracion={self._origenGeneracion},"
-                f" clasificacionSismo={self._clasificacionSismo}, latitudEpicentro={self._latitudEpicentro},"
-                f" longitudEpicentro={self._longitudEpicentro}, seriesTemporales={self._seriesTemporales})")
+        return (f"EventoSismico(EventoSismicoId={self._eventoSismicoId}, \n"
+                f"fechaHoraOcurrencia={self._fechaHoraOcurrencia}, magnitud={self._magnitudRitcher},\n"
+                f" latitudHipocentro={self._latitudHipocentro}, longitudHipocentro={self._longitudHipocentro},\n"
+                f" estado={self._estado}, alcanceSismo={self._alcanceSismo}, origenGeneracion={self._origenGeneracion},\n"
+                f" clasificacionSismo={self._clasificacionSismo}, latitudEpicentro={self._latitudEpicentro},\n"
+                f" longitudEpicentro={self._longitudEpicentro}, seriesTemporales={self._seriesTemporales})\n")
 
     def agregarCambioEstado(self, nuevo_cambio_estado: 'CambioEstado'):
         self._cambioEstado.append(nuevo_cambio_estado)

@@ -11,7 +11,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.variableEjemplo = None
         self.imagen = None
         self.modificoDatos = None
-        self.punteroManejador = None
+        self.punteroManejador: ManejadorNuevoEventoSismico|None  = None
         self.bodyFrame = ttk.Frame(master=self)
         self.imgFrame = ttk.Frame(master=self.bodyFrame)
         self.inputFrame = ttk.Frame(master=self.bodyFrame)
@@ -72,15 +72,18 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
 
         # ESTILOS
 
+        # Gestión de eventos
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
+        self.bind("<Escape>", self.cancelarEjecucionCasoDeUso)
+
         # Packing inicial
 
         self.buttons_frame.pack()
 
-    def cancelarEjecucionCasoDeUso(self):
+    def cancelarEjecucionCasoDeUso(self, _event=None):
         respuesta = messagebox.askyesno("Cancelar Caso de Uso", "¿Está seguro de que desea cancelar la ejecución del caso de uso?")
         if respuesta:
             self.punteroManejador.casoDeUsoCancelado()
-            self.volverApantallaPrincipal()
 
     def opcionRegistrarRevisionManual(self):
         self.habilitarVentana()
@@ -155,15 +158,18 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
 
     def seleccionaEventoSismico(self, _event):
         seleccion = self.cuadro.selection()
-        if seleccion is not None:
+        if seleccion is not None and len(seleccion) > 0:
             item_id = seleccion[0]
             index = self.cuadro.index(item_id)
             self.punteroManejador.eventoSismicoSeleccionado(index)
 
-    def animateGif(self, index):
+    def animateGif_old(self, index):
         self.lblGifMapaIMG.configure(image=self.frames[index])
         self.after(100, lambda: self.animateGif((index + 1) % len(self.frames)))
 
+    def animateGif(self, index):
+        self.lblGifMapaIMG.configure(image=self.frames[index])
+        self.after(100, self.animateGif, (index + 1) % len(self.frames))
 
     def continuarAVisualizarEventos(self):
         self.lblGifMapaIMG.place_forget()
@@ -285,4 +291,7 @@ class VentanaPantNuevoEventoSismico(ttk.Window):
         self.habilitarVentana()
         self.punteroManejador.registrarNuevaRevision()
 
-    
+    def on_closing(self):
+        if messagebox.askokcancel("Salir", "¿Estás seguro de que querés cerrar la aplicación?, se cancelara el Caso de Uso"):
+            self.punteroManejador.cancelarCambios()
+            self.destroy()  # Cierra la ventana realmente

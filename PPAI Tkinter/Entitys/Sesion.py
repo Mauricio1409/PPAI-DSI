@@ -47,5 +47,5 @@ class Sesion:
 
     @sesionId.setter
     def sesionId(self, value):
-        self._sesionId = value
+        self._sesion_id = value
     

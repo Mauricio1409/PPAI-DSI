@@ -18,10 +18,3 @@ class OrigenGeneracionMapper:
             descripcion=entity.descripcion,
             nombre=entity.nombre,
         )
-
-    @staticmethod
-    def newToORM(entity: OrigenDeGeneracion) -> OrigenGeneracionORM:
-        return OrigenGeneracionORM(
-            descripcion=entity.descripcion,
-            nombre=entity.nombre,
-        )

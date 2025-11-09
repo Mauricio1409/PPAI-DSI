@@ -66,10 +66,11 @@ class ManejadorNuevoEventoSismico:
         self.actualizarEventoABloqueado(self.eventoSismicoSeleccionadoActual)
         self.buscarDatosEvento(self.eventoSismicoSeleccionadoActual)
         self.clasificarPorEstacion()
-        for clavedato, dato in self.datosEventoSismico.items(): #todo esto lo hice simplemente para ver que funcionase y recuperase los datos que se necesitan
-            print(f"{clavedato}: {dato}")
+
         ruta_sismo =  self.generarSismograma(self.datosSerieTemporal)
+
         self.punteroPantalla.mostrarDetallesEvento(self.datosEventoSismico["clasificacionSismo"], ruta_sismo)
+
         self.punteroPantalla.mostrarOpcionMapa()
 
     def actualizarEventoABloqueado(self, eventoSismico: EventoSismico):
@@ -93,10 +94,16 @@ class ManejadorNuevoEventoSismico:
         self.datosSerieTemporal = evento.obtenerDatosSerieTemporal()
         print("----------------------------------")
         print("DATOS EVENTO SISMICO")
-        print(self.datosEventoSismico)
+        for clavedato, dato in self.datosEventoSismico.items(): #todo esto lo hice simplemente para ver que funcionase y recuperase los datos que se necesitan
+            print(f"{clavedato}: {dato}")
         print("----------------------------------")
-        print("DATOS SERIE TEMPORAL")
-        print(self.datosSerieTemporal)
+        print("DATOS SERIES TEMPORALES")
+        for serie in self.datosSerieTemporal:
+            print('-'*50)
+            for key, value in serie.items():
+                print(f"{key}: {value}")
+        print("-"*50)
+
 
 
     def clasificarPorEstacion(self):
@@ -176,6 +183,7 @@ class ManejadorNuevoEventoSismico:
 
     def finCasoDeUso(self): #TODO no se que debería hacer con esto, si es que debería hacer algo, cerrar la venta quizás(?
         print("Fin del caso de uso")
+        self.eventoSismicoSeleccionadoActual = None
         self.punteroPantalla.volverApantallaPrincipal()
         print(self)
 
@@ -192,9 +200,34 @@ class ManejadorNuevoEventoSismico:
         print("Caso de uso cancelado")
         self.buscarUsuarioLogueado()
         self.getFechaHora()
-        self.eventoSismicoSeleccionadoActual.actualizarEstadoPendiente(self.analistaLogueado, self.fechaHoraActual)
+
+
+        if self.eventoSismicoSeleccionadoActual is None:
+            self.punteroPantalla.on_closing()
+            return
+
+        self.cancelarCambios()
+
+        self.punteroPantalla.volverApantallaPrincipal()
+
         print(self)
 
+    def cancelarCambios(self):
+
+        if self.eventoSismicoSeleccionadoActual is None:
+            return
+
+        self.eventoSismicoSeleccionadoActual.actualizarEstadoAutoDetectado(self.analistaLogueado, self.fechaHoraActual)
+        repoEventoSismico = EventoSismicoRepository()
+        self.eventoSismicoSeleccionadoActual = repoEventoSismico.update(self.eventoSismicoSeleccionadoActual)
+
+        for i in range(len(self.eventosSismicos)):
+            if self.eventosSismicos[i].eventoSismicoId == self.eventoSismicoSeleccionadoActual.eventoSismicoId:
+                self.eventosSismicos[i] = self.eventoSismicoSeleccionadoActual
 
 
+        self.eventoSismicoSeleccionadoActual = None
+
+        self.buscarEventosAutoDetectados()
+        self.ordenarPorFechaHora()
 

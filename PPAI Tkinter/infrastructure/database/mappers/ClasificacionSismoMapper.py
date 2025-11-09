@@ -6,6 +6,7 @@ class ClasificacionSismoMapper:
     @staticmethod
     def toDomain(orm: ClasificacionSismoORM) -> ClasificacionSismo:
         return ClasificacionSismo(
+            clasificacionSismoId=orm.clasificacionSismoId,
             kmProfundidadDesde=orm.kmProfundidadDesde or 0,
             kmProfundidadHasta=orm.kmProfundidadHasta or 0,
             nombre=orm.nombre or "",
@@ -15,14 +16,6 @@ class ClasificacionSismoMapper:
     def toORM(entity: ClasificacionSismo) -> ClasificacionSismoORM:
         return ClasificacionSismoORM(
             clasificacionSismoId=entity.clasificacionSismoId,
-            kmProfundidadDesde=entity.kmProfundidadDesde,
-            kmProfundidadHasta=entity.kmProfundidadHasta,
-            nombre=entity.nombre,
-        )
-
-    @staticmethod
-    def newToORM(entity: ClasificacionSismo) -> ClasificacionSismoORM:
-        return ClasificacionSismoORM(
             kmProfundidadDesde=entity.kmProfundidadDesde,
             kmProfundidadHasta=entity.kmProfundidadHasta,
             nombre=entity.nombre,

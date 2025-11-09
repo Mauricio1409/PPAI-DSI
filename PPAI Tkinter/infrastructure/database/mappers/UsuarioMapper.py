@@ -20,13 +20,5 @@ class UsuarioMapper:
             usuarioId=entity.usuarioId,
             nombre=entity.nombre,
             contrasena=entity.contrasena,
-            analista=AnalistaSismoMapper.newToORM(entity.logueado) if entity.logueado else None,
-        )
-
-    @staticmethod
-    def newToORM(entity: Usuario) -> UsuarioORM:
-        return UsuarioORM(
-            nombre=entity.nombre,
-            contrasena=entity.contrasena,
-            analista=AnalistaSismoMapper.newToORM(entity.logueado) if entity.logueado else None,
+            analista=AnalistaSismoMapper.toORM(entity.logueado) if entity.logueado else None,
         )

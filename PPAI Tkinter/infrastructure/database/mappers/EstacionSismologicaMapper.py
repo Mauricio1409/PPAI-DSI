@@ -28,15 +28,3 @@ class EstacionSismologicaMapper:
             nombre=entity.nombre,
             numeroCertificacionAdquisicion=entity.numeroCertificacionAdquisicion,
         )
-
-    @staticmethod
-    def newToORM(entity: EstacionSismologica) -> EstacionSismologicaORM:
-        return EstacionSismologicaORM(
-            codigoEstacion=entity.codigoEstacion,
-            documentoCertificacionAdquisicion=entity.documentoCertificacionAdq,
-            fechaSolicitudCertificacion=entity.fechaSolicitudCertificacion,
-            latitud=entity.latitud,
-            longitud=entity.longitud,
-            nombre=entity.nombre,
-            numeroCertificacionAdquisicion=entity.numeroCertificacionAdquisicion,
-        )

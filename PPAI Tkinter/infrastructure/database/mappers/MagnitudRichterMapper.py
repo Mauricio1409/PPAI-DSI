@@ -18,10 +18,3 @@ class MagnitudRichterMapper:
             descripcionMagnitud=entity.descripcionMagnitud,
             numero=entity.numero,
         )
-
-    @staticmethod
-    def newToORM(entity: MagnitudRichter) -> MagnitudRitcherORM:
-        return MagnitudRitcherORM(
-            descripcionMagnitud=entity.descripcionMagnitud,
-            numero=entity.numero,
-        )

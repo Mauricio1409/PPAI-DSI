@@ -16,9 +16,19 @@ class SesionRepository:
     def save(self, entity: Sesion) -> None:
         with self.uow_factory() as uow:
             orm = SesionMapper.toORM(entity)
-            uow.session.merge(orm)
+            orm = uow.session.merge(orm)
             uow.session.flush()
             entity.sesionId = orm.sesionId
+
+    def update(self, sesion: Sesion) -> Sesion:
+        id_sesion = sesion.sesion_id
+        with self.uow_factory() as uow:
+            orm = SesionMapper.toORM(sesion)
+            uow.session.merge(orm)
+            uow.session.flush()
+
+            newSesionORM = uow.session.query(SesionORM).filter_by(sesionId=id_sesion).first()
+            return SesionMapper.toDomain(newSesionORM)
 
     def get_actual(self) -> Sesion:
         with self.uow_factory() as uow:

@@ -21,11 +21,3 @@ class TipoDatoMapper:
             valorUmbral=entity.valorUmbral,
         )
 
-    @staticmethod
-    def newToORM(entity: TipoDato) -> TipoDatoORM:
-        return TipoDatoORM(
-            denominacion=entity.denominacion,
-            unidadMedida=entity.nombreUnidadMedida,
-            valorUmbral=entity.valorUmbral,
-        )
-

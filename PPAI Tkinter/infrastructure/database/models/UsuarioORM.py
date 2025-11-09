@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional, List
+from typing import Optional
 
 
 from sqlalchemy import Integer, Text, ForeignKey
@@ -11,7 +11,6 @@ from infrastructure.database.engine.base import Base
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from infrastructure.database.models.AnalistaSismosORM import AnalistaSismosORM
-    from infrastructure.database.models.SesionORM import SesionORM
 
 class UsuarioORM(Base):
     __tablename__ = "USUARIO"

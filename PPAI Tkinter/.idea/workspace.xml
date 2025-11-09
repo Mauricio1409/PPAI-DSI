@@ -5,30 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4544443a-2ebf-423d-810a-cc4ad7f3bbe2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SQL_QUERIES.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/database/repositories/UsuarioRepository.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rebuild_database/SQL_QUERIES_copilot.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rebuild_database/rebuild_with_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/27df29db-13ba-48aa-adc1-d47cecdf5a5d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/27df29db-13ba-48aa-adc1-d47cecdf5a5d.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/debug.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rebuild_database/rebuild_minimal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Boundarys/PantNuevoEventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Boundarys/PantNuevoEventoSismico.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CasoUso/ManejadorNuevoEventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/CasoUso/ManejadorNuevoEventoSismico.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/AlcanceSismo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/AlcanceSismo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/CambioEstado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/CambioEstado.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/ClasificacionSismo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/ClasificacionSismo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/EventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/EventoSismico.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entitys/STATE/Bloqueado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Bloqueado.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entitys/STATE/Estado.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/STATE/Estado.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entitys/Sesion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Entitys/Sesion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ManejadorGenerarSismograma.py" beforeDir="false" afterPath="$PROJECT_DIR$/CasoUso/ManejadorGenerarSismograma.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ManejadorNuevoEventoSismico.py" beforeDir="false" afterPath="$PROJECT_DIR$/CasoUso/ManejadorNuevoEventoSismico.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQL QUERIES" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQL_QUERIES.sql" beforeDir="false" afterPath="$PROJECT_DIR$/rebuild_database/SQL_QUERIES.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/database/PPAI_DATABASE.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/PPAI_DATABASE.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/database/PPAI_DATABASE_COPY_1.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/PPAI_DATABASE_COPY_1.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/database/PPAI_DATABASE_COPY_3.db" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/PPAI_DATABASE_COPY_3.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/database/PPAI_DATABASE_old.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/database/engine/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/engine/engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/EstadoMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/EstadoMapper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/EventoSismicoMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/EventoSismicoMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/AlcanceSismoMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/AlcanceSismoMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/AnalistaSismoMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/AnalistaSismoMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/CambioEstadoMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/CambioEstadoMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/ClasificacionSismoMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/ClasificacionSismoMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/DetalleMuestraSismicaMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/DetalleMuestraSismicaMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/EstacionSismologicaMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/EstacionSismologicaMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/MagnitudRichterMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/MagnitudRichterMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/MuestraSismicaMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/MuestraSismicaMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/OrigenGeneracionMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/OrigenGeneracionMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/SerieTemporalMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/SerieTemporalMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/SesionMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/SesionMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/SismografoMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/SismografoMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/TipoDatoMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/TipoDatoMapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/mappers/UsuarioMapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/mappers/UsuarioMapper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/database/models/CambioEstadoORM.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/models/CambioEstadoORM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/database/repositories/EventoSismicoRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/repositories/EventoSismicoRepository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/models/EstacionSismologicaORM.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/models/EstacionSismologicaORM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/database/models/UsuarioORM.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/models/UsuarioORM.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/database/repositories/SesionRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/database/repositories/SesionRepository.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rebuild_database/SQL_QUERIES_copilot.sql" beforeDir="false" afterPath="$PROJECT_DIR$/rebuild_database/SQL_QUERIES_copilot.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +93,7 @@
     "Python.engine.executor": "Run",
     "Python.main.executor": "Run",
     "Python.rebuild_and_run.executor": "Run",
+    "Python.rebuild_minimal.executor": "Run",
     "Python.rebuild_sqlite.executor": "Run",
     "Python.rebuild_sqlite_fixed.executor": "Run",
     "Python.rebuild_with_data.executor": "Run",
@@ -95,7 +107,7 @@
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/home/agustin/MEGA/AB No de la Facultad/Proyectos/Facultad/DSI/PPAI-DSI/PPAI Tkinter",
+    "last_opened_file_path": "/home/agustin/MEGA/AB No de la Facultad/Proyectos/Facultad/DSI/PPAI-DSI/PPAI Tkinter/rebuild_database",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -114,17 +126,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/rebuild_database" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/CasoUso" />
       <recent name="$PROJECT_DIR$/rebuild_database" />
+      <recent name="$PROJECT_DIR$/CasoUso" />
       <recent name="$PROJECT_DIR$/infrastructure/database/models" />
       <recent name="$PROJECT_DIR$/infrastructure/database/models/listo" />
       <recent name="$PROJECT_DIR$/infrastructure/database/engine" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.rebuild_with_data">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="PPAI Tkinter" />
       <option name="ENV_FILES" value="" />
@@ -141,6 +154,29 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="rebuild_minimal" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PPAI Tkinter" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/rebuild_database" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/rebuild_database/rebuild_minimal.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -172,81 +208,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PPAI Tkinter" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="test2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PPAI Tkinter" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="test3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PPAI Tkinter" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test3.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.rebuild_minimal" />
         <item itemvalue="Python.rebuild_with_data" />
-        <item itemvalue="Python.test3" />
-        <item itemvalue="Python.test2" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -273,6 +238,8 @@
       <workItem from="1762612243649" duration="4724000" />
       <workItem from="1762618233382" duration="1279000" />
       <workItem from="1762629360360" duration="16069000" />
+      <workItem from="1762663703612" duration="2446000" />
+      <workItem from="1762714001325" duration="9683000" />
     </task>
     <servers />
   </component>
@@ -283,12 +250,13 @@
     <SUITE FILE_PATH="coverage/PPAI_Tkinter$test3.coverage" NAME="test3 Coverage Results" MODIFIED="1762631301904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PPAI_Tkinter$AnalistaSismos.coverage" NAME="AnalistaSismos Coverage Results" MODIFIED="1762556141838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Entitys" />
     <SUITE FILE_PATH="coverage/PPAI_Tkinter$rebuild_sqlite_fixed.coverage" NAME="rebuild_sqlite_fixed Coverage Results" MODIFIED="1762641169832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/rebuild_database" />
-    <SUITE FILE_PATH="coverage/PPAI_Tkinter$rebuild_with_data.coverage" NAME="rebuild_with_data Coverage Results" MODIFIED="1762649267869" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/rebuild_database" />
+    <SUITE FILE_PATH="coverage/PPAI_Tkinter$rebuild_with_data.coverage" NAME="rebuild_with_data Coverage Results" MODIFIED="1762714371101" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/rebuild_database" />
+    <SUITE FILE_PATH="coverage/PPAI_Tkinter$rebuild_minimal.coverage" NAME="rebuild_minimal Coverage Results" MODIFIED="1762727160673" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/rebuild_database" />
     <SUITE FILE_PATH="coverage/PPAI_Tkinter$engine.coverage" NAME="engine Coverage Results" MODIFIED="1762555523292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/infrastructure/database/engine" />
     <SUITE FILE_PATH="coverage/PPAI_Tkinter$AnalistaSismosORM.coverage" NAME="AnalistaSismosORM Coverage Results" MODIFIED="1762555697091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/infrastructure/database/models" />
     <SUITE FILE_PATH="coverage/PPAI_Tkinter$test.coverage" NAME="test Coverage Results" MODIFIED="1762569412934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PPAI_Tkinter$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1762570866837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/PPAI_Tkinter$main.coverage" NAME="main Coverage Results" MODIFIED="1762649112545" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PPAI_Tkinter$main.coverage" NAME="main Coverage Results" MODIFIED="1762727162784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/PPAI_Tkinter$rebuild_sqlite.coverage" NAME="rebuild_sqlite Coverage Results" MODIFIED="1762641399975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/rebuild_database" />
     <SUITE FILE_PATH="coverage/PPAI_Tkinter$rebuild_and_run.coverage" NAME="rebuild_and_run Coverage Results" MODIFIED="1762648445597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/rebuild_database" />
     <SUITE FILE_PATH="coverage/PPAI_Tkinter$UsuarioRepository.coverage" NAME="UsuarioRepository Coverage Results" MODIFIED="1762562427024" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/infrastructure/database/repositories" />

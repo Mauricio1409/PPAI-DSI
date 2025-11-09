@@ -18,10 +18,3 @@ class AnalistaSismoMapper:
             nombre=entity.nombre,
             apellido=entity.apellido,
         )
-
-    @staticmethod
-    def newToORM(entity: AnalistaSismos) -> AnalistaSismosORM:
-        return AnalistaSismosORM(
-            nombre=entity.nombre,
-            apellido=entity.apellido,
-        )

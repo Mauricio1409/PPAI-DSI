@@ -5,6 +5,7 @@ class AlcanceSismoMapper:
     @staticmethod
     def toDomain(alcanceSismoORM: AlcanceSismoORM):
         return AlcanceSismo(
+            alcanceSismoId=alcanceSismoORM.alcanceSismoId,
             descripcion=alcanceSismoORM.descripcion,
             nombre=alcanceSismoORM.nombre
         )
@@ -12,12 +13,6 @@ class AlcanceSismoMapper:
     def toORM(alcanceSismo: AlcanceSismo):
         return AlcanceSismoORM(
             alcanceSismoId=alcanceSismo.alcanceSismoId,
-            descripcion=alcanceSismo.descripcion,
-            nombre=alcanceSismo.nombre
-        )
-    @staticmethod
-    def newToORM(alcanceSismo: AlcanceSismo):
-        return AlcanceSismoORM(
             descripcion=alcanceSismo.descripcion,
             nombre=alcanceSismo.nombre
         )

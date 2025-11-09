@@ -24,12 +24,3 @@ class CambioEstadoMapper:
             estado=EstadoMapper.toORM(entity.estado),
             analista=AnalistaSismoMapper.toORM(entity.analistaResponsable)
         )
-
-    @staticmethod
-    def NewToORM(entity: CambioEstado) -> CambioEstadoORM:
-        return CambioEstadoORM(
-            fechaHoraFin=entity.fechaHoraFin,
-            fechaHoraInicio=entity.fechaHoraInicio,
-            estado=EstadoMapper.toORM(entity.estado),
-            analista=AnalistaSismoMapper.toORM(entity.analistaResponsable)
-        )

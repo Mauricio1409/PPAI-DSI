@@ -7,7 +7,6 @@ from infrastructure.database.engine.base import Base
 
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from infrastructure.database.models.EventoSismicoORM import EventoSismicoORM
     from infrastructure.database.models.EstadoOrm import EstadoORM
     from infrastructure.database.models.AnalistaSismosORM import AnalistaSismosORM
 
