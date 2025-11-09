@@ -38,14 +38,6 @@ class EventoSismicoMapper:
             cambioORM.eventoSismicoId = entity.eventoSismicoId
             cambios_estado.append(cambioORM)
 
-        print("-"*50)
-        print('\n'*4)
-        print("cambios_estado: ")
-        for cambio in cambios_estado:
-            print(cambio)
-        print('\n' * 4)
-        print("-"*50)
-
         return EventoSismicoORM(
             eventoSismicoId=entity.eventoSismicoId,
             fechaHoraOcurrencia=entity.fechaHoraOcurrencia,
